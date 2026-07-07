@@ -54,7 +54,7 @@
   - **退路**：若 `better-sqlite3` 在部署環境編譯失敗，設 env `DATA_BACKEND=json`，`lib/db.ts` 改為直接讀 `data/tutors.json`，對外介面完全不變。不得因 DB 問題卡住部署。
 - **LLM：Google Gemini API**，SDK 用 `@google/genai`。模型由 env `GEMINI_MODEL` 控制，預設 `gemini-2.5-flash`。**只在 server route 呼叫**，key 讀 env `GEMINI_API_KEY`，絕不出現在前端 bundle。
 - **部署：Zeabur**。所需 env：`GEMINI_API_KEY`、`GEMINI_MODEL`（可省略）、`DATA_BACKEND`（可省略）。
-- **i18n：不用框架**。React context + 兩個字典檔 `locales/zh-TW.json`、`locales/en.json`。Nav 右上「中／EN」切換，選擇存 localStorage。UI 介面文案全雙語；mock 內容（自傳、評價內文）維持中文，英文模式下在內容區顯示小標「Demo content in Chinese」。
+- **i18n：不用框架**。`lib/i18n.tsx` 提供 React context（`useLang()` 回傳 `{lang, setLang, t}`，`t()` 吃 `{zh, en}` 物件）。Nav 右上「中／EN」切換，選擇存 localStorage。**字串存放規則（平行開發防衝突）**：Nav/Footer 等共用 chrome 字串放 `lib/chrome-strings.ts`（僅 scaffold 任務可改）；各頁面自己的字串放該頁目錄下的 `strings.ts`，不碰共用檔。UI 介面文案全雙語；mock 內容（自傳、評價內文）維持中文，英文模式下在內容區顯示小標「Demo content in Chinese」。
 - **工程紀律**（Stan 的通則）：每完成一個 P0 區塊就 commit（`feat: ...`），維護 `CHANGELOG.md`；禁 `git add -A`，指定路徑 add。
 
 ### 檔案結構（建議）
