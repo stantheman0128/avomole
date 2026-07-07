@@ -1,8 +1,17 @@
-<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="幾何頭像">
-  <circle cx="60" cy="60" r="60" fill="#9C6B3F"/>
-  <polygon points="60,26 90,44 90,80 60,98 30,80 30,44" fill="#F8F6EC"/>
-  <polygon points="60,40 78,50 78,72 60,82 42,72 42,50" fill="#6B9E3E"/>
-  <circle cx="53" cy="60" r="3.4" fill="#F8F6EC"/>
-  <circle cx="67" cy="60" r="3.4" fill="#F8F6EC"/>
-  <path d="M53 70 q7 5 14 0" stroke="#F8F6EC" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="講師頭像">
+  <defs><clipPath id="c5"><circle cx="60" cy="60" r="60"/></clipPath></defs>
+  <g clip-path="url(#c5)">
+    <rect width="120" height="120" fill="#C9DCA6"/>
+    <circle cx="60" cy="126" r="50" fill="#9C6B3F"/>
+    <path d="M32 74 C32 58 44 48 60 48 C76 48 88 58 88 74 L88 96 L32 96 Z" fill="#2E4A1F"/>
+    <circle cx="60" cy="48" r="23" fill="#F5F7EF"/>
+    <path d="M34 40 C34 22 60 22 60 22 C60 22 86 22 86 40 L34 40 Z" fill="#6B9E3E"/>
+    <rect x="32" y="38" width="56" height="6" rx="3" fill="#2E4A1F"/>
+    <circle cx="60" cy="30" r="4" fill="#C9DCA6"/>
+    <circle cx="52" cy="50" r="3.2" fill="#2E4A1F"/>
+    <circle cx="68" cy="50" r="3.2" fill="#2E4A1F"/>
+    <path d="M52 60 q8 5 16 0" stroke="#9C6B3F" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <polyline points="18,98 26,90 34,96 42,84" fill="none" stroke="#2E4A1F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="78,86 86,94 94,88 102,96" fill="none" stroke="#6B9E3E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
 </svg>

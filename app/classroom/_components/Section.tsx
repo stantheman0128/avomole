@@ -1,6 +1,7 @@
 'use client';
 // 區塊外殼與標頭。標題／說明走 t()，故為 client。也提供英文模式下的
 // 「示意內容為中文」小標（DEMO_CONTENT_NOTE），用在中文 mock 內容區塊上方。
+// 編輯風：不放 01/02/03 裝飾序號圓圈，改 serif 標題 + 分隔線分段。
 import { useLang } from '@/lib/i18n';
 import { DEMO_CONTENT_NOTE } from '@/lib/chrome-strings';
 
@@ -19,15 +20,12 @@ export function Section({
 }) {
   const { t } = useLang();
   return (
-    <section className="rounded-3xl border border-avo-light bg-white/50 p-5 sm:p-7">
-      <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-avo-dark font-mono text-sm text-avo-cream">
-          {step}
-        </span>
-        <div>
-          <h2 className="text-lg font-bold text-avo-dark sm:text-xl">{t(title)}</h2>
-          {desc && <p className="text-sm text-avo-ink/60">{t(desc)}</p>}
-        </div>
+    <section>
+      {/* step 保留在 props 供呼叫端排序，但不再當裝飾序號渲染 */}
+      {step > 1 && <hr className="avo-rule mb-10" />}
+      <div className="mb-5">
+        <h2 className="avo-display text-2xl text-avo-dark sm:text-3xl">{t(title)}</h2>
+        {desc && <p className="mt-2 text-sm text-avo-ink/60">{t(desc)}</p>}
       </div>
       {children}
     </section>

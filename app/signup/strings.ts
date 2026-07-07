@@ -1,0 +1,26 @@
+// app/signup/strings.ts —— 註冊頁 UI 字串（雙語）。站名／slogan 取自 lib/brand.ts。
+export const SIGNUP = {
+  heading: { zh: '建立帳號', en: 'Create account' },
+  subheading: {
+    zh: '選一個身份開始：想學 AI，還是想開課教 AI？',
+    en: 'Pick a role to start: learn AI, or teach it?',
+  },
+  nameLabel: { zh: '姓名', en: 'Name' },
+  namePlaceholder: { zh: '你的名字', en: 'Your name' },
+  emailLabel: { zh: '電子郵件', en: 'Email' },
+  emailPlaceholder: { zh: 'you@example.com', en: 'you@example.com' },
+  passwordLabel: { zh: '密碼', en: 'Password' },
+  passwordPlaceholder: { zh: '至少 8 個字', en: 'At least 8 characters' },
+  roleLabel: { zh: '身份', en: 'I am a' },
+  roleStudent: { zh: '學生（想找講師學 AI）', en: 'Student (looking to learn)' },
+  roleTutor: { zh: '講師（想開課教 AI）', en: 'Tutor (looking to teach)' },
+  submit: { zh: '註冊', en: 'Sign up' },
+  submitting: { zh: '建立中…', en: 'Creating…' },
+  haveAccount: { zh: '已經有帳號？', en: 'Already have an account?' },
+  login: { zh: '登入', en: 'Sign in' },
+  errDuplicate: { zh: '這個電子郵件已經註冊過了。', en: 'That email is already registered.' },
+  errPassword: { zh: '密碼至少要 8 個字。', en: 'Password must be at least 8 characters.' },
+  errEmail: { zh: '請輸入有效的電子郵件。', en: 'Please enter a valid email.' },
+  errName: { zh: '請輸入姓名。', en: 'Please enter your name.' },
+  errGeneric: { zh: '註冊時發生問題，請稍後再試。', en: 'Something went wrong. Please try again.' },
+} as const;

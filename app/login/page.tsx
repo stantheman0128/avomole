@@ -1,49 +1,37 @@
 'use client';
-// app/login/page.tsx —— 登入頁（§4.6）。完整登入 UI，但不接真帳號。
-// 任何提交／點擊 → showToast('Demo 版請以訪客身份繼續探索 🥑') → 導回首頁。
+// app/login/page.tsx —— 真登入頁。Email+密碼（Credentials）＋ Google（未設定時停用）＋ 去註冊連結。
+// 成功導向 /discover（由 server action 的 redirectTo 處理）。錯誤態、loading 態齊全。
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useActionState } from 'react';
 import { useLang } from '@/lib/i18n';
-import { showToast } from '@/lib/toast';
 import { BRAND } from '@/lib/brand';
 import { LOGIN } from './strings';
+import { authenticate, googleSignIn, type LoginState } from './actions';
+
+// 由 layout 環境變數注入：Google 是否可用（用 public flag，避免把 secret 帶到 client）
+const googleEnabled = process.env.NEXT_PUBLIC_GOOGLE_ENABLED === '1';
 
 export default function LoginPage() {
   const { lang, t } = useLang();
-  const router = useRouter();
   const brandName = lang === 'zh' ? BRAND.zh : BRAND.en;
-
-  // Demo：任何登入動作都走同一條路——提示後以訪客身份回首頁
-  function continueAsGuest() {
-    showToast(LOGIN.toast.zh);
-    router.push('/');
-  }
-
-  function submit(e: React.FormEvent) {
-    e.preventDefault();
-    continueAsGuest();
-  }
+  const [state, formAction, pending] = useActionState<LoginState, FormData>(authenticate, undefined);
 
   return (
     <section className="mx-auto flex max-w-md flex-col px-4 py-14 sm:py-20">
       <div className="flex flex-col items-center text-center">
-        <Image
-          src="/mascot.png"
-          alt={brandName}
-          width={72}
-          height={72}
-          className="h-16 w-16"
-        />
+        <Image src="/mascot.png" alt={brandName} width={72} height={72} className="h-16 w-16" />
         <h1 className="mt-4 text-2xl font-bold text-avo-dark">{t(LOGIN.heading)}</h1>
         <p className="mt-2 text-sm text-avo-ink/70">{t(LOGIN.subheading)}</p>
       </div>
 
-      <form onSubmit={submit} className="mt-8 flex flex-col gap-4">
+      <form action={formAction} className="mt-8 flex flex-col gap-4">
         <label className="flex flex-col gap-1.5">
           <span className="text-sm font-medium text-avo-dark">{t(LOGIN.emailLabel)}</span>
           <input
+            name="email"
             type="email"
+            required
             autoComplete="email"
             placeholder={t(LOGIN.emailPlaceholder)}
             className="rounded-xl border border-avo-main/40 bg-white px-4 py-2.5 text-avo-ink outline-none focus:border-avo-main"
@@ -53,18 +41,27 @@ export default function LoginPage() {
         <label className="flex flex-col gap-1.5">
           <span className="text-sm font-medium text-avo-dark">{t(LOGIN.passwordLabel)}</span>
           <input
+            name="password"
             type="password"
+            required
             autoComplete="current-password"
             placeholder={t(LOGIN.passwordPlaceholder)}
             className="rounded-xl border border-avo-main/40 bg-white px-4 py-2.5 text-avo-ink outline-none focus:border-avo-main"
           />
         </label>
 
+        {state?.error && (
+          <p role="alert" className="rounded-xl bg-red-50 px-4 py-2.5 text-sm text-red-700">
+            {state.error === 'invalid' ? t(LOGIN.errorInvalid) : t(LOGIN.errorGeneric)}
+          </p>
+        )}
+
         <button
           type="submit"
-          className="mt-1 rounded-full bg-avo-main px-6 py-3 font-medium text-white transition-colors hover:bg-avo-dark"
+          disabled={pending}
+          className="mt-1 rounded-full bg-avo-main px-6 py-3 font-medium text-white transition-colors hover:bg-avo-dark disabled:opacity-60"
         >
-          {t(LOGIN.submit)}
+          {pending ? t(LOGIN.submitting) : t(LOGIN.submit)}
         </button>
       </form>
 
@@ -74,28 +71,36 @@ export default function LoginPage() {
         <span className="h-px flex-1 bg-avo-light" />
       </div>
 
-      <button
-        type="button"
-        onClick={continueAsGuest}
-        className="flex items-center justify-center gap-2 rounded-full border border-avo-main/40 bg-white px-6 py-3 font-medium text-avo-dark transition-colors hover:bg-avo-light/40"
-      >
-        <span aria-hidden className="font-mono text-avo-main">G</span>
-        {t(LOGIN.google)}
-      </button>
+      {googleEnabled ? (
+        <form action={googleSignIn}>
+          <button
+            type="submit"
+            className="flex w-full items-center justify-center gap-2 rounded-full border border-avo-main/40 bg-white px-6 py-3 font-medium text-avo-dark transition-colors hover:bg-avo-light/40"
+          >
+            <span aria-hidden className="font-mono text-avo-main">G</span>
+            {t(LOGIN.google)}
+          </button>
+        </form>
+      ) : (
+        <div>
+          <button
+            type="button"
+            disabled
+            title={t(LOGIN.googleDisabled)}
+            className="flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-full border border-avo-light bg-white px-6 py-3 font-medium text-avo-ink/40"
+          >
+            <span aria-hidden className="font-mono">G</span>
+            {t(LOGIN.google)}
+          </button>
+          <p className="mt-2 text-center text-xs text-avo-ink/50">{t(LOGIN.googleDisabled)}</p>
+        </div>
+      )}
 
       <p className="mt-6 text-center text-sm text-avo-ink/70">
         {t(LOGIN.noAccount)}{' '}
-        <button
-          type="button"
-          onClick={continueAsGuest}
-          className="font-medium text-avo-main underline hover:text-avo-dark"
-        >
+        <Link href="/signup" className="font-medium text-avo-main underline hover:text-avo-dark">
           {t(LOGIN.signup)}
-        </button>
-      </p>
-
-      <p className="mt-8 rounded-xl bg-avo-light/30 px-4 py-3 text-center text-xs text-avo-ink/60">
-        {t(LOGIN.demoNote)}
+        </Link>
       </p>
     </section>
   );

@@ -1,0 +1,130 @@
+// Prisma schema —— Guacamole AI v2 資料層（Postgres）。
+// SPEC-v2 §4。對外型別（lib/types.ts 的 Tutor/PublicTutor）由 lib/db.ts 對映，schema 不必逐字對齊命名。
+// hiddenScore 是 server-only，永遠只從 lib/db 讀，經 toPublic 剝除後才進 client。
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  TUTOR
+}
+
+// Auth.js（NextAuth v5）使用者表。Account/Session/VerificationToken 是 PrismaAdapter 標準表。
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          Role      @default(STUDENT)
+  passwordHash  String? // Credentials 登入用；OAuth 使用者可為 null
+
+  accounts     Account[]
+  sessions     Session[]
+  tutorProfile TutorProfile?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model TutorProfile {
+  id     String @id @default(cuid())
+  // seq：對外穩定數字 id，對映 lib/types.ts 的 Tutor.id(number)。frozen 型別要 number，故保留數字鍵。
+  seq    Int    @unique @default(autoincrement())
+  userId String @unique
+  slug   String @unique
+
+  // name/nameEn：lib/types.ts 的 Tutor 是 frozen 型別、要這兩欄。User.name 給登入顯示，講師頁用這兩個。
+  name   String
+  nameEn String
+
+  title           String
+  bio             String
+  avatar          String
+  hourlyRate      Int
+  acceptsProjects Boolean @default(false)
+
+  domains     String[]
+  skills      String[]
+  teachLevels String[]
+
+  githubUsername String?
+  isReal         Boolean @default(false)
+  published      Boolean @default(false)
+
+  hiddenScore Float // server-only，永不進 client payload
+
+  aiProfile Json // {radar:{llm,cv,mlBasics,engineering,teaching,influence}, summary, difficulty, reviewDigest}
+  github    Json // {username, repos[], langDist, activityNote}
+  portfolio Json // [{title,desc,link}]
+  plans     Json // [{name,price,desc}]
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reviews      Review[]
+  endorsements Endorsement[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review {
+  id             String @id @default(cuid())
+  tutorProfileId String
+  author         String
+  rating         Int
+  text           String
+
+  tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id], onDelete: Cascade)
+}
+
+model Endorsement {
+  id             String @id @default(cuid())
+  tutorProfileId String
+  endorserName   String
+  endorserTitle  String
+  quote          String
+
+  tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id], onDelete: Cascade)
+}

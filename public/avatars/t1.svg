@@ -1,9 +1,18 @@
-<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="幾何頭像">
-  <circle cx="60" cy="60" r="60" fill="#6B9E3E"/>
-  <circle cx="60" cy="46" r="20" fill="#F8F6EC"/>
-  <path d="M26 108 C26 84 42 74 60 74 C78 74 94 84 94 108 Z" fill="#F8F6EC"/>
-  <circle cx="53" cy="45" r="3.4" fill="#2E4A1F"/>
-  <circle cx="67" cy="45" r="3.4" fill="#2E4A1F"/>
-  <path d="M52 54 q8 6 16 0" stroke="#2E4A1F" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-  <rect x="30" y="14" width="60" height="10" rx="5" fill="#2E4A1F"/>
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="講師頭像">
+  <defs><clipPath id="c1"><circle cx="60" cy="60" r="60"/></clipPath></defs>
+  <g clip-path="url(#c1)">
+    <rect width="120" height="120" fill="#C9DCA6"/>
+    <circle cx="60" cy="128" r="52" fill="#2E4A1F"/>
+    <path d="M32 74 C32 58 44 48 60 48 C76 48 88 58 88 74 L88 96 L32 96 Z" fill="#6B9E3E"/>
+    <circle cx="60" cy="44" r="24" fill="#F5F7EF"/>
+    <path d="M36 40 C36 22 52 16 60 16 C68 16 84 22 84 40 C84 34 74 30 60 30 C46 30 36 34 36 40 Z" fill="#2E4A1F"/>
+    <circle cx="51" cy="45" r="3.4" fill="#2E4A1F"/>
+    <circle cx="69" cy="45" r="3.4" fill="#2E4A1F"/>
+    <path d="M52 55 q8 6 16 0" stroke="#2E4A1F" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <path d="M35 44 a25 25 0 0 1 50 0" stroke="#9C6B3F" stroke-width="4" fill="none"/>
+    <rect x="30" y="44" width="7" height="14" rx="3.5" fill="#9C6B3F"/>
+    <rect x="83" y="44" width="7" height="14" rx="3.5" fill="#9C6B3F"/>
+    <rect x="30" y="58" width="4" height="12" rx="2" fill="#9C6B3F"/>
+    <circle cx="32" cy="72" r="4" fill="#6B9E3E"/>
+  </g>
 </svg>

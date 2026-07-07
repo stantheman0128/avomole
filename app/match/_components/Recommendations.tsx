@@ -33,9 +33,7 @@ export function Recommendations({
   return (
     <div className="ml-8">
       <div className="mb-2 flex items-center gap-2">
-        <p className="text-xs font-semibold uppercase tracking-wide text-avo-main">
-          {t(s.recommendTitle)}
-        </p>
+        <p className="font-mono text-xs font-medium text-avo-main">{t(s.recommendTitle)}</p>
         {offline && (
           <span className="rounded-full bg-avo-seed/15 px-2 py-0.5 text-xs font-medium text-avo-seed">
             {t(s.offlineTag)}

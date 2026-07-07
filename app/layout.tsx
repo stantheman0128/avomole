@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_TC, Noto_Serif_TC, JetBrains_Mono } from 'next/font/google';
+import { SessionProvider } from 'next-auth/react';
 import './globals.css';
 import { LangProvider } from '@/lib/i18n';
 import { ToastProvider } from '@/lib/toast';
@@ -41,16 +42,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body
         className={`${notoSansTC.variable} ${notoSerifTC.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        {/* SessionProvider slot (backend line) —— 之後後端線在此掛 next-auth 的 <SessionProvider>，包住下面整棵樹。設計線不動它。 */}
-        <LangProvider>
-          <ToastProvider>
-            <div className="flex min-h-screen flex-col">
-              <Nav />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-          </ToastProvider>
-        </LangProvider>
+        {/* SessionProvider（後端線）：包住整棵樹，讓 client 能讀登入狀態。只加這層，不動版面。 */}
+        <SessionProvider>
+          <LangProvider>
+            <ToastProvider>
+              <div className="flex min-h-screen flex-col">
+                <Nav />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </div>
+            </ToastProvider>
+          </LangProvider>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -44,9 +44,7 @@ export function MeetingCard({
           <p className="mt-1 break-all font-mono text-xs text-avo-seed">{meetUrl}</p>
         </div>
         <div className="border-t border-avo-main/20 pt-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-avo-seed">
-            {t(CR.recordingLabel)}
-          </p>
+          <p className="font-mono text-xs text-avo-seed">{t(CR.recordingLabel)}</p>
           <p className="mt-1 text-sm text-avo-ink/80">{recordingNote}</p>
         </div>
       </div>

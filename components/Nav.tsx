@@ -2,13 +2,17 @@
 // components/Nav.tsx —— 全站頂部導覽。吉祥物 logo＋站名、連結、登入鈕、中/EN 切換、訪客 pill。
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSession, signOut } from 'next-auth/react';
 import { useLang } from '@/lib/i18n';
 import { BRAND } from '@/lib/brand';
 import { NAV } from '@/lib/chrome-strings';
 
 export function Nav() {
   const { lang, setLang, t } = useLang();
+  const { data: session } = useSession();
   const brandName = lang === 'zh' ? BRAND.zh : BRAND.en;
+  const user = session?.user;
+  const isTutor = user?.role === 'TUTOR';
 
   return (
     <header className="sticky top-0 z-50 border-b border-avo-light bg-avo-cream/90 backdrop-blur">
@@ -25,9 +29,18 @@ export function Nav() {
         </div>
 
         <div className="ml-auto flex items-center gap-2">
-          <span className="hidden rounded-full bg-avo-light px-2.5 py-0.5 text-xs text-avo-dark sm:inline">
-            {t(NAV.guestMode)}
-          </span>
+          {!user && (
+            <span className="hidden rounded-full bg-avo-light px-2.5 py-0.5 text-xs text-avo-dark sm:inline">
+              {t(NAV.guestMode)}
+            </span>
+          )}
+
+          {/* 講師才顯示後臺連結 */}
+          {isTutor && (
+            <Link href="/dashboard" className="hidden text-sm text-avo-ink/80 hover:text-avo-main sm:inline">
+              {t(NAV.dashboard)}
+            </Link>
+          )}
 
           {/* 中／EN 切換 */}
           <div className="flex items-center overflow-hidden rounded-full border border-avo-main/40 text-xs">
@@ -49,12 +62,27 @@ export function Nav() {
             </button>
           </div>
 
-          <Link
-            href="/login"
-            className="rounded-full bg-avo-dark px-3 py-1.5 text-sm text-avo-cream hover:bg-avo-main"
-          >
-            {t(NAV.login)}
-          </Link>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <span className="hidden max-w-[8rem] truncate text-sm text-avo-dark sm:inline">
+                {user.name || user.email}
+              </span>
+              <button
+                type="button"
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="rounded-full border border-avo-main/40 px-3 py-1.5 text-sm text-avo-dark hover:bg-avo-light/40"
+              >
+                {t(NAV.logout)}
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="rounded-full bg-avo-dark px-3 py-1.5 text-sm text-avo-cream hover:bg-avo-main"
+            >
+              {t(NAV.login)}
+            </Link>
+          )}
         </div>
       </nav>
     </header>

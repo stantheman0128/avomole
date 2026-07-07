@@ -1,8 +1,21 @@
-<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="幾何頭像">
-  <circle cx="60" cy="60" r="60" fill="#7CA9C9"/>
-  <rect x="28" y="40" width="64" height="40" rx="6" fill="#F8F6EC"/>
-  <circle cx="60" cy="60" r="15" fill="#2E4A1F"/>
-  <circle cx="60" cy="60" r="8" fill="#6B9E3E"/>
-  <circle cx="64" cy="56" r="2.5" fill="#F8F6EC"/>
-  <rect x="46" y="30" width="28" height="12" rx="3" fill="#2E4A1F"/>
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="講師頭像">
+  <defs><clipPath id="c4"><circle cx="60" cy="60" r="60"/></clipPath></defs>
+  <g clip-path="url(#c4)">
+    <rect width="120" height="120" fill="#9C6B3F"/>
+    <circle cx="60" cy="126" r="50" fill="#2E4A1F"/>
+    <path d="M34 72 C34 56 46 46 60 46 C74 46 86 56 86 72 L86 92 L34 92 Z" fill="#C9DCA6"/>
+    <circle cx="60" cy="46" r="24" fill="#F5F7EF"/>
+    <path d="M36 42 L60 24 L84 42 C84 30 74 22 60 22 C46 22 36 30 36 42 Z" fill="#2E4A1F"/>
+    <rect x="44" y="44" width="14" height="10" rx="5" fill="none" stroke="#2E4A1F" stroke-width="2.4"/>
+    <rect x="62" y="44" width="14" height="10" rx="5" fill="none" stroke="#2E4A1F" stroke-width="2.4"/>
+    <line x1="58" y1="47" x2="62" y2="47" stroke="#2E4A1F" stroke-width="2.4"/>
+    <circle cx="51" cy="49" r="3.4" fill="#6B9E3E"/>
+    <circle cx="69" cy="49" r="2.6" fill="#2E4A1F"/>
+    <path d="M53 60 q7 4 14 0" stroke="#9C6B3F" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <g transform="translate(90 30)">
+      <circle r="10" fill="#2E4A1F"/>
+      <circle r="6" fill="#6B9E3E"/>
+      <circle r="2.5" fill="#F5F7EF"/>
+    </g>
+  </g>
 </svg>

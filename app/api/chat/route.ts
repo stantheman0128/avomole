@@ -61,7 +61,7 @@ export async function POST(req: Request) {
   const messages = parseMessages(body);
   const lastUserText = [...messages].reverse().find((m) => m.role === 'user')?.content ?? '';
 
-  const tutors = getTutors(); // server：含 hiddenScore 供排序／prompt
+  const tutors = await getTutors(); // server：含 hiddenScore 供排序／prompt
   const slugSet = new Set(tutors.map((t) => t.slug));
 
   let result: MatchResult;

@@ -8,11 +8,11 @@ export const dynamic = 'force-dynamic';
 
 export default async function TutorPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const tutor = getTutorBySlug(slug);
+  const tutor = await getTutorBySlug(slug);
   if (!tutor) notFound();
 
-  const reviews = getReviews(tutor.id);
-  const endorsements = getEndorsements(tutor.id);
+  const reviews = await getReviews(tutor.id);
+  const endorsements = await getEndorsements(tutor.id);
 
   return (
     <TutorDetail tutor={toPublic(tutor)} reviews={reviews} endorsements={endorsements} />

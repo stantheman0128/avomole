@@ -7,6 +7,8 @@ export const NAV = {
   aiMatch: { zh: 'AI 媒合', en: 'AI Match' },
   classroom: { zh: '教室體驗', en: 'Classroom' },
   login: { zh: '登入', en: 'Log in' },
+  logout: { zh: '登出', en: 'Log out' },
+  dashboard: { zh: '講師後臺', en: 'Dashboard' },
   guestMode: { zh: '訪客模式', en: 'Guest mode' },
   langZh: { zh: '中', en: '中' },
   langEn: { zh: 'EN', en: 'EN' },

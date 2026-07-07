@@ -27,6 +27,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# 範例檔要進版控（不含真 secret）；真 .env 仍被上面那行擋掉
+!.env.example
 
 # typescript
 *.tsbuildinfo

@@ -30,6 +30,11 @@ export function RadarChart({ radar, size = 260 }: { radar: Radar; size?: number 
   const rings = [25, 50, 75, 100];
   const n = AXES.length;
 
+  // 色彩走 avo token（OKLCH）而非硬編 hex，隨主題色板走。
+  const ink = 'var(--color-avo-ink)';
+  const main = 'var(--color-avo-main)';
+  const dark = 'var(--color-avo-dark)';
+
   const dataPoints = AXES.map((a, i) => pointOnAxis(cx, cy, radius, i, n, radar[a.key]));
   const dataPath = dataPoints.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
 
@@ -51,8 +56,8 @@ export function RadarChart({ radar, size = 260 }: { radar: Radar; size?: number 
             key={ring}
             points={pts}
             fill="none"
-            stroke="#2e4a1f"
-            strokeOpacity={0.15}
+            stroke={ink}
+            strokeOpacity={0.14}
             strokeWidth={1}
           />
         );
@@ -68,17 +73,17 @@ export function RadarChart({ radar, size = 260 }: { radar: Radar; size?: number 
             y1={cy}
             x2={end.x}
             y2={end.y}
-            stroke="#2e4a1f"
-            strokeOpacity={0.15}
+            stroke={ink}
+            strokeOpacity={0.14}
             strokeWidth={1}
           />
         );
       })}
 
       {/* 數據多邊形 */}
-      <polygon points={dataPath} fill="#6b9e3e" fillOpacity={0.35} stroke="#6b9e3e" strokeWidth={2} />
+      <polygon points={dataPath} fill={main} fillOpacity={0.28} stroke={main} strokeWidth={2} />
       {dataPoints.map((p, i) => (
-        <circle key={i} cx={p.x} cy={p.y} r={2.5} fill="#2e4a1f" />
+        <circle key={i} cx={p.x} cy={p.y} r={2.5} fill={dark} />
       ))}
 
       {/* 軸標籤 */}
@@ -91,7 +96,7 @@ export function RadarChart({ radar, size = 260 }: { radar: Radar; size?: number 
             x={lp.x}
             y={lp.y}
             fontSize={10}
-            fill="#2e4a1f"
+            fill={dark}
             textAnchor={anchor}
             dominantBaseline="middle"
           >

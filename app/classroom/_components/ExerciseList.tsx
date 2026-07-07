@@ -22,9 +22,9 @@ function Item({ ex, index }: { ex: Exercise; index: number }) {
   const typeLabel = ex.type === 'choice' ? CR.typeChoice : CR.typeShort;
 
   return (
-    <li className="rounded-2xl border border-avo-light bg-white/60 p-4 sm:p-5">
+    <li className="avo-panel rounded-2xl p-4 sm:p-5">
       <div className="flex items-start gap-3">
-        <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-avo-main font-mono text-sm text-white">
+        <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-avo-main font-mono text-sm text-avo-dark">
           {index + 1}
         </span>
         <div className="min-w-0 flex-1">
@@ -74,27 +74,21 @@ function Item({ ex, index }: { ex: Exercise; index: number }) {
           </button>
 
           {open && (
-            <div className="mt-3 space-y-3 border-t border-avo-light pt-3">
+            <div className="mt-3 space-y-3 border-t border-avo-ink/10 pt-3">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-avo-ink/50">
-                  {t(CR.studentAnswerLabel)}
-                </p>
-                <p className="mt-1 rounded-lg bg-avo-cream px-3 py-2 text-sm text-avo-ink/90">
+                <p className="font-mono text-xs text-avo-ink/50">{t(CR.studentAnswerLabel)}</p>
+                <p className="mt-1 rounded-lg bg-avo-light/30 px-3 py-2 text-sm text-avo-ink/90">
                   {ex.mockStudentAnswer}
                 </p>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-avo-main">
-                  {t(CR.aiFeedbackLabel)}
-                </p>
+                <p className="font-mono text-xs text-avo-main">{t(CR.aiFeedbackLabel)}</p>
                 <p className="mt-1 rounded-lg bg-avo-light/40 px-3 py-2 text-sm leading-relaxed text-avo-ink">
                   {ex.aiFeedback}
                 </p>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-avo-ink/50">
-                  {t(CR.explanationLabel)}
-                </p>
+                <p className="font-mono text-xs text-avo-ink/50">{t(CR.explanationLabel)}</p>
                 <p className="mt-1 text-sm leading-relaxed text-avo-ink/80">{ex.explanation}</p>
               </div>
             </div>

@@ -12,10 +12,10 @@ export default async function MatchPage({
   searchParams: Promise<{ q?: string }>;
 }) {
   const { q } = await searchParams;
-  const tutors = getTutors().map(toPublic);
+  const tutors = (await getTutors()).map(toPublic);
 
   return (
-    <section className="mx-auto flex max-w-3xl flex-col px-4 py-8 sm:py-12">
+    <section className="mx-auto flex max-w-3xl flex-col px-5 py-12 sm:py-16">
       <MatchChat tutors={tutors} initialQuery={typeof q === 'string' ? q : ''} />
     </section>
   );

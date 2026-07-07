@@ -17,17 +17,17 @@ export function HeroSearch() {
   }
 
   return (
-    <form onSubmit={submit} className="mx-auto mt-8 flex w-full max-w-xl flex-col gap-2 sm:flex-row">
+    <form onSubmit={submit} className="flex w-full max-w-xl flex-col gap-2 sm:flex-row">
       <input
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder={t(HOME.heroPlaceholder)}
         aria-label={t(HOME.heroPlaceholder)}
-        className="min-w-0 flex-1 rounded-full border border-avo-main/40 bg-white px-5 py-3 text-avo-ink outline-none focus:border-avo-main"
+        className="avo-panel min-w-0 flex-1 rounded-full px-5 py-3 text-avo-ink outline-none transition-colors focus:border-avo-main"
       />
       <button
         type="submit"
-        className="shrink-0 rounded-full bg-avo-main px-6 py-3 font-medium text-white transition-colors hover:bg-avo-dark"
+        className="shrink-0 rounded-full bg-avo-main px-6 py-3 font-medium text-avo-dark transition-colors hover:bg-avo-dark hover:text-avo-paper"
       >
         {t(HOME.heroSubmit)}
       </button>

@@ -1,9 +1,19 @@
-<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="幾何頭像">
-  <circle cx="60" cy="60" r="60" fill="#B06E9C"/>
-  <circle cx="60" cy="60" r="30" fill="#F8F6EC"/>
-  <path d="M60 30 A30 30 0 0 1 60 90 Z" fill="#C9DCA6"/>
-  <circle cx="52" cy="56" r="3.4" fill="#2E4A1F"/>
-  <circle cx="68" cy="56" r="3.4" fill="#2E4A1F"/>
-  <path d="M52 68 q8 6 16 0" stroke="#2E4A1F" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-  <circle cx="60" cy="60" r="30" fill="none" stroke="#2E4A1F" stroke-width="3"/>
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="講師頭像">
+  <defs><clipPath id="c8"><circle cx="60" cy="60" r="60"/></clipPath></defs>
+  <g clip-path="url(#c8)">
+    <rect width="120" height="120" fill="#C9DCA6"/>
+    <circle cx="60" cy="126" r="50" fill="#6B9E3E"/>
+    <path d="M78 40 C92 46 94 74 88 96 L74 96 C82 74 80 52 74 44 Z" fill="#2E4A1F"/>
+    <path d="M34 72 C34 56 46 47 60 47 C74 47 86 56 86 72 L86 94 L34 94 Z" fill="#F5F7EF"/>
+    <circle cx="58" cy="48" r="23" fill="#F0D9B8"/>
+    <path d="M35 46 C35 26 50 22 58 22 C70 22 82 28 82 46 C82 38 70 36 58 36 C46 36 35 38 35 46 Z" fill="#2E4A1F"/>
+    <path d="M80 30 C86 34 86 44 84 52 C80 44 78 38 76 34 Z" fill="#2E4A1F"/>
+    <circle cx="50" cy="49" r="3.2" fill="#2E4A1F"/>
+    <circle cx="66" cy="49" r="3.2" fill="#2E4A1F"/>
+    <path d="M51 59 q7 5 14 0" stroke="#9C6B3F" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <g transform="translate(26 30)">
+      <polygon points="0,-9 8,-3 8,6 0,11 -8,6 -8,-3" fill="#2E4A1F"/>
+      <polygon points="0,-4 4,-1 4,4 0,6 -4,4 -4,-1" fill="#6B9E3E"/>
+    </g>
+  </g>
 </svg>

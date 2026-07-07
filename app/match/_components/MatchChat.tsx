@@ -102,15 +102,16 @@ export function MatchChat({
 
   return (
     <div className="flex min-h-[70vh] flex-col">
-      <header className="mb-4">
-        <h1 className="text-2xl font-bold text-avo-dark sm:text-3xl">{t(s.title)}</h1>
-        <p className="mt-1 text-sm text-avo-ink/70">{t(s.subtitle)}</p>
+      <header className="mb-6">
+        <p className="avo-kicker">{t(s.kicker)}</p>
+        <h1 className="avo-display mt-2 text-3xl text-avo-dark sm:text-4xl">{t(s.title)}</h1>
+        <p className="avo-prose mt-3 text-sm text-avo-ink/70">{t(s.subtitle)}</p>
       </header>
 
       {/* 訊息列表 */}
       <div
         ref={scrollRef}
-        className="flex-1 space-y-4 overflow-y-auto rounded-2xl border border-avo-light bg-white/50 p-4"
+        className="avo-panel flex-1 space-y-4 overflow-y-auto rounded-3xl p-4 sm:p-5"
       >
         {/* 開場白 */}
         <AssistantBubble text={t(s.greeting)} />
@@ -132,14 +133,14 @@ export function MatchChat({
       </div>
 
       {/* 建議 prompt chips */}
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="mt-4 flex flex-wrap gap-2">
         {s.chips.map((chip, i) => (
           <button
             key={i}
             type="button"
             disabled={loading}
             onClick={() => void send(t(chip))}
-            className="rounded-full border border-avo-main/40 px-3.5 py-1.5 text-sm text-avo-dark transition-colors hover:bg-avo-light/60 disabled:opacity-50"
+            className="rounded-full border border-avo-main/35 px-3.5 py-1.5 text-sm text-avo-dark transition-colors hover:bg-avo-light/60 disabled:opacity-50"
           >
             {t(chip)}
           </button>
@@ -159,12 +160,12 @@ export function MatchChat({
           onChange={(e) => setInput(e.target.value)}
           placeholder={t(s.inputPlaceholder)}
           aria-label={t(s.inputPlaceholder)}
-          className="min-w-0 flex-1 rounded-full border border-avo-light bg-white px-4 py-2.5 text-sm text-avo-ink outline-none focus:border-avo-main"
+          className="avo-panel min-w-0 flex-1 rounded-full px-4 py-2.5 text-sm text-avo-ink outline-none transition-colors focus:border-avo-main"
         />
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="shrink-0 rounded-full bg-avo-main px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-avo-dark disabled:opacity-50"
+          className="shrink-0 rounded-full bg-avo-main px-5 py-2.5 text-sm font-semibold text-avo-dark transition-colors hover:bg-avo-dark hover:text-avo-paper disabled:opacity-50"
         >
           {loading ? t(s.sending) : t(s.send)}
         </button>
@@ -176,7 +177,7 @@ export function MatchChat({
 function UserBubble({ text }: { text: string }) {
   return (
     <div className="flex justify-end">
-      <p className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-br-sm bg-avo-main px-4 py-2.5 text-sm text-white">
+      <p className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-br-sm bg-avo-main px-4 py-2.5 text-sm text-avo-dark">
         {text}
       </p>
     </div>

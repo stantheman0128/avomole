@@ -10,7 +10,7 @@ export function BookButton({ className = '' }: { className?: string }) {
     <button
       type="button"
       onClick={() => showToast(t(s.bookToast))}
-      className={`rounded-full bg-avo-main px-6 py-2.5 font-medium text-white transition-colors hover:bg-avo-dark ${className}`}
+      className={`rounded-full bg-avo-main px-6 py-2.5 font-medium text-avo-dark transition-colors hover:bg-avo-dark hover:text-avo-paper ${className}`}
     >
       {t(s.book)}
     </button>

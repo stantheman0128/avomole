@@ -27,8 +27,8 @@ export function KnowledgeQA({ presets }: { presets: Preset[] }) {
               aria-pressed={on}
               className={`rounded-full px-3.5 py-2 text-sm transition-colors ${
                 on
-                  ? 'bg-avo-main text-white'
-                  : 'border border-avo-main/40 text-avo-dark hover:bg-avo-light/60'
+                  ? 'bg-avo-main text-avo-dark'
+                  : 'border border-avo-main/35 text-avo-dark hover:bg-avo-light/60'
               }`}
             >
               {p.question}
@@ -37,12 +37,10 @@ export function KnowledgeQA({ presets }: { presets: Preset[] }) {
         })}
       </div>
 
-      <div className="mt-4 rounded-2xl border border-avo-light bg-white/60 p-4">
+      <div className="avo-panel mt-4 rounded-2xl p-4">
         <div className="flex items-center gap-2">
           <span aria-hidden className="text-base">🥑</span>
-          <p className="text-xs font-semibold uppercase tracking-wide text-avo-main">
-            {t(CR.qaAnswerLabel)}
-          </p>
+          <p className="font-mono text-xs text-avo-main">{t(CR.qaAnswerLabel)}</p>
         </div>
         <p className="mt-2 text-sm leading-relaxed text-avo-ink">{answer}</p>
       </div>

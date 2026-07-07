@@ -8,8 +8,8 @@ import { DOMAINS, type Domain } from './strings';
 
 export const dynamic = 'force-dynamic';
 
-function avgRating(tutorId: number): number {
-  const reviews = getReviews(tutorId);
+async function avgRating(tutorId: number): Promise<number> {
+  const reviews = await getReviews(tutorId);
   if (reviews.length === 0) return 0;
   const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
   // 四捨五入到最近的 0.5
@@ -24,13 +24,16 @@ export default async function TutorsPage({
   const { domain } = await searchParams;
   const initialDomain = DOMAINS.includes(domain as Domain) ? (domain as Domain) : undefined;
 
-  const data: RatedTutor[] = getTutors().map((tut) => ({
-    tutor: toPublic(tut),
-    rating: avgRating(tut.id),
-  }));
+  const tutors = await getTutors();
+  const data: RatedTutor[] = await Promise.all(
+    tutors.map(async (tut) => ({
+      tutor: toPublic(tut),
+      rating: await avgRating(tut.id),
+    })),
+  );
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-8 sm:py-12">
+    <section className="mx-auto max-w-6xl px-5 py-12 sm:py-16">
       <ListHeader />
       <TutorFilters data={data} initialDomain={initialDomain} />
     </section>

@@ -2,6 +2,7 @@
 // 值為 {zh, en}，交給 lib/i18n 的 t() 取字。不碰共用 chrome 字串。
 
 export const s = {
+  kicker: { zh: 'AI 媒合', en: 'AI matchmaking' },
   title: { zh: 'AI 媒合聊天室', en: 'AI matchmaking chat' },
   subtitle: {
     zh: '告訴酪梨你想學什麼、程度和預算，幫你配對最適合的講師。',

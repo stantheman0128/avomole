@@ -1,61 +1,60 @@
-import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
-import path from 'node:path';
-import { buildDb, loadData } from '../scripts/seed';
-import type { TutorData } from '../lib/types';
+import { describe, it, expect } from 'vitest';
+import type { Tutor } from '../lib/types';
 
-const DB_PATH = path.join(process.cwd(), 'data', 'avomole.db');
-const data: TutorData = loadData();
-
-// 兩種 backend 都必須：getTutorBySlug 找得到人、toPublic 一定剝掉 hiddenScore。
-// 每個 it 前 vi.resetModules()，讓 db.ts 的模組層快取重置、依當下 env 選 backend。
-
-describe('db.ts — JSON backend (DATA_BACKEND=json)', () => {
-  beforeAll(() => {
-    process.env.DATA_BACKEND = 'json';
-  });
-  afterAll(() => {
-    delete process.env.DATA_BACKEND;
-  });
-
-  it('getTutorBySlug 回傳講師；toPublic 剝除 hiddenScore', async () => {
-    vi.resetModules();
-    const db = await import('../lib/db');
-    const t = db.getTutorBySlug('stan-shih');
-    expect(t).not.toBeNull();
-    expect(t!.name).toBe('Stan Shih');
-    expect(typeof t!.hiddenScore).toBe('number'); // server 端仍持有
-
-    const pub = db.toPublic(t!);
+// toPublic 是純函式，不碰 DB：一定要剝掉 hiddenScore（鐵則，型別 + 執行期雙保險）。
+describe('toPublic — 剝除 hiddenScore', () => {
+  it('回傳物件不含 hiddenScore', async () => {
+    const { toPublic } = await import('../lib/db');
+    const fake: Tutor = {
+      id: 1,
+      slug: 'x',
+      name: '測試',
+      nameEn: 'Test',
+      title: 't',
+      avatar: '/a.svg',
+      bio: 'b',
+      hourlyRate: 100,
+      domains: [],
+      skills: [],
+      teachLevels: [],
+      acceptsProjects: false,
+      isReal: false,
+      hiddenScore: 99,
+      aiProfile: {
+        radar: { llm: 1, cv: 1, mlBasics: 1, engineering: 1, teaching: 1, influence: 1 },
+        summary: '',
+        difficulty: 1,
+        reviewDigest: '',
+      },
+      github: { username: 'x', repos: [], langDist: {}, activityNote: '' },
+      portfolio: [],
+      plans: [],
+    };
+    const pub = toPublic(fake);
     expect('hiddenScore' in pub).toBe(false);
-
-    expect(db.getTutorBySlug('does-not-exist')).toBeNull();
+    expect(pub.slug).toBe('x');
   });
 });
 
-describe('db.ts — SQLite backend', () => {
-  beforeAll(() => {
-    delete process.env.DATA_BACKEND;
-    buildDb(DB_PATH, data); // 確保 avomole.db 存在，走 SQLite 路徑
-  });
+// 整合測試：需要真的 DATABASE_URL 且已 seed。沒設 DB 就跳過（CI 無 DB 也不會紅）。
+const HAS_DB = Boolean(process.env.DATABASE_URL) && !process.env.DATABASE_URL!.includes('${');
 
-  it('getTutorBySlug 回傳講師；toPublic 剝除 hiddenScore', async () => {
-    vi.resetModules();
+describe.skipIf(!HAS_DB)('db.ts — Prisma backend（需真 DB 且已 seed）', () => {
+  it('getTutorBySlug 找得到 Stan；hiddenScore 只在 server 端物件上', async () => {
     const db = await import('../lib/db');
-    const t = db.getTutorBySlug('stan-shih');
+    const t = await db.getTutorBySlug('stan-shih');
     expect(t).not.toBeNull();
     expect(t!.name).toBe('Stan Shih');
     expect(typeof t!.hiddenScore).toBe('number');
-
-    const pub = db.toPublic(t!);
-    expect('hiddenScore' in pub).toBe(false);
+    expect('hiddenScore' in db.toPublic(t!)).toBe(false);
+    expect(await db.getTutorBySlug('does-not-exist')).toBeNull();
   });
 
-  it('getTutors 回傳全部講師；getReviews 取得結構化陣列', async () => {
-    vi.resetModules();
+  it('getTutors 只回已發佈講師；reviews/endorsements 是結構化陣列', async () => {
     const db = await import('../lib/db');
-    const all = db.getTutors();
-    expect(all.length).toBe(data.tutors.length);
-    expect(Array.isArray(db.getReviews(all[0].id))).toBe(true);
-    expect(Array.isArray(db.getEndorsements(all[0].id))).toBe(true);
+    const all = await db.getTutors();
+    expect(all.length).toBeGreaterThan(0);
+    expect(Array.isArray(await db.getReviews(all[0].id))).toBe(true);
+    expect(Array.isArray(await db.getEndorsements(all[0].id))).toBe(true);
   });
 });

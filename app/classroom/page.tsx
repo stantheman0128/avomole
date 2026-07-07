@@ -18,7 +18,7 @@ export default function ClassroomPage() {
   const { course, meeting, aiSummary, exercises, knowledgeQA } = classroom;
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10 sm:py-14">
+    <div className="mx-auto max-w-4xl px-5 py-12 sm:py-16">
       <PageHeader
         title={course.title}
         subtitle={course.subtitle}
@@ -27,7 +27,7 @@ export default function ClassroomPage() {
         durationMin={course.durationMin}
       />
 
-      <div className="space-y-6">
+      <div className="mt-12 space-y-10">
         {/* 1. 上課資訊 */}
         <Section step={1} title={CR.meetHeading}>
           <MeetingCard

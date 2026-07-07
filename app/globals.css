@@ -94,6 +94,31 @@ body {
   color: var(--color-avo-paper);
 }
 
+/* 內頁乾淨版塊：白底 + 極淡描邊。取代到處手寫 border+bg-white，收斂視覺語彙。
+   不強制圓角尺寸，讓各頁自己配（避免全站又變成一致卡片格）。 */
+.avo-panel {
+  background: color-mix(in oklch, white 92%, var(--color-avo-cream));
+  border: 1px solid color-mix(in oklch, var(--color-avo-ink) 10%, transparent);
+}
+
+/* 內頁上的細分隔線 kicker 小標：mono、放大字距、次要色。用在版塊標題上方當角色字，
+   不是每段都放的裝飾 eyebrow——只在真的要標一個角色時用。 */
+.avo-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  color: color-mix(in oklch, var(--color-avo-seed) 90%, var(--color-avo-ink));
+}
+
+/* --- 換頁過場：template.tsx 每次導航重掛時觸發（淡入 + 輕微上移）--- */
+.avo-page {
+  animation: avo-page-in var(--dur-base) var(--ease-out-quart) both;
+}
+@keyframes avo-page-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
 /* --- 動態預設 ---------------------------------------------------------- */
 .avo-enter {
   animation: avo-enter var(--dur-base) var(--ease-out-quart) both;
@@ -107,6 +132,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .avo-enter { animation: avo-fade var(--dur-fast) linear both; }
+  /* 換頁過場退化成純淡入，不位移 */
+  .avo-page { animation: avo-fade var(--dur-fast) linear both; }
   @keyframes avo-fade { from { opacity: 0; } to { opacity: 1; } }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

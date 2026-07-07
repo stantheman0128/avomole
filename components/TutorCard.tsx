@@ -1,5 +1,7 @@
 'use client';
 // components/TutorCard.tsx —— 講師卡，列表／首頁／AI 推薦卡共用。
+// 講師卡是少數「卡片是對的載體」的地方（它就是一個可點的實體）。編輯風處理：
+// 大名字、mono 價格靠右、skills 走文字 chip 不搶戲、hover 用邊框+輕位移不換整塊底。
 // 只吃 PublicTutor（型別上不含 hiddenScore）。頁面 Task 可加變體 props。
 import Link from 'next/link';
 import Image from 'next/image';
@@ -19,7 +21,7 @@ function Stars({ rating }: { rating: number }) {
   return (
     <span className="font-mono text-sm text-avo-seed" aria-label={`${rating.toFixed(1)} / 5`}>
       {'★'.repeat(full)}
-      <span className="text-avo-seed/30">{'★'.repeat(5 - full)}</span>
+      <span className="text-avo-seed/25">{'★'.repeat(5 - full)}</span>
     </span>
   );
 }
@@ -32,7 +34,13 @@ export function TutorCard({ tutor, rating, reason, className = '' }: TutorCardPr
   return (
     <Link
       href={`/tutors/${tutor.slug}`}
-      className={`block rounded-2xl border border-avo-light bg-white p-4 transition-colors hover:bg-avo-light/40 ${className}`}
+      className={[
+        'group avo-panel block rounded-2xl p-4 transition-[transform,border-color]',
+        'duration-[var(--dur-base)] ease-[var(--ease-out-quart)]',
+        'hover:-translate-y-0.5 hover:border-avo-main/50',
+        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-avo-main',
+        className,
+      ].join(' ')}
     >
       <div className="flex items-start gap-3">
         <Image
@@ -40,42 +48,43 @@ export function TutorCard({ tutor, rating, reason, className = '' }: TutorCardPr
           alt={tutor.name}
           width={56}
           height={56}
-          className="h-14 w-14 shrink-0 rounded-xl bg-avo-light object-cover"
+          className="h-14 w-14 shrink-0 rounded-2xl object-cover"
         />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <h3 className="truncate font-semibold text-avo-dark">{tutor.name}</h3>
+            <h3 className="avo-display truncate text-lg text-avo-dark">{tutor.name}</h3>
             {tutor.isReal && <Badge kind="real" />}
           </div>
-          <p className="truncate text-sm text-avo-ink/70">{tutor.title}</p>
+          <p className="truncate text-sm text-avo-ink/65">{tutor.title}</p>
         </div>
       </div>
 
-      <div className="mt-3 flex flex-wrap gap-1.5">
-        {shownSkills.map((s) => (
-          <span key={s} className="rounded-md bg-avo-light/60 px-2 py-0.5 text-xs text-avo-dark">
-            {s}
+      <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-avo-ink/70">
+        {shownSkills.map((sk) => (
+          <span key={sk} className="whitespace-nowrap">
+            {sk}
           </span>
         ))}
-        {extra > 0 && (
-          <span className="rounded-md bg-avo-light/60 px-2 py-0.5 text-xs text-avo-dark">+{extra}</span>
-        )}
+        {extra > 0 && <span className="text-avo-ink/40">+{extra}</span>}
       </div>
 
-      <div className="mt-3 flex items-center justify-between">
+      <hr className="avo-rule my-3" />
+
+      <div className="flex items-center justify-between">
         <span className="font-mono text-sm text-avo-dark">
           NT${tutor.hourlyRate}
-          <span className="text-avo-ink/50">{t({ zh: ' /時', en: ' /hr' })}</span>
+          <span className="text-avo-ink/45">{t({ zh: ' /時', en: ' /hr' })}</span>
         </span>
-        {typeof rating === 'number' && <Stars rating={rating} />}
-      </div>
-
-      <div className="mt-2 flex flex-wrap gap-1.5">
-        {tutor.acceptsProjects && <Badge kind="projects" />}
+        <div className="flex items-center gap-2">
+          {tutor.acceptsProjects && <Badge kind="projects" />}
+          {typeof rating === 'number' && rating > 0 && <Stars rating={rating} />}
+        </div>
       </div>
 
       {reason && (
-        <p className="mt-3 rounded-lg bg-avo-cream px-3 py-2 text-sm text-avo-ink/80">{reason}</p>
+        <p className="mt-3 rounded-lg bg-avo-light/40 px-3 py-2 text-sm leading-relaxed text-avo-ink/85">
+          {reason}
+        </p>
       )}
     </Link>
   );
