@@ -41,6 +41,8 @@
 
 字體：`Noto Sans TC`（全站）＋ `JetBrains Mono`（數字、代碼、GitHub 統計）。Google Fonts 載入。
 
+**品牌名實作規則**：中英文站名、slogan 一律取自 `lib/brand.ts` 的常數（並同步存在於兩個 locale 字典），任何頁面不得寫死站名字串——名稱仍可能微調（AvoMole vs Guacamole AI），改名必須是改一處的事。
+
 **頁尾聲明（每頁必有）**：「本網站為黑客松 Demo。講師、評價與推薦資料除特別標示外均為虛構示意。」
 
 ## 3. 技術棧（定案，不要更換）
