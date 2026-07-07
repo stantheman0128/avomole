@@ -1,48 +1,55 @@
-'use client';
-// app/page.tsx —— 首頁 hero 佔位（scaffold）。Task 6 會覆寫成完整首頁八區塊。
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { useLang } from '@/lib/i18n';
-import { BRAND } from '@/lib/brand';
+// app/page.tsx —— 首頁（Server Component）。
+// 讀 db、剝除 hiddenScore（toPublic）、算平均評分、蒐集名人推薦，把純資料傳給 client 的 HomeContent。
+// 區塊 1（Nav）與 8（Footer）由 layout 全站處理。
+import { getTutors, getReviews, getEndorsements, toPublic } from '@/lib/db';
+import { HomeContent } from './_home/HomeContent';
+import type { FeaturedTutor, HomeEndorsement } from './_home/HomeContent';
 
-export default function HomePage() {
-  const { lang, t } = useLang();
-  const router = useRouter();
-  const [q, setQ] = useState('');
-  const slogan = lang === 'zh' ? BRAND.sloganZh : BRAND.sloganEn;
+export const dynamic = 'force-dynamic';
 
-  function submit(e: React.FormEvent) {
-    e.preventDefault();
-    const text = q.trim();
-    router.push(text ? `/match?q=${encodeURIComponent(text)}` : '/match');
+// 平均評分（0–5），無評價回 0
+function avgRating(tutorId: number): number {
+  const reviews = getReviews(tutorId);
+  if (reviews.length === 0) return 0;
+  const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
+  return sum / reviews.length;
+}
+
+// 精選 4 位：必含 Stan（isReal），其餘挑不同領域湊滿，維持展示廣度
+function pickFeatured(): FeaturedTutor[] {
+  const tutors = getTutors();
+  const real = tutors.find((t) => t.isReal);
+  const picked = real ? [real] : [];
+  const preferredSlugs = ['wu-jian-lin', 'chen-wei-ting', 'zhang-xiao-han'];
+  for (const slug of preferredSlugs) {
+    if (picked.length >= 4) break;
+    const t = tutors.find((x) => x.slug === slug && !picked.includes(x));
+    if (t) picked.push(t);
   }
+  // 保底：若上面湊不滿 4 位（資料異動時），用剩下的補
+  for (const t of tutors) {
+    if (picked.length >= 4) break;
+    if (!picked.includes(t)) picked.push(t);
+  }
+  return picked.slice(0, 4).map((t) => ({ tutor: toPublic(t), rating: avgRating(t.id) }));
+}
 
-  return (
-    <section className="mx-auto max-w-3xl px-4 py-16 text-center">
-      <Image src="/mascot.svg" alt="" width={120} height={120} className="mx-auto h-28 w-28" priority />
-      <h1 className="mt-6 text-3xl font-bold text-avo-dark sm:text-4xl">{slogan}</h1>
-      <p className="mt-3 text-avo-ink/70">
-        {t({
-          zh: 'AI 領域人才的專門媒合平臺，用 AI 評估教 AI 的人。',
-          en: 'The matchmaking platform for AI talent — AI that evaluates those who teach AI.',
-        })}
-      </p>
+// 跨講師蒐集推薦，攤平後取 3 位「不同的」認證帳號（同一人只取第一則，避免推薦牆出現重複頭像）
+function pickEndorsements(): HomeEndorsement[] {
+  const flat: HomeEndorsement[] = [];
+  const seen = new Set<string>();
+  for (const t of getTutors()) {
+    for (const e of getEndorsements(t.id)) {
+      if (seen.has(e.endorserName)) continue;
+      seen.add(e.endorserName);
+      flat.push({ endorserName: e.endorserName, endorserTitle: e.endorserTitle, quote: e.quote });
+    }
+  }
+  return flat.slice(0, 3);
+}
 
-      <form onSubmit={submit} className="mx-auto mt-8 flex max-w-xl gap-2">
-        <input
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder={t({ zh: '告訴酪梨你想學什麼…', en: 'Tell the avocado what you want to learn…' })}
-          className="flex-1 rounded-full border border-avo-main/40 bg-white px-5 py-3 text-avo-ink outline-none focus:border-avo-main"
-        />
-        <button
-          type="submit"
-          className="rounded-full bg-avo-main px-6 py-3 font-medium text-white hover:bg-avo-dark"
-        >
-          {t({ zh: '問酪梨', en: 'Ask' })}
-        </button>
-      </form>
-    </section>
-  );
+export default async function HomePage() {
+  const featured = pickFeatured();
+  const endorsements = pickEndorsements();
+  return <HomeContent featured={featured} endorsements={endorsements} />;
 }
