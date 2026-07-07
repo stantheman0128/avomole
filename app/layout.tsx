@@ -23,6 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: `${BRAND.zh}｜${BRAND.en}`,
   description: BRAND.sloganZh,
+  icons: { icon: '/mascot.svg' },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
