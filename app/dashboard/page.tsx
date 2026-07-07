@@ -1,20 +1,25 @@
 // app/dashboard/page.tsx —— 登入後臺。未登入導向 /login。
-// 講師：講師頁管理（真 CRUD 建置中）。學生：帳號總覽。
+// 講師：完整講師頁 CRUD（建草稿 → 編輯 → AI 側寫 → 發佈）。學生：帳號總覽。
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loadOrCreateProfile } from './profile';
+import { TutorEditor } from './_components/TutorEditor';
 
 export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {
   const session = await auth();
   if (!session?.user) redirect('/login');
-  const { name, email, role } = session.user;
+  const { id, name, email, role } = session.user;
   const isTutor = role === 'TUTOR';
+
+  // 講師：載入（或首次登入時建立）自己的講師草稿。hiddenScore 已在 profile.ts 剝除，不進 client。
+  const profile = isTutor ? await loadOrCreateProfile(id, name ?? null, email ?? null) : null;
 
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:py-24">
-      <p className="font-mono text-xs uppercase tracking-widest text-avo-main">Dashboard</p>
+      <p className="avo-kicker">Dashboard</p>
       <h1 className="avo-display mt-3 text-3xl text-avo-dark">
         {isTutor ? '講師後臺' : '我的帳號'}
       </h1>
@@ -22,13 +27,8 @@ export default async function DashboardPage() {
         嗨{name ? `，${name}` : ''}。你以「{isTutor ? '講師' : '學生'}」身份登入（{email}）。
       </p>
 
-      {isTutor ? (
-        <div className="mt-8 avo-panel rounded-2xl p-5">
-          <h2 className="avo-display text-lg text-avo-dark">上架你的講師頁（建置中）</h2>
-          <p className="mt-2 text-sm text-avo-ink/70">
-            很快就能在這裡編輯能力側寫卡、技能、方案與作品，接上 GitHub 讓 AI 幫你生側寫，發佈後出現在講師列表。
-          </p>
-        </div>
+      {isTutor && profile ? (
+        <TutorEditor profile={profile} />
       ) : (
         <div className="mt-8 avo-panel rounded-2xl p-5">
           <h2 className="avo-display text-lg text-avo-dark">開始學 AI</h2>

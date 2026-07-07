@@ -62,7 +62,13 @@ export function Nav() {
               </span>
               <button
                 type="button"
-                onClick={() => signOut({ callbackUrl: '/' })}
+                onClick={() => {
+                  // redirect:false + 用瀏覽器自身 origin 硬導向：避免 Auth.js 在 Zeabur 代理後把
+                  // callbackUrl 解成容器內部 localhost:8080。
+                  void signOut({ redirect: false }).then(() => {
+                    window.location.href = '/';
+                  });
+                }}
                 className="rounded-full border border-avo-main/40 px-3 py-1.5 text-sm text-avo-dark hover:bg-avo-light/40"
               >
                 {t(NAV.logout)}
