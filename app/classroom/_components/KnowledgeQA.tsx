@@ -5,12 +5,16 @@ import { useState } from 'react';
 import { useLang } from '@/lib/i18n';
 import { CR } from '../strings';
 
-type Preset = { question: string; answer: string };
+type Preset = { question: string; questionEn?: string; answer: string; answerEn?: string };
+export type KnowledgeQAData = { note?: string; noteEn?: string; presets: Preset[] };
 
-export function KnowledgeQA({ presets }: { presets: Preset[] }) {
-  const { t } = useLang();
+export function KnowledgeQA({ knowledgeQA }: { knowledgeQA: KnowledgeQAData }) {
+  const { lang, t } = useLang();
+  const en = lang === 'en';
+  const { presets } = knowledgeQA;
   const [active, setActive] = useState(0);
-  const answer = presets[active]?.answer ?? '';
+  const current = presets[active];
+  const answer = current ? (en ? current.answerEn ?? current.answer : current.answer) : '';
 
   return (
     <div>
@@ -31,7 +35,7 @@ export function KnowledgeQA({ presets }: { presets: Preset[] }) {
                   : 'border border-avo-main/35 text-avo-dark hover:bg-avo-light/60'
               }`}
             >
-              {p.question}
+              {en ? p.questionEn ?? p.question : p.question}
             </button>
           );
         })}

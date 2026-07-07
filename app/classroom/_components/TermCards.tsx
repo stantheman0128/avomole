@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { useLang } from '@/lib/i18n';
 import { CR } from '../strings';
 
-type Term = { term: string; explain: string };
+export type Term = { term: string; termEn?: string; explain: string; explainEn?: string };
 
-function Card({ term, explain }: Term) {
+function Card({ term, explain }: { term: string; explain: string }) {
   const [flipped, setFlipped] = useState(false);
   return (
     <button
@@ -36,7 +36,8 @@ function Card({ term, explain }: Term) {
 }
 
 export function TermCards({ terms }: { terms: Term[] }) {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const en = lang === 'en';
   return (
     <div>
       <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
@@ -47,8 +48,12 @@ export function TermCards({ terms }: { terms: Term[] }) {
         </span>
       </div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        {terms.map((term) => (
-          <Card key={term.term} {...term} />
+        {terms.map((tm) => (
+          <Card
+            key={tm.term}
+            term={en ? tm.termEn ?? tm.term : tm.term}
+            explain={en ? tm.explainEn ?? tm.explain : tm.explain}
+          />
         ))}
       </div>
     </div>

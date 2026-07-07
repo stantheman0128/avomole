@@ -12,8 +12,10 @@ const PROFILE_SELECT = {
   name: true,
   nameEn: true,
   title: true,
+  titleEn: true,
   avatar: true,
   bio: true,
+  bioEn: true,
   hourlyRate: true,
   domains: true,
   skills: true,
@@ -33,8 +35,10 @@ type ProfileRow = {
   name: string;
   nameEn: string;
   title: string;
+  titleEn: string | null;
   avatar: string;
   bio: string;
+  bioEn: string | null;
   hourlyRate: number;
   domains: string[];
   skills: string[];
@@ -55,8 +59,10 @@ function rowToTutor(r: ProfileRow): Tutor {
     name: r.name,
     nameEn: r.nameEn,
     title: r.title,
+    titleEn: r.titleEn ?? undefined,
     avatar: r.avatar,
     bio: r.bio,
+    bioEn: r.bioEn ?? undefined,
     hourlyRate: r.hourlyRate,
     domains: r.domains,
     skills: r.skills,
@@ -92,9 +98,16 @@ export async function getReviews(tutorId: number): Promise<Review[]> {
   const rows = await prisma.review.findMany({
     where: { tutorProfile: { seq: tutorId } },
     orderBy: { id: 'asc' },
-    select: { author: true, rating: true, text: true },
+    select: { author: true, rating: true, text: true, textEn: true },
   });
-  return rows.map((r, i) => ({ id: i + 1, tutorId, author: r.author, rating: r.rating, text: r.text }));
+  return rows.map((r, i) => ({
+    id: i + 1,
+    tutorId,
+    author: r.author,
+    rating: r.rating,
+    text: r.text,
+    textEn: r.textEn ?? undefined,
+  }));
 }
 
 export async function getEndorsements(tutorId: number): Promise<Endorsement[]> {

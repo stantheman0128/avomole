@@ -81,7 +81,9 @@ model TutorProfile {
   nameEn String
 
   title           String
+  titleEn         String? // 英文標題（demo 雙語內容；缺則前端 fallback 回中文）
   bio             String
+  bioEn           String? // 英文自傳（同上）
   avatar          String
   hourlyRate      Int
   acceptsProjects Boolean @default(false)
@@ -115,6 +117,7 @@ model Review {
   author         String
   rating         Int
   text           String
+  textEn         String? // 英文評價（demo 雙語內容；缺則前端 fallback 回中文）
 
   tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id], onDelete: Cascade)
 }

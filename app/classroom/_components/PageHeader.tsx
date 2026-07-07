@@ -1,22 +1,26 @@
 'use client';
-// 頁面標頭：kicker + 課名 + 副標 + 課堂 meta。課名／副標為中文 mock，來自 json。
+// 頁面標頭：kicker + 課名 + 副標 + 課堂 meta。課名／副標來自 json，中英雙語，依 lang 挑。
 import { useLang } from '@/lib/i18n';
 import { CR } from '../strings';
 
-export function PageHeader({
-  title,
-  subtitle,
-  sessionLabel,
-  tutorName,
-  durationMin,
-}: {
+export type Course = {
   title: string;
+  titleEn?: string;
   subtitle: string;
-  sessionLabel: string;
+  subtitleEn?: string;
   tutorName: string;
+  sessionLabel: string;
+  sessionLabelEn?: string;
   durationMin: number;
-}) {
-  const { t } = useLang();
+};
+
+export function PageHeader({ course }: { course: Course }) {
+  const { lang, t } = useLang();
+  const en = lang === 'en';
+  const title = en ? course.titleEn ?? course.title : course.title;
+  const subtitle = en ? course.subtitleEn ?? course.subtitle : course.subtitle;
+  const sessionLabel = en ? course.sessionLabelEn ?? course.sessionLabel : course.sessionLabel;
+
   return (
     <header className="max-w-2xl">
       <p className="avo-kicker">
@@ -31,9 +35,9 @@ export function PageHeader({
       <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-sm text-avo-ink/55">
         <span>{sessionLabel}</span>
         <span aria-hidden className="text-avo-ink/30">·</span>
-        <span>{tutorName}</span>
+        <span>{course.tutorName}</span>
         <span aria-hidden className="text-avo-ink/30">·</span>
-        <span>{durationMin} min</span>
+        <span>{course.durationMin} min</span>
       </div>
 
       <p className="avo-prose mt-5 text-sm text-avo-ink/60">{t(CR.pageLead)}</p>

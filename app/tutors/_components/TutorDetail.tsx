@@ -12,13 +12,6 @@ import { LevelChips } from '@/components/LevelChips';
 import { BookButton } from './BookButton';
 import { s } from '../strings';
 
-// 英文模式下，中文 mock 內容區塊掛一個小標
-function ZhContentTag() {
-  const { lang, t } = useLang();
-  if (lang !== 'en') return null;
-  return <span className="ml-2 align-middle text-xs text-avo-ink/40">{t(s.demoContentZh)}</span>;
-}
-
 // 區塊標頭：kicker 角色字 + serif 大標
 function SectionHead({ kicker, title }: { kicker: string; title: React.ReactNode }) {
   return (
@@ -58,7 +51,10 @@ export function TutorDetail({
   reviews: Review[];
   endorsements: Endorsement[];
 }) {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const en = lang === 'en';
+  // 英文模式挑英文欄位，缺則 fallback 回中文原文
+  const pick = (zh: string, enVal?: string) => (en ? enVal ?? zh : zh);
   const gh = tutor.github;
   const langEntries = Object.entries(gh.langDist).sort((a, b) => b[1] - a[1]);
   // 語言橫條配色（在 avo 色系內輪替）
@@ -79,10 +75,9 @@ export function TutorDetail({
             {tutor.acceptsProjects && <Badge kind="projects" />}
           </div>
           <h1 className="avo-display mt-3 text-4xl text-avo-dark sm:text-5xl">{tutor.name}</h1>
-          <p className="mt-2 text-avo-ink/70">{tutor.title}</p>
+          <p className="mt-2 text-avo-ink/70">{pick(tutor.title, tutor.titleEn)}</p>
           <p className="avo-prose mt-4 leading-relaxed text-avo-ink/90">
-            {tutor.bio}
-            <ZhContentTag />
+            {pick(tutor.bio, tutor.bioEn)}
           </p>
         </div>
 
@@ -123,8 +118,7 @@ export function TutorDetail({
           <div className="min-w-0">
             <p className="avo-kicker">{t(s.summaryLabel)}</p>
             <p className="avo-prose mt-2 leading-relaxed text-avo-ink/90">
-              {tutor.aiProfile.summary}
-              <ZhContentTag />
+              {pick(tutor.aiProfile.summary, tutor.aiProfile.summaryEn)}
             </p>
             <div className="mt-6 grid gap-5 sm:grid-cols-2">
               <div>
@@ -182,8 +176,7 @@ export function TutorDetail({
             ))}
           </div>
           <p className="mt-4 text-sm leading-relaxed text-avo-ink/70">
-            {gh.activityNote}
-            <ZhContentTag />
+            {pick(gh.activityNote, gh.activityNoteEn)}
           </p>
         </div>
 
@@ -195,7 +188,7 @@ export function TutorDetail({
                 <span className="truncate font-mono font-semibold text-avo-dark">{repo.name}</span>
                 <span className="shrink-0 font-mono text-sm text-avo-seed">★ {repo.stars}</span>
               </div>
-              <p className="mt-1.5 text-sm text-avo-ink/70">{repo.desc}</p>
+              <p className="mt-1.5 text-sm text-avo-ink/70">{pick(repo.desc, repo.descEn)}</p>
               <span className="mt-2 inline-block font-mono text-xs text-avo-ink/50">{repo.lang}</span>
             </div>
           ))}
@@ -210,8 +203,8 @@ export function TutorDetail({
         <div className="grid gap-3 sm:grid-cols-2">
           {tutor.portfolio.map((p) => (
             <div key={p.title} className="avo-panel rounded-2xl p-4">
-              <h3 className="font-semibold text-avo-dark">{p.title}</h3>
-              <p className="mt-1 text-sm text-avo-ink/70">{p.desc}</p>
+              <h3 className="font-semibold text-avo-dark">{pick(p.title, p.titleEn)}</h3>
+              <p className="mt-1 text-sm text-avo-ink/70">{pick(p.desc, p.descEn)}</p>
               <a
                 href={p.link}
                 target="_blank"
@@ -235,8 +228,7 @@ export function TutorDetail({
             {t(s.reviewDigest)}
           </span>
           <span className="text-sm text-avo-ink/90">
-            {tutor.aiProfile.reviewDigest}
-            <ZhContentTag />
+            {pick(tutor.aiProfile.reviewDigest, tutor.aiProfile.reviewDigestEn)}
           </span>
         </div>
         <div className="mt-4 divide-y divide-avo-ink/10">
@@ -246,7 +238,7 @@ export function TutorDetail({
                 <span className="font-medium text-avo-dark">{r.author}</span>
                 <Stars rating={r.rating} />
               </div>
-              <p className="mt-1.5 text-sm leading-relaxed text-avo-ink/80">{r.text}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-avo-ink/80">{pick(r.text, r.textEn)}</p>
             </div>
           ))}
         </div>
@@ -281,9 +273,9 @@ export function TutorDetail({
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {tutor.plans.map((plan) => (
             <div key={plan.name} className="avo-panel flex flex-col rounded-2xl p-4">
-              <h3 className="font-semibold text-avo-dark">{plan.name}</h3>
+              <h3 className="font-semibold text-avo-dark">{pick(plan.name, plan.nameEn)}</h3>
               <p className="mt-1 font-mono text-lg font-semibold text-avo-main">NT${plan.price}</p>
-              <p className="mt-2 flex-1 text-sm text-avo-ink/70">{plan.desc}</p>
+              <p className="mt-2 flex-1 text-sm text-avo-ink/70">{pick(plan.desc, plan.descEn)}</p>
               <BookButton className="mt-3 w-full" />
             </div>
           ))}

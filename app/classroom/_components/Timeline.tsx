@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { useLang } from '@/lib/i18n';
 import { CR } from '../strings';
 
-type Item = { time: string; title: string };
+export type TimelineItem = { time: string; title: string; titleEn?: string };
 
-export function Timeline({ items }: { items: Item[] }) {
-  const { t } = useLang();
+export function Timeline({ items }: { items: TimelineItem[] }) {
+  const { lang, t } = useLang();
+  const en = lang === 'en';
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
@@ -33,7 +34,9 @@ export function Timeline({ items }: { items: Item[] }) {
                 className="group flex w-full items-baseline gap-3 rounded-lg px-2 py-1.5 text-left transition-colors hover:bg-avo-light/50"
               >
                 <span className="shrink-0 font-mono text-xs text-avo-seed">{item.time}</span>
-                <span className="text-sm text-avo-ink group-hover:text-avo-dark">{item.title}</span>
+                <span className="text-sm text-avo-ink group-hover:text-avo-dark">
+                  {en ? item.titleEn ?? item.title : item.title}
+                </span>
               </button>
               {open && (
                 <p

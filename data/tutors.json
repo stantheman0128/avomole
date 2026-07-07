@@ -6,8 +6,10 @@
       "name": "林品睿",
       "nameEn": "Lin Pin-Jui",
       "title": "LLM 應用工程師 · 前電商搜尋團隊",
+      "titleEn": "LLM Application Engineer · ex-E-commerce Search Team",
       "avatar": "/avatars/t1.svg",
       "bio": "在電商公司待了五年，主力是把大型語言模型接進真實產品裡。做過商品問答機器人、客服自動分類、還有一套踩了無數坑的 RAG 搜尋。我不太喜歡從理論講起，習慣直接開一個能跑的小專案，邊做邊補觀念。教學重心放在「怎麼讓 LLM 在正式環境不出包」這件事上。",
+      "bioEn": "I spent five years at an e-commerce company, mostly wiring large language models into real products. I built a product Q&A bot, an automatic support-ticket classifier, and a RAG search system that taught me plenty of hard lessons. I don't like starting from theory. I prefer opening a small project that actually runs and filling in the concepts as we build. My teaching centers on one thing: keeping an LLM from breaking once it's in production.",
       "hourlyRate": 1400,
       "domains": ["LLM 應用", "AI 入門"],
       "skills": ["Prompt Engineering", "RAG", "LangChain", "OpenAI API", "向量資料庫"],
@@ -18,27 +20,30 @@
       "aiProfile": {
         "radar": { "llm": 90, "cv": 30, "mlBasics": 65, "engineering": 80, "teaching": 78, "influence": 55 },
         "summary": "LLM 應用實戰型講師，強在把模型落地成產品，尤其 RAG 與線上穩定性。理論深度中等，適合已有程式基礎、想直接做出東西的人。",
+        "summaryEn": "A hands-on LLM application tutor whose strength is turning models into products, especially RAG and production reliability. His theory runs to moderate depth, so he suits people who already code and want to ship something.",
         "difficulty": 3,
-        "reviewDigest": "83% 的學生提到「範例都能直接跑，少走很多冤枉路」。"
+        "reviewDigest": "83% 的學生提到「範例都能直接跑，少走很多冤枉路」。",
+        "reviewDigestEn": "83% of students mention that his examples run straight out of the box and save a lot of wasted effort."
       },
       "github": {
         "username": "linpinjui-demo",
         "repos": [
-          { "name": "product-qa-bot", "desc": "電商商品問答機器人的參考實作，含 RAG 檢索與 fallback", "stars": 46, "lang": "Python" },
-          { "name": "rag-cookbook", "desc": "把 RAG 常見坑整理成十幾個可執行的 notebook", "stars": 71, "lang": "Jupyter Notebook" },
-          { "name": "prompt-lint", "desc": "簡單的 prompt 檢查小工具，抓常見寫法問題", "stars": 12, "lang": "TypeScript" }
+          { "name": "product-qa-bot", "desc": "電商商品問答機器人的參考實作，含 RAG 檢索與 fallback", "descEn": "A reference build of an e-commerce product Q&A bot, with RAG retrieval and a fallback path", "stars": 46, "lang": "Python" },
+          { "name": "rag-cookbook", "desc": "把 RAG 常見坑整理成十幾個可執行的 notebook", "descEn": "A dozen-plus runnable notebooks that collect the common RAG pitfalls", "stars": 71, "lang": "Jupyter Notebook" },
+          { "name": "prompt-lint", "desc": "簡單的 prompt 檢查小工具，抓常見寫法問題", "descEn": "A small prompt-checking tool that catches common wording problems", "stars": 12, "lang": "TypeScript" }
         ],
         "langDist": { "Python": 62, "TypeScript": 26, "Shell": 12 },
-        "activityNote": "近一年穩定更新，主要在維護 RAG 教學範例與回答 issue。"
+        "activityNote": "近一年穩定更新，主要在維護 RAG 教學範例與回答 issue。",
+        "activityNoteEn": "Steady updates over the past year, mostly maintaining the RAG teaching examples and answering issues."
       },
       "portfolio": [
-        { "title": "電商商品問答系統", "desc": "上線的商品客服問答，用檢索加生成把退換貨、規格問題的人工客服量壓下來", "link": "https://example.com/proj/product-qa" },
-        { "title": "客服工單自動分類", "desc": "把進來的工單分到十幾個類別再派給對應組別，錯分率明顯下降", "link": "https://example.com/proj/ticket-router" }
+        { "title": "電商商品問答系統", "titleEn": "E-commerce Product Q&A System", "desc": "上線的商品客服問答，用檢索加生成把退換貨、規格問題的人工客服量壓下來", "descEn": "A live product-support Q&A that uses retrieval plus generation to cut the human workload on returns and spec questions", "link": "https://example.com/proj/product-qa" },
+        { "title": "客服工單自動分類", "titleEn": "Automatic Support-Ticket Routing", "desc": "把進來的工單分到十幾個類別再派給對應組別，錯分率明顯下降", "descEn": "Sorts incoming tickets into a dozen-plus categories and routes them to the right team, with a clear drop in misrouting", "link": "https://example.com/proj/ticket-router" }
       ],
       "plans": [
-        { "name": "單堂體驗", "price": 1400, "desc": "60 分鐘，先看你的目標，直接動手做一個小 demo" },
-        { "name": "RAG 入門四堂", "price": 5000, "desc": "四堂把一套能用的 RAG 從零建起來，含向量庫與評估" },
-        { "name": "十堂專題陪跑", "price": 12000, "desc": "十堂陪你把自己的 LLM 專案做到能 demo 的程度" }
+        { "name": "單堂體驗", "nameEn": "Single trial session", "price": 1400, "desc": "60 分鐘，先看你的目標，直接動手做一個小 demo", "descEn": "60 minutes: we look at your goal and build a small demo hands-on right away" },
+        { "name": "RAG 入門四堂", "nameEn": "RAG Foundations (4 sessions)", "price": 5000, "desc": "四堂把一套能用的 RAG 從零建起來，含向量庫與評估", "descEn": "Four sessions building a usable RAG system from scratch, including the vector store and evaluation" },
+        { "name": "十堂專題陪跑", "nameEn": "Project Mentorship (10 sessions)", "price": 12000, "desc": "十堂陪你把自己的 LLM 專案做到能 demo 的程度", "descEn": "Ten sessions walking your own LLM project all the way to a demo-ready state" }
       ]
     },
     {
@@ -47,8 +52,10 @@
       "name": "張筱涵",
       "nameEn": "Zhang Xiao-Han",
       "title": "資料科學家 · 金融風控背景",
+      "titleEn": "Data Scientist · Financial Risk Background",
       "avatar": "/avatars/t2.svg",
       "bio": "統計出身，前幾年在銀行做風控模型，後來轉去做用戶行為分析。我對「資料到底在講什麼」比對最新模型還執著，上課會花不少時間在教怎麼看圖、怎麼問對問題。從 pandas、特徵工程到經典機器學習都能帶，尤其適合非本科想轉資料領域的人。",
+      "bioEn": "I come from a statistics background. I spent my first few years building risk models at a bank, then moved into user-behavior analysis. I care more about what the data is actually saying than about the newest model, so I spend real class time on how to read a chart and how to ask the right question. I can take you from pandas through feature engineering to classic machine learning, and I'm a good fit for people from other fields who want to move into data.",
       "hourlyRate": 1100,
       "domains": ["資料科學", "AI 入門"],
       "skills": ["Python", "pandas", "資料視覺化", "特徵工程", "scikit-learn", "統計"],
@@ -59,25 +66,28 @@
       "aiProfile": {
         "radar": { "llm": 40, "cv": 35, "mlBasics": 85, "engineering": 60, "teaching": 88, "influence": 48 },
         "summary": "資料科學基本功扎實，教學耐心，特別會照顧非本科背景的學生。強項在統計直覺與經典機器學習，較少碰深度學習與 LLM。",
+        "summaryEn": "Solid data-science fundamentals and a patient teacher who looks after students from non-technical backgrounds. Her strengths are statistical intuition and classic machine learning; she works less with deep learning and LLMs.",
         "difficulty": 2,
-        "reviewDigest": "76% 的學生提到「講解很有耐心，聽得懂為什麼要這樣做」。"
+        "reviewDigest": "76% 的學生提到「講解很有耐心，聽得懂為什麼要這樣做」。",
+        "reviewDigestEn": "76% of students mention that she explains patiently and helps them understand why each step is done."
       },
       "github": {
         "username": "xiaohan-ds",
         "repos": [
-          { "name": "eda-templates", "desc": "探索式資料分析的常用模板，拿到新資料就能套", "stars": 58, "lang": "Jupyter Notebook" },
-          { "name": "credit-risk-demo", "desc": "去識別化的風控建模教學範例，從資料清理到模型評估", "stars": 33, "lang": "Python" }
+          { "name": "eda-templates", "desc": "探索式資料分析的常用模板，拿到新資料就能套", "descEn": "Handy exploratory-data-analysis templates you can drop onto any new dataset", "stars": 58, "lang": "Jupyter Notebook" },
+          { "name": "credit-risk-demo", "desc": "去識別化的風控建模教學範例，從資料清理到模型評估", "descEn": "A de-identified credit-risk modeling walkthrough, from data cleaning to model evaluation", "stars": 33, "lang": "Python" }
         ],
         "langDist": { "Jupyter Notebook": 55, "Python": 40, "R": 5 },
-        "activityNote": "定期更新教學 notebook，issue 回覆速度快。"
+        "activityNote": "定期更新教學 notebook，issue 回覆速度快。",
+        "activityNoteEn": "Regularly updates the teaching notebooks and replies to issues quickly."
       },
       "portfolio": [
-        { "title": "用戶流失預測", "desc": "訂閱制產品的流失預警，把可能退訂的用戶提早撈出來做挽回", "link": "https://example.com/proj/churn" },
-        { "title": "風控評分卡", "desc": "傳統評分卡模型，重點在解釋性與稽核能過關", "link": "https://example.com/proj/scorecard" }
+        { "title": "用戶流失預測", "titleEn": "Customer Churn Prediction", "desc": "訂閱制產品的流失預警，把可能退訂的用戶提早撈出來做挽回", "descEn": "A churn early-warning system for a subscription product that surfaces likely cancellers in time to win them back", "link": "https://example.com/proj/churn" },
+        { "title": "風控評分卡", "titleEn": "Credit Scorecard", "desc": "傳統評分卡模型，重點在解釋性與稽核能過關", "descEn": "A traditional scorecard model built for interpretability and to pass audit", "link": "https://example.com/proj/scorecard" }
       ],
       "plans": [
-        { "name": "單堂體驗", "price": 1100, "desc": "60 分鐘，帶一份你想搞懂的資料來，我們一起看" },
-        { "name": "轉職資料科學六堂", "price": 6000, "desc": "六堂從 pandas 到第一個完整分析專案" }
+        { "name": "單堂體驗", "nameEn": "Single trial session", "price": 1100, "desc": "60 分鐘，帶一份你想搞懂的資料來，我們一起看", "descEn": "60 minutes: bring a dataset you want to make sense of and we'll go through it together" },
+        { "name": "轉職資料科學六堂", "nameEn": "Career Switch to Data Science (6 sessions)", "price": 6000, "desc": "六堂從 pandas 到第一個完整分析專案", "descEn": "Six sessions from pandas to your first complete analysis project" }
       ]
     },
     {
@@ -86,8 +96,10 @@
       "name": "吳建霖",
       "nameEn": "Wu Jian-Lin",
       "title": "AI Agent 開發者 · 自動化工具作者",
+      "titleEn": "AI Agent Developer · Automation Tool Author",
       "avatar": "/avatars/t3.svg",
       "bio": "這兩年幾乎都在寫 agent。從最早串幾個 API 的小腳本，到現在能自己規劃、呼叫工具、失敗會重試的多步驟系統。我很愛拆架構給人看，喜歡討論「這個決策該讓模型做還是寫死」這種取捨。適合已經會用 API、想往自動化跟 agent 系統走的人。手上有接案，也可以帶著你一起做真的東西。",
+      "bioEn": "For the past two years I've spent almost all my time building agents, from early scripts that chained a few APIs to multi-step systems that now plan for themselves, call tools, and retry on failure. I love pulling an architecture apart to show how it works, and I enjoy debating trade-offs like whether a given decision should be left to the model or hard-coded. I'm a fit for people who already use APIs and want to move toward automation and agent systems. I also take on client work, so we can build something real together.",
       "hourlyRate": 1800,
       "domains": ["Agent 開發", "LLM 應用"],
       "skills": ["Function Calling", "LangGraph", "工具編排", "Multi-Agent", "Python", "非同步"],
@@ -98,28 +110,31 @@
       "aiProfile": {
         "radar": { "llm": 85, "cv": 25, "mlBasics": 55, "engineering": 90, "teaching": 72, "influence": 68 },
         "summary": "Agent 系統設計的實戰派，工程能力強，擅長工具編排與多步驟流程的錯誤處理。內容偏中高階，新手可能會覺得節奏快。",
+        "summaryEn": "A practitioner of agent-system design with strong engineering skills, good at tool orchestration and error handling across multi-step flows. His material leans intermediate-to-advanced, so beginners may find the pace fast.",
         "difficulty": 4,
-        "reviewDigest": "80% 的學生提到「架構圖畫得很清楚，終於懂 agent 在幹嘛」。"
+        "reviewDigest": "80% 的學生提到「架構圖畫得很清楚，終於懂 agent 在幹嘛」。",
+        "reviewDigestEn": "80% of students mention that his architecture diagrams are so clear they finally understood what an agent actually does."
       },
       "github": {
         "username": "jianlin-agents",
         "repos": [
-          { "name": "toolflow", "desc": "輕量的工具編排框架，重點在可觀測與重試", "stars": 214, "lang": "Python" },
-          { "name": "agent-patterns", "desc": "整理常見 agent 設計模式，每個都有可跑的最小範例", "stars": 156, "lang": "Python" },
-          { "name": "async-llm-worker", "desc": "非同步批次呼叫 LLM 的 worker 範本", "stars": 47, "lang": "Python" }
+          { "name": "toolflow", "desc": "輕量的工具編排框架，重點在可觀測與重試", "descEn": "A lightweight tool-orchestration framework focused on observability and retries", "stars": 214, "lang": "Python" },
+          { "name": "agent-patterns", "desc": "整理常見 agent 設計模式，每個都有可跑的最小範例", "descEn": "A collection of common agent design patterns, each with a runnable minimal example", "stars": 156, "lang": "Python" },
+          { "name": "async-llm-worker", "desc": "非同步批次呼叫 LLM 的 worker 範本", "descEn": "A worker template for calling LLMs asynchronously in batches", "stars": 47, "lang": "Python" }
         ],
         "langDist": { "Python": 78, "TypeScript": 15, "Shell": 7 },
-        "activityNote": "活躍度高，toolflow 有一小群固定貢獻者，issue 討論很認真。"
+        "activityNote": "活躍度高，toolflow 有一小群固定貢獻者，issue 討論很認真。",
+        "activityNoteEn": "Highly active; toolflow has a small group of regular contributors and the issue discussions are thoughtful."
       },
       "portfolio": [
-        { "title": "研究資料蒐集 agent", "desc": "會自己搜尋、抓網頁、整理成表格的多步驟 agent，中途出錯會自己退回重試", "link": "https://example.com/proj/research-agent" },
-        { "title": "內部維運自動化", "desc": "把重複的維運操作交給 agent，人只在關鍵步驟確認", "link": "https://example.com/proj/ops-agent" },
-        { "title": "多模型比較平台", "desc": "同一個任務丟給不同模型跑，把結果並排讓人選", "link": "https://example.com/proj/model-arena" }
+        { "title": "研究資料蒐集 agent", "titleEn": "Research-Gathering Agent", "desc": "會自己搜尋、抓網頁、整理成表格的多步驟 agent，中途出錯會自己退回重試", "descEn": "A multi-step agent that searches, scrapes pages, and organizes the results into tables, backing off and retrying when something fails mid-run", "link": "https://example.com/proj/research-agent" },
+        { "title": "內部維運自動化", "titleEn": "Internal Ops Automation", "desc": "把重複的維運操作交給 agent，人只在關鍵步驟確認", "descEn": "Hands repetitive ops work to an agent, leaving people to confirm only the critical steps", "link": "https://example.com/proj/ops-agent" },
+        { "title": "多模型比較平台", "titleEn": "Multi-Model Comparison Platform", "desc": "同一個任務丟給不同模型跑，把結果並排讓人選", "descEn": "Runs the same task across different models and lays the results side by side for a human to choose", "link": "https://example.com/proj/model-arena" }
       ],
       "plans": [
-        { "name": "單堂體驗", "price": 1800, "desc": "60 分鐘，先聊你想做的 agent，畫出第一版架構" },
-        { "name": "Agent 進階五堂", "price": 8500, "desc": "五堂把一個會用工具、有重試邏輯的 agent 建起來" },
-        { "name": "專案陪跑十堂", "price": 17000, "desc": "帶你把自己的 agent 專案做到能上線的狀態" }
+        { "name": "單堂體驗", "nameEn": "Single trial session", "price": 1800, "desc": "60 分鐘，先聊你想做的 agent，畫出第一版架構", "descEn": "60 minutes: we talk through the agent you want to build and sketch its first architecture" },
+        { "name": "Agent 進階五堂", "nameEn": "Advanced Agents (5 sessions)", "price": 8500, "desc": "五堂把一個會用工具、有重試邏輯的 agent 建起來", "descEn": "Five sessions building an agent that uses tools and has retry logic" },
+        { "name": "專案陪跑十堂", "nameEn": "Project Mentorship (10 sessions)", "price": 17000, "desc": "帶你把自己的 agent 專案做到能上線的狀態", "descEn": "Walks your own agent project all the way to a shippable state" }
       ]
     },
     {
@@ -128,8 +143,10 @@
       "name": "陳威廷",
       "nameEn": "Chen Wei-Ting",
       "title": "電腦視覺工程師 · 製造業瑕疵檢測",
+      "titleEn": "Computer Vision Engineer · Manufacturing Defect Detection",
       "avatar": "/avatars/t4.svg",
       "bio": "在工廠端做視覺檢測，每天處理的是相機拍出來的產線影像。做過瑕疵偵測、尺寸量測、還有物件計數這些不太光鮮但很實在的東西。教學會從影像處理的基本盤講起，再帶到 CNN 跟現在流行的偵測模型。我很堅持一件事：資料標得爛，模型再好也沒用，所以標註流程我也會教。",
+      "bioEn": "I do visual inspection on the factory floor, working every day with production-line images from cameras. I've built defect detection, dimensional measurement, and object counting: unglamorous but very real work. My teaching starts from the basics of image processing and moves up to CNNs and today's popular detection models. I hold firmly to one rule: if the labeling is bad, no model can save it, so I teach the annotation process too.",
       "hourlyRate": 1600,
       "domains": ["電腦視覺"],
       "skills": ["PyTorch", "OpenCV", "物件偵測", "影像分割", "資料標註", "模型部署"],
@@ -140,25 +157,28 @@
       "aiProfile": {
         "radar": { "llm": 30, "cv": 92, "mlBasics": 75, "engineering": 78, "teaching": 74, "influence": 50 },
         "summary": "電腦視覺實戰經驗豐富，強在工業場景的偵測與部署。對資料標註品質的要求很高。LLM 與純理論不是他的主場。",
+        "summaryEn": "Deeply experienced in computer vision, strong on detection and deployment in industrial settings, with high standards for labeling quality. LLMs and pure theory are not his home turf.",
         "difficulty": 4,
-        "reviewDigest": "78% 的學生提到「把標註跟資料品質講得很透，這塊別人都跳過」。"
+        "reviewDigest": "78% 的學生提到「把標註跟資料品質講得很透，這塊別人都跳過」。",
+        "reviewDigestEn": "78% of students mention that he covers labeling and data quality thoroughly, a part other tutors skip."
       },
       "github": {
         "username": "weiting-cv",
         "repos": [
-          { "name": "defect-detect", "desc": "產線瑕疵偵測的訓練與推論範例，含資料增強", "stars": 89, "lang": "Python" },
-          { "name": "label-checker", "desc": "檢查標註一致性的小工具，抓漏標與框歪", "stars": 41, "lang": "Python" }
+          { "name": "defect-detect", "desc": "產線瑕疵偵測的訓練與推論範例，含資料增強", "descEn": "A training-and-inference example for production-line defect detection, including data augmentation", "stars": 89, "lang": "Python" },
+          { "name": "label-checker", "desc": "檢查標註一致性的小工具，抓漏標與框歪", "descEn": "A small tool that checks annotation consistency, catching missed labels and skewed boxes", "stars": 41, "lang": "Python" }
         ],
         "langDist": { "Python": 84, "C++": 11, "Shell": 5 },
-        "activityNote": "更新集中在瑕疵偵測範例，偶爾寫工業視覺的踩坑筆記。"
+        "activityNote": "更新集中在瑕疵偵測範例，偶爾寫工業視覺的踩坑筆記。",
+        "activityNoteEn": "Updates center on the defect-detection examples, with the occasional write-up of industrial-vision pitfalls."
       },
       "portfolio": [
-        { "title": "產線瑕疵自動判定", "desc": "取代部分人工目檢，把明顯瑕疵先攔下來，減輕檢驗員負擔", "link": "https://example.com/proj/defect" },
-        { "title": "零件計數與量測", "desc": "用視覺自動數量與量尺寸，接進生產報表", "link": "https://example.com/proj/measure" }
+        { "title": "產線瑕疵自動判定", "titleEn": "Automated Production-Line Defect Screening", "desc": "取代部分人工目檢，把明顯瑕疵先攔下來，減輕檢驗員負擔", "descEn": "Replaces part of the manual visual inspection by catching obvious defects first, easing the load on inspectors", "link": "https://example.com/proj/defect" },
+        { "title": "零件計數與量測", "titleEn": "Part Counting and Measurement", "desc": "用視覺自動數量與量尺寸，接進生產報表", "descEn": "Uses vision to count parts and measure dimensions automatically, feeding the production reports", "link": "https://example.com/proj/measure" }
       ],
       "plans": [
-        { "name": "單堂體驗", "price": 1600, "desc": "60 分鐘，看你手上的影像問題，給一條可行路線" },
-        { "name": "視覺專案六堂", "price": 9000, "desc": "六堂從標註到部署，做出一個能動的偵測系統" }
+        { "name": "單堂體驗", "nameEn": "Single trial session", "price": 1600, "desc": "60 分鐘，看你手上的影像問題，給一條可行路線", "descEn": "60 minutes: we look at your image problem and map out a workable route" },
+        { "name": "視覺專案六堂", "nameEn": "Vision Project (6 sessions)", "price": 9000, "desc": "六堂從標註到部署，做出一個能動的偵測系統", "descEn": "Six sessions from labeling to deployment, building a detection system that works" }
       ]
     },
     {
@@ -167,8 +187,10 @@
       "name": "黃郁婷",
       "nameEn": "Huang Yu-Ting",
       "title": "MLOps 工程師 · 模型上線與監控",
+      "titleEn": "MLOps Engineer · Model Deployment and Monitoring",
       "avatar": "/avatars/t5.svg",
       "bio": "我做的是模型訓練完之後的那一段——怎麼包起來、怎麼上線、怎麼在半夜掛掉的時候知道是哪裡出問題。很多人會訓練模型卻不會讓它穩定服務，我專門補這一塊。會帶 Docker、CI/CD、模型版本管理跟監控。上課偏工程，不太碰演算法本身，但保證你的模型上線後不會變成黑箱。",
+      "bioEn": "My work is the part that comes after a model is trained: how to package it, how to ship it, and how to know where it broke when it goes down at 3 a.m. Plenty of people can train a model but can't keep it serving reliably, and that's exactly the gap I fill. I'll take you through Docker, CI/CD, model versioning, and monitoring. My classes lean toward engineering and don't touch the algorithms much, but I'll make sure your model doesn't turn into a black box once it's live.",
       "hourlyRate": 1900,
       "domains": ["MLOps"],
       "skills": ["Docker", "Kubernetes", "CI/CD", "MLflow", "模型監控", "雲端部署"],
@@ -179,26 +201,29 @@
       "aiProfile": {
         "radar": { "llm": 45, "cv": 40, "mlBasics": 60, "engineering": 95, "teaching": 70, "influence": 52 },
         "summary": "MLOps 工程能力頂尖，專精模型部署、版本管理與線上監控。適合已有模型、卡在上線與維運的團隊或個人。演算法教學非其重心。",
+        "summaryEn": "Top-tier MLOps engineering, specialized in model deployment, versioning, and live monitoring. A good fit for teams or individuals who have a model but are stuck on shipping and operating it. Teaching algorithms is not her focus.",
         "difficulty": 4,
-        "reviewDigest": "81% 的學生提到「上線這段終於有人講清楚，之前都在瞎猜」。"
+        "reviewDigest": "81% 的學生提到「上線這段終於有人講清楚，之前都在瞎猜」。",
+        "reviewDigestEn": "81% of students mention that someone finally explained the deployment part clearly, after they'd been guessing their way through it."
       },
       "github": {
         "username": "yuting-mlops",
         "repos": [
-          { "name": "ml-serving-template", "desc": "模型服務化樣板，含健康檢查、版本切換與監控埋點", "stars": 132, "lang": "Python" },
-          { "name": "pipeline-ci", "desc": "機器學習專案的 CI/CD 設定範例合集", "stars": 64, "lang": "HCL" },
-          { "name": "drift-watch", "desc": "簡易的資料與模型漂移監控小服務", "stars": 38, "lang": "Python" }
+          { "name": "ml-serving-template", "desc": "模型服務化樣板，含健康檢查、版本切換與監控埋點", "descEn": "A model-serving template with health checks, version switching, and monitoring hooks", "stars": 132, "lang": "Python" },
+          { "name": "pipeline-ci", "desc": "機器學習專案的 CI/CD 設定範例合集", "descEn": "A collection of CI/CD configuration examples for machine-learning projects", "stars": 64, "lang": "HCL" },
+          { "name": "drift-watch", "desc": "簡易的資料與模型漂移監控小服務", "descEn": "A simple service for monitoring data and model drift", "stars": 38, "lang": "Python" }
         ],
         "langDist": { "Python": 58, "HCL": 22, "Dockerfile": 12, "Shell": 8 },
-        "activityNote": "持續維護部署樣板，常被拿去當團隊起手式。"
+        "activityNote": "持續維護部署樣板，常被拿去當團隊起手式。",
+        "activityNoteEn": "Continuously maintains the deployment template, which teams often use as a starting point."
       },
       "portfolio": [
-        { "title": "模型服務平台", "desc": "把團隊的模型統一包成服務，上線流程標準化，回滾一鍵搞定", "link": "https://example.com/proj/serving" },
-        { "title": "線上監控儀表板", "desc": "把延遲、錯誤率與資料漂移攤在同一個面板，出事第一時間發現", "link": "https://example.com/proj/monitor" }
+        { "title": "模型服務平台", "titleEn": "Model Serving Platform", "desc": "把團隊的模型統一包成服務，上線流程標準化，回滾一鍵搞定", "descEn": "Packages a team's models into unified services, standardizes the release flow, and makes rollback a single click", "link": "https://example.com/proj/serving" },
+        { "title": "線上監控儀表板", "titleEn": "Live Monitoring Dashboard", "desc": "把延遲、錯誤率與資料漂移攤在同一個面板，出事第一時間發現", "descEn": "Puts latency, error rate, and data drift on one panel so problems surface the moment they happen", "link": "https://example.com/proj/monitor" }
       ],
       "plans": [
-        { "name": "單堂體驗", "price": 1900, "desc": "60 分鐘，盤點你現在的部署狀況，找出最痛的一點" },
-        { "name": "上線實戰五堂", "price": 9000, "desc": "五堂把一個模型從本機做到雲端穩定服務" }
+        { "name": "單堂體驗", "nameEn": "Single trial session", "price": 1900, "desc": "60 分鐘，盤點你現在的部署狀況，找出最痛的一點", "descEn": "60 minutes: we take stock of your current deployment setup and find the most painful spot" },
+        { "name": "上線實戰五堂", "nameEn": "Deployment in Practice (5 sessions)", "price": 9000, "desc": "五堂把一個模型從本機做到雲端穩定服務", "descEn": "Five sessions taking a model from your laptop to reliable service in the cloud" }
       ]
     },
     {
@@ -207,8 +232,10 @@
       "name": "蔡孟錡",
       "nameEn": "Cai Meng-Qi",
       "title": "AI 入門導師 · 非本科轉職過來人",
+      "titleEn": "AI Fundamentals Mentor · Career Switcher from Another Field",
       "avatar": "/avatars/t6.svg",
       "bio": "我自己是文組畢業，工作幾年後才半路出家學程式跟 AI，所以我最懂新手會卡在哪裡。現在專門帶完全沒基礎的人入門，從 Python 語法、怎麼看懂錯誤訊息，到跑出第一個機器學習模型。我不會丟一堆術語嚇你，會用生活化的比喻慢慢帶。如果你連要學什麼都還沒頭緒，找我聊最合適。",
+      "bioEn": "I have a humanities degree and only picked up programming and AI a few years into working, so I know exactly where beginners get stuck. These days I focus on getting complete beginners started, from Python syntax and reading error messages to running your first machine-learning model. I won't scare you with a pile of jargon; I'll take it slowly with everyday analogies. If you don't even know what to learn yet, I'm the right person to talk to.",
       "hourlyRate": 650,
       "domains": ["AI 入門", "資料科學"],
       "skills": ["Python 基礎", "程式思維", "Google Colab", "機器學習概念", "學習路徑規劃"],
@@ -219,25 +246,28 @@
       "aiProfile": {
         "radar": { "llm": 35, "cv": 30, "mlBasics": 55, "engineering": 42, "teaching": 90, "influence": 45 },
         "summary": "入門教學的好選擇，特別擅長帶完全零基礎、非本科的學生跨過第一道門檻。深度有限，進階需求要另找人接手。",
+        "summaryEn": "A strong choice for getting started, especially good at helping complete beginners from other fields clear the first hurdle. Her depth is limited, so more advanced needs call for another tutor.",
         "difficulty": 1,
-        "reviewDigest": "89% 的學生提到「第一次覺得自己也學得會，不再害怕程式」。"
+        "reviewDigest": "89% 的學生提到「第一次覺得自己也學得會，不再害怕程式」。",
+        "reviewDigestEn": "89% of students mention that they felt, for the first time, that they could learn this and stopped being afraid of code."
       },
       "github": {
         "username": "mengqi-learn",
         "repos": [
-          { "name": "ai-first-steps", "desc": "給零基礎的人的入門練習題，每題都有詳細註解", "stars": 97, "lang": "Jupyter Notebook" },
-          { "name": "python-mistakes", "desc": "新手最常犯的錯誤跟怎麼看懂錯誤訊息", "stars": 52, "lang": "Python" }
+          { "name": "ai-first-steps", "desc": "給零基礎的人的入門練習題，每題都有詳細註解", "descEn": "Beginner exercises for people with no background, each fully annotated", "stars": 97, "lang": "Jupyter Notebook" },
+          { "name": "python-mistakes", "desc": "新手最常犯的錯誤跟怎麼看懂錯誤訊息", "descEn": "The mistakes beginners make most often and how to read error messages", "stars": 52, "lang": "Python" }
         ],
         "langDist": { "Jupyter Notebook": 70, "Python": 28, "Markdown": 2 },
-        "activityNote": "內容都是教學導向，每個範例都寫得很白話。"
+        "activityNote": "內容都是教學導向，每個範例都寫得很白話。",
+        "activityNoteEn": "Everything is teaching-oriented, and every example is written in plain language."
       },
       "portfolio": [
-        { "title": "零基礎入門講義", "desc": "自己整理的一套從安裝環境到第一個模型的講義，帶過上百位新手", "link": "https://example.com/proj/first-steps" },
-        { "title": "轉職學習地圖", "desc": "給非本科的人的學習順序建議，避免一開始就卡死", "link": "https://example.com/proj/roadmap" }
+        { "title": "零基礎入門講義", "titleEn": "Beginner's Handbook from Zero", "desc": "自己整理的一套從安裝環境到第一個模型的講義，帶過上百位新手", "descEn": "A self-written handbook running from setting up the environment to a first model, used with hundreds of beginners", "link": "https://example.com/proj/first-steps" },
+        { "title": "轉職學習地圖", "titleEn": "Career-Switch Learning Map", "desc": "給非本科的人的學習順序建議，避免一開始就卡死", "descEn": "A recommended learning order for people from other fields, so they don't get stuck at the very start", "link": "https://example.com/proj/roadmap" }
       ],
       "plans": [
-        { "name": "單堂體驗", "price": 650, "desc": "60 分鐘，先聊你的背景跟目標，排一條適合你的路" },
-        { "name": "入門八堂", "price": 4800, "desc": "八堂從零到跑出第一個機器學習模型" }
+        { "name": "單堂體驗", "nameEn": "Single trial session", "price": 650, "desc": "60 分鐘，先聊你的背景跟目標，排一條適合你的路", "descEn": "60 minutes: we talk through your background and goals and lay out a path that fits you" },
+        { "name": "入門八堂", "nameEn": "Getting Started (8 sessions)", "price": 4800, "desc": "八堂從零到跑出第一個機器學習模型", "descEn": "Eight sessions from zero to running your first machine-learning model" }
       ]
     },
     {
@@ -246,8 +276,10 @@
       "name": "郭承恩",
       "nameEn": "Guo Cheng-En",
       "title": "LLM 應用架構師 · 新創技術負責人",
+      "titleEn": "LLM Application Architect · Startup Tech Lead",
       "avatar": "/avatars/t7.svg",
       "bio": "在一間 AI 新創當技術負責人，從零把產品的 AI 功能搭起來。踩過的坑包括成本失控、回覆品質不穩、還有各種評估到底怎麼做才可信。我教學偏系統思考，喜歡跟人討論架構跟取捨，也常被問怎麼在有限預算下把 LLM 產品做穩。適合有一定經驗、想從寫功能升級到設計系統的人。",
+      "bioEn": "I'm the tech lead at an AI startup, where I built the product's AI features from nothing. The pits I've fallen into include runaway costs, unstable answer quality, and the endless question of how to evaluate in a way you can actually trust. My teaching leans toward systems thinking. I like discussing architecture and trade-offs, and I often get asked how to keep an LLM product stable on a limited budget. I suit people with some experience who want to move from writing features to designing systems.",
       "hourlyRate": 2400,
       "domains": ["LLM 應用", "Agent 開發"],
       "skills": ["系統設計", "LLM 評估", "成本優化", "RAG 架構", "串流回應", "產品思維"],
@@ -258,26 +290,29 @@
       "aiProfile": {
         "radar": { "llm": 93, "cv": 28, "mlBasics": 62, "engineering": 88, "teaching": 76, "influence": 74 },
         "summary": "LLM 產品架構的資深視角，強在系統設計、評估方法與成本控制。適合想從實作者升級為架構設計者的人，入門者不建議直接找他。",
+        "summaryEn": "A senior perspective on LLM product architecture, strong in system design, evaluation methods, and cost control. He suits people ready to grow from builder to architect; beginners shouldn't start with him.",
         "difficulty": 5,
-        "reviewDigest": "84% 的學生提到「格局完全不一樣，開始懂得從整個系統想事情」。"
+        "reviewDigest": "84% 的學生提到「格局完全不一樣，開始懂得從整個系統想事情」。",
+        "reviewDigestEn": "84% of students mention that his perspective is on a different level and taught them to think about the whole system."
       },
       "github": {
         "username": "chengen-arch",
         "repos": [
-          { "name": "llm-eval-kit", "desc": "一套自己在用的 LLM 回覆品質評估工具與指標", "stars": 178, "lang": "Python" },
-          { "name": "cost-aware-rag", "desc": "在預算限制下設計 RAG 的參考架構與取捨筆記", "stars": 121, "lang": "TypeScript" }
+          { "name": "llm-eval-kit", "desc": "一套自己在用的 LLM 回覆品質評估工具與指標", "descEn": "His own toolkit and metrics for evaluating LLM answer quality", "stars": 178, "lang": "Python" },
+          { "name": "cost-aware-rag", "desc": "在預算限制下設計 RAG 的參考架構與取捨筆記", "descEn": "A reference architecture and trade-off notes for designing RAG under a budget", "stars": 121, "lang": "TypeScript" }
         ],
         "langDist": { "Python": 48, "TypeScript": 42, "Shell": 10 },
-        "activityNote": "更新不算頻繁但每次都很有料，偏架構與方法論。"
+        "activityNote": "更新不算頻繁但每次都很有料，偏架構與方法論。",
+        "activityNoteEn": "Updates aren't frequent but each one has real substance, leaning toward architecture and methodology."
       },
       "portfolio": [
-        { "title": "新創 AI 產品從零到上線", "desc": "帶團隊把產品的 AI 功能從概念做到付費用戶在用", "link": "https://example.com/proj/startup-ai" },
-        { "title": "LLM 成本壓縮方案", "desc": "在不犧牲品質的前提下把每月推論成本砍掉一大半", "link": "https://example.com/proj/cost-cut" },
-        { "title": "回覆品質評估體系", "desc": "建立一套能被信任的自動評估，讓改版有依據", "link": "https://example.com/proj/eval" }
+        { "title": "新創 AI 產品從零到上線", "titleEn": "Startup AI Product, Zero to Launch", "desc": "帶團隊把產品的 AI 功能從概念做到付費用戶在用", "descEn": "Led a team to take the product's AI features from concept to paying users", "link": "https://example.com/proj/startup-ai" },
+        { "title": "LLM 成本壓縮方案", "titleEn": "LLM Cost Reduction Plan", "desc": "在不犧牲品質的前提下把每月推論成本砍掉一大半", "descEn": "Cut monthly inference cost by more than half without sacrificing quality", "link": "https://example.com/proj/cost-cut" },
+        { "title": "回覆品質評估體系", "titleEn": "Answer-Quality Evaluation System", "desc": "建立一套能被信任的自動評估，讓改版有依據", "descEn": "Built a trustworthy automatic evaluation so that each iteration has evidence behind it", "link": "https://example.com/proj/eval" }
       ],
       "plans": [
-        { "name": "架構諮詢單堂", "price": 2400, "desc": "60 分鐘，帶你現在的系統來，我幫你找出設計上的問題" },
-        { "name": "系統設計四堂", "price": 9000, "desc": "四堂一起把一個 LLM 產品的架構跟評估設計清楚" }
+        { "name": "架構諮詢單堂", "nameEn": "Architecture Consult (single session)", "price": 2400, "desc": "60 分鐘，帶你現在的系統來，我幫你找出設計上的問題", "descEn": "60 minutes: bring your current system and I'll help you find the design problems" },
+        { "name": "系統設計四堂", "nameEn": "System Design (4 sessions)", "price": 9000, "desc": "四堂一起把一個 LLM 產品的架構跟評估設計清楚", "descEn": "Four sessions designing the architecture and evaluation of an LLM product together" }
       ]
     },
     {
@@ -286,8 +321,10 @@
       "name": "許雅玲",
       "nameEn": "Xu Ya-Ling",
       "title": "深度學習研究助理 · 電腦視覺與多模態",
+      "titleEn": "Deep Learning Research Assistant · Computer Vision and Multimodal",
       "avatar": "/avatars/t8.svg",
       "bio": "在大學實驗室做研究，主題是視覺跟多模態，就是讓模型同時看圖又讀字那類。我比較偏學術路線，喜歡把論文的想法拆開講清楚，也常帶學生讀 paper、復現實驗。如果你要準備研究所、想搞懂模型背後的數學、或想跟上最新的研究，我這邊資源比較多。不太適合只想快速做應用的人。",
+      "bioEn": "I do research in a university lab on vision and multimodal work, the kind where a model reads an image and text at the same time. I lean academic. I like taking a paper's ideas apart until they're clear, and I often guide students through reading papers and reproducing experiments. If you're preparing for grad school, want to understand the math behind the models, or want to keep up with the latest research, I have plenty to offer. I'm less suited to people who just want to build applications quickly.",
       "hourlyRate": 1200,
       "domains": ["電腦視覺", "AI 入門"],
       "skills": ["深度學習", "論文導讀", "PyTorch", "多模態", "數學基礎", "實驗復現"],
@@ -298,25 +335,28 @@
       "aiProfile": {
         "radar": { "llm": 55, "cv": 82, "mlBasics": 88, "engineering": 50, "teaching": 80, "influence": 46 },
         "summary": "學術背景扎實，強在深度學習理論、論文導讀與數學基礎。適合走研究路線或想打好底子的人。工程部署與快速落地不是強項。",
+        "summaryEn": "A solid academic background, strong in deep-learning theory, paper reading, and mathematical foundations. A good fit for people on a research track or those wanting a strong base. Engineering deployment and fast delivery are not her strengths.",
         "difficulty": 3,
-        "reviewDigest": "82% 的學生提到「終於把 paper 裡的數學看懂了，講得很細」。"
+        "reviewDigest": "82% 的學生提到「終於把 paper 裡的數學看懂了，講得很細」。",
+        "reviewDigestEn": "82% of students mention that they finally understood the math in the papers, thanks to how carefully she explains it."
       },
       "github": {
         "username": "yaling-research",
         "repos": [
-          { "name": "paper-reimpl", "desc": "復現幾篇經典視覺與多模態論文，附詳細筆記", "stars": 108, "lang": "Python" },
-          { "name": "dl-math-notes", "desc": "深度學習會用到的數學整理，從頭推導", "stars": 143, "lang": "Jupyter Notebook" }
+          { "name": "paper-reimpl", "desc": "復現幾篇經典視覺與多模態論文，附詳細筆記", "descEn": "Reimplements several classic vision and multimodal papers, with detailed notes", "stars": 108, "lang": "Python" },
+          { "name": "dl-math-notes", "desc": "深度學習會用到的數學整理，從頭推導", "descEn": "The math you need for deep learning, derived from first principles", "stars": 143, "lang": "Jupyter Notebook" }
         ],
         "langDist": { "Python": 60, "Jupyter Notebook": 35, "TeX": 5 },
-        "activityNote": "更新以論文筆記與復現為主，內容偏學術。"
+        "activityNote": "更新以論文筆記與復現為主，內容偏學術。",
+        "activityNoteEn": "Updates center on paper notes and reimplementations, leaning academic."
       },
       "portfolio": [
-        { "title": "論文復現系列", "desc": "把幾篇重要論文從頭刻出來，讓學生看到理論怎麼變成程式", "link": "https://example.com/proj/reimpl" },
-        { "title": "研究所備考帶讀", "desc": "帶學生讀 paper、補數學，準備推甄與面試", "link": "https://example.com/proj/grad-prep" }
+        { "title": "論文復現系列", "titleEn": "Paper Reproduction Series", "desc": "把幾篇重要論文從頭刻出來，讓學生看到理論怎麼變成程式", "descEn": "Rebuilds several important papers from scratch so students see how theory becomes code", "link": "https://example.com/proj/reimpl" },
+        { "title": "研究所備考帶讀", "titleEn": "Grad-School Prep Reading Group", "desc": "帶學生讀 paper、補數學，準備推甄與面試", "descEn": "Guides students through papers and shores up the math to prepare for applications and interviews", "link": "https://example.com/proj/grad-prep" }
       ],
       "plans": [
-        { "name": "單堂體驗", "price": 1200, "desc": "60 分鐘，挑一篇你想懂的 paper，我帶你讀" },
-        { "name": "論文導讀六堂", "price": 6500, "desc": "六堂讀完一個主題的核心論文，打通觀念" }
+        { "name": "單堂體驗", "nameEn": "Single trial session", "price": 1200, "desc": "60 分鐘，挑一篇你想懂的 paper，我帶你讀", "descEn": "60 minutes: pick a paper you want to understand and I'll read it with you" },
+        { "name": "論文導讀六堂", "nameEn": "Paper Reading (6 sessions)", "price": 6500, "desc": "六堂讀完一個主題的核心論文，打通觀念", "descEn": "Six sessions working through the core papers of one topic until the concepts click" }
       ]
     },
     {
@@ -325,8 +365,10 @@
       "name": "Stan Shih",
       "nameEn": "Stan Shih",
       "title": "多專案獨立開發者 · LLM 應用與 Agent",
+      "titleEn": "Multi-Project Indie Developer · LLM Apps and Agents",
       "avatar": "/avatars/t9.svg",
       "bio": "獨立開發者，同時養著一堆專案，橫跨 Web、Android 跟瀏覽器擴充功能。從 Next.js 網站、Kotlin 手機 App、到 Chrome 擴充功能都自己一手包。這陣子重心放在 LLM 應用跟 agent，喜歡把 AI 接進日常會用到的小工具裡，也常寫自動化來省掉重複勞動。教學走實作路線，直接帶你把想法做成能跑的成品，不繞理論。",
+      "bioEn": "I'm an indie developer keeping a whole stack of projects alive across the web, Android, and browser extensions. I handle it all myself, from Next.js sites to Kotlin mobile apps to Chrome extensions. Lately I've focused on LLM applications and agents. I like wiring AI into the small tools I use every day, and I often write automation to cut out repetitive work. My teaching is hands-on: I take your idea straight to a working product without detouring through theory.",
       "hourlyRate": 1500,
       "domains": ["LLM 應用", "Agent 開發"],
       "skills": ["Next.js", "TypeScript", "Kotlin", "Chrome Extension", "LLM 整合", "自動化"],
@@ -337,69 +379,72 @@
       "aiProfile": {
         "radar": { "llm": 84, "cv": 35, "mlBasics": 58, "engineering": 90, "teaching": 78, "influence": 60 },
         "summary": "全端型獨立開發者，橫跨 Web、Android 與瀏覽器擴充功能，近期主攻把 LLM 與 agent 接進實用工具。工程落地能力強，適合想把 AI 做成真正能用的產品的人。",
+        "summaryEn": "A full-stack indie developer spanning web, Android, and browser extensions, lately focused on wiring LLMs and agents into practical tools. Strong at shipping, and a good fit for people who want to turn AI into products they can actually use.",
         "difficulty": 3,
-        "reviewDigest": "85% 的學生提到「什麼都能接，卡住的地方他都做過」。"
+        "reviewDigest": "85% 的學生提到「什麼都能接，卡住的地方他都做過」。",
+        "reviewDigestEn": "85% of students mention that he can connect anything and has already dealt with whatever they get stuck on."
       },
       "github": {
         "username": "stantheman0128",
         "repos": [
-          { "name": "antnest-chatbot", "desc": "LINE Notify+ - Enhanced LINE notification viewer for Android", "stars": 1, "lang": "TypeScript" },
-          { "name": "etf-tracker", "desc": "Portfolio Tracker with Next.js 14 + TypeScript + TradingView Charts", "stars": 1, "lang": "TypeScript" },
-          { "name": "line-notify-plus", "desc": "LINE Notify+ - Enhanced LINE notification viewer for Android", "stars": 0, "lang": "Kotlin" },
-          { "name": "chrome-extensions", "desc": "多個自製 Chrome 擴充功能的單一 repo", "stars": 1, "lang": "JavaScript" },
-          { "name": "bedtime-hibernate", "desc": "系統匣小工具，Claude 跑完後自動讓電腦休眠", "stars": 0, "lang": "PowerShell" }
+          { "name": "antnest-chatbot", "desc": "LINE Notify+ - Enhanced LINE notification viewer for Android", "descEn": "LINE Notify+ - Enhanced LINE notification viewer for Android", "stars": 1, "lang": "TypeScript" },
+          { "name": "etf-tracker", "desc": "Portfolio Tracker with Next.js 14 + TypeScript + TradingView Charts", "descEn": "Portfolio Tracker with Next.js 14 + TypeScript + TradingView Charts", "stars": 1, "lang": "TypeScript" },
+          { "name": "line-notify-plus", "desc": "LINE Notify+ - Enhanced LINE notification viewer for Android", "descEn": "LINE Notify+ - Enhanced LINE notification viewer for Android", "stars": 0, "lang": "Kotlin" },
+          { "name": "chrome-extensions", "desc": "多個自製 Chrome 擴充功能的單一 repo", "descEn": "A single repo holding several homemade Chrome extensions", "stars": 1, "lang": "JavaScript" },
+          { "name": "bedtime-hibernate", "desc": "系統匣小工具，Claude 跑完後自動讓電腦休眠", "descEn": "A system-tray tool that hibernates the PC automatically once Claude finishes a run", "stars": 0, "lang": "PowerShell" }
         ],
         "langDist": { "TypeScript": 40, "JavaScript": 22, "Kotlin": 20, "PowerShell": 10, "Python": 8 },
-        "activityNote": "同時維護多個公開專案，橫跨 Web、Android 與桌面工具，更新頻繁。"
+        "activityNote": "同時維護多個公開專案，橫跨 Web、Android 與桌面工具，更新頻繁。",
+        "activityNoteEn": "Maintains several public projects at once across web, Android, and desktop tools, with frequent updates."
       },
       "portfolio": [
-        { "title": "ETF 投資組合追蹤", "desc": "用 Next.js 14 加 TradingView 圖表做的投資組合追蹤工具", "link": "https://github.com/stantheman0128/etf-tracker" },
-        { "title": "LINE Notify+ Android App", "desc": "強化版的 LINE 通知整理 App，用 Kotlin 寫的", "link": "https://github.com/stantheman0128/line-notify-plus" },
-        { "title": "Chrome 擴充功能合集", "desc": "自製多個瀏覽器擴充功能，收在同一個 repo 管理", "link": "https://github.com/stantheman0128/chrome-extensions" }
+        { "title": "ETF 投資組合追蹤", "titleEn": "ETF Portfolio Tracker", "desc": "用 Next.js 14 加 TradingView 圖表做的投資組合追蹤工具", "descEn": "A portfolio-tracking tool built with Next.js 14 and TradingView charts", "link": "https://github.com/stantheman0128/etf-tracker" },
+        { "title": "LINE Notify+ Android App", "titleEn": "LINE Notify+ Android App", "desc": "強化版的 LINE 通知整理 App，用 Kotlin 寫的", "descEn": "An enhanced LINE-notification organizer app, written in Kotlin", "link": "https://github.com/stantheman0128/line-notify-plus" },
+        { "title": "Chrome 擴充功能合集", "titleEn": "Chrome Extensions Collection", "desc": "自製多個瀏覽器擴充功能，收在同一個 repo 管理", "descEn": "Several homemade browser extensions kept in a single repo", "link": "https://github.com/stantheman0128/chrome-extensions" }
       ],
       "plans": [
-        { "name": "單堂體驗", "price": 1500, "desc": "60 分鐘，聊你想做的東西，直接開一個能跑的雛形" },
-        { "name": "產品實作六堂", "price": 8000, "desc": "六堂帶你把一個 AI 小工具從想法做到能用" },
-        { "name": "十堂全端陪跑", "price": 14000, "desc": "十堂陪你做完一個橫跨前後端的完整專案" }
+        { "name": "單堂體驗", "nameEn": "Single trial session", "price": 1500, "desc": "60 分鐘，聊你想做的東西，直接開一個能跑的雛形", "descEn": "60 minutes: we talk through what you want to build and spin up a working prototype right away" },
+        { "name": "產品實作六堂", "nameEn": "Product Build (6 sessions)", "price": 8000, "desc": "六堂帶你把一個 AI 小工具從想法做到能用", "descEn": "Six sessions taking an AI tool from idea to something usable" },
+        { "name": "十堂全端陪跑", "nameEn": "Full-Stack Mentorship (10 sessions)", "price": 14000, "desc": "十堂陪你做完一個橫跨前後端的完整專案", "descEn": "Ten sessions completing a full project that spans front end and back end" }
       ]
     }
   ],
   "reviews": [
-    { "id": 1, "tutorId": 1, "author": "阿凱", "rating": 5, "text": "本來 RAG 檢索一直抓錯東西，上了兩堂他直接指出我 chunk 切太大，改完準確度整個上來。範例都能跑真的省超多時間。" },
-    { "id": 2, "tutorId": 1, "author": "Wendy", "rating": 5, "text": "很實務，不會空談理論。他把上線會遇到的狀況都先講過一遍，我後來自己接產品的時候少踩很多雷。" },
-    { "id": 3, "tutorId": 1, "author": "小豪", "rating": 4, "text": "內容很紮實，唯一小缺點是有時候講太快，需要自己回去消化。但問問題都會很仔細回。" },
+    { "id": 1, "tutorId": 1, "author": "阿凱", "rating": 5, "text": "本來 RAG 檢索一直抓錯東西，上了兩堂他直接指出我 chunk 切太大，改完準確度整個上來。範例都能跑真的省超多時間。", "textEn": "My RAG retrieval kept pulling the wrong things. Two sessions in, he pointed out that my chunks were too big, and accuracy jumped once I fixed it. His examples all run, which saved me a ton of time." },
+    { "id": 2, "tutorId": 1, "author": "Wendy", "rating": 5, "text": "很實務，不會空談理論。他把上線會遇到的狀況都先講過一遍，我後來自己接產品的時候少踩很多雷。", "textEn": "Very practical, no empty theory. He walked through the situations you hit in production ahead of time, so I stepped on far fewer landmines when I took on a product myself." },
+    { "id": 3, "tutorId": 1, "author": "小豪", "rating": 4, "text": "內容很紮實，唯一小缺點是有時候講太快，需要自己回去消化。但問問題都會很仔細回。", "textEn": "The material is solid. The one small downside is that he sometimes moves fast and you need to digest it afterward. But he answers every question carefully." },
 
-    { "id": 4, "tutorId": 2, "author": "婷婷", "rating": 5, "text": "我完全非本科，一開始連 pandas 都怕。老師超有耐心，每一步都問我懂不懂，現在我自己能做基本分析了。" },
-    { "id": 5, "tutorId": 2, "author": "David L.", "rating": 5, "text": "統計觀念被她講得很清楚，不是背公式那種，是真的讓你懂為什麼。轉職準備作品集靠她幫我看了很多次。" },
-    { "id": 6, "tutorId": 2, "author": "阿哲", "rating": 4, "text": "教得很好，就是她比較專注在傳統機器學習，我後來想學深度學習她有老實說不是她強項，介紹我找別人。這點反而讓我更信任她。" },
+    { "id": 4, "tutorId": 2, "author": "婷婷", "rating": 5, "text": "我完全非本科，一開始連 pandas 都怕。老師超有耐心，每一步都問我懂不懂，現在我自己能做基本分析了。", "textEn": "I'm from a completely different field and was scared of even pandas at first. She's so patient, checking at every step whether I understood, and now I can do basic analysis on my own." },
+    { "id": 5, "tutorId": 2, "author": "David L.", "rating": 5, "text": "統計觀念被她講得很清楚，不是背公式那種，是真的讓你懂為什麼。轉職準備作品集靠她幫我看了很多次。", "textEn": "She makes the statistics genuinely clear, not the memorize-the-formula kind but really understanding why. She reviewed my career-switch portfolio for me many times." },
+    { "id": 6, "tutorId": 2, "author": "阿哲", "rating": 4, "text": "教得很好，就是她比較專注在傳統機器學習，我後來想學深度學習她有老實說不是她強項，介紹我找別人。這點反而讓我更信任她。", "textEn": "She teaches well; she just focuses on classic machine learning. When I later wanted deep learning, she was honest that it wasn't her strength and referred me elsewhere. That actually made me trust her more." },
 
-    { "id": 7, "tutorId": 3, "author": "Ryan", "rating": 5, "text": "之前看一堆 agent 教學都霧煞煞，他一張架構圖就讓我懂了。工具編排跟重試那段講得特別好，回去馬上改了我的專案。" },
-    { "id": 8, "tutorId": 3, "author": "阿賢", "rating": 5, "text": "節奏偏快但很值得，他真的在做這行，講的都是實戰會遇到的問題。我們後來還一起接了個小案子。" },
-    { "id": 9, "tutorId": 3, "author": "Momo", "rating": 4, "text": "很強，但如果你是新手可能會有點跟不上，建議先有 API 基礎再來找他。我第一堂有點吃力，第二堂就順了。" },
+    { "id": 7, "tutorId": 3, "author": "Ryan", "rating": 5, "text": "之前看一堆 agent 教學都霧煞煞，他一張架構圖就讓我懂了。工具編排跟重試那段講得特別好，回去馬上改了我的專案。", "textEn": "I'd read a pile of agent tutorials and stayed lost, but one architecture diagram from him made it click. The tool-orchestration and retry part was especially good, and I reworked my project right after." },
+    { "id": 8, "tutorId": 3, "author": "阿賢", "rating": 5, "text": "節奏偏快但很值得，他真的在做這行，講的都是實戰會遇到的問題。我們後來還一起接了個小案子。", "textEn": "The pace is on the fast side but worth it. He actually works in this field, so everything he covers is a real-world problem. We even took on a small project together afterward." },
+    { "id": 9, "tutorId": 3, "author": "Momo", "rating": 4, "text": "很強，但如果你是新手可能會有點跟不上，建議先有 API 基礎再來找他。我第一堂有點吃力，第二堂就順了。", "textEn": "He's very good, but as a beginner you might struggle to keep up; I'd get some API basics first. My first session was a bit hard, and the second went smoothly." },
 
-    { "id": 10, "tutorId": 4, "author": "工程師老王", "rating": 5, "text": "在工廠端做視覺的都知道資料標註多重要，他把這塊講得超透，別的老師都直接跳過。瑕疵偵測的範例拿回公司改改就能用。" },
-    { "id": 11, "tutorId": 4, "author": "Cindy", "rating": 4, "text": "很專業，工業場景經驗豐富。就是內容偏硬，要有點 PyTorch 底子比較跟得上。" },
-    { "id": 12, "tutorId": 4, "author": "阿宏", "rating": 5, "text": "帶我從標註流程重新盤一次，才發現我之前資料品質根本有問題。模型準確度後來提升很多，很感謝。" },
+    { "id": 10, "tutorId": 4, "author": "工程師老王", "rating": 5, "text": "在工廠端做視覺的都知道資料標註多重要，他把這塊講得超透，別的老師都直接跳過。瑕疵偵測的範例拿回公司改改就能用。", "textEn": "Anyone doing vision on the factory floor knows how much labeling matters, and he covers it thoroughly where other tutors skip it. I took his defect-detection example back to work, tweaked it, and it was usable." },
+    { "id": 11, "tutorId": 4, "author": "Cindy", "rating": 4, "text": "很專業，工業場景經驗豐富。就是內容偏硬，要有點 PyTorch 底子比較跟得上。", "textEn": "Very professional, with deep industrial experience. The content is just on the tough side, so having some PyTorch grounding helps you keep up." },
+    { "id": 12, "tutorId": 4, "author": "阿宏", "rating": 5, "text": "帶我從標註流程重新盤一次，才發現我之前資料品質根本有問題。模型準確度後來提升很多，很感謝。", "textEn": "He walked me back through the labeling process and I realized my data quality had been the problem all along. My model accuracy improved a lot afterward. Really grateful." },
 
-    { "id": 13, "tutorId": 5, "author": "Kevin", "rating": 5, "text": "模型會訓練不會上線是我的痛，找她補了這塊。Docker 到 CI/CD 一路帶，現在部署流程順很多，掛掉也知道去哪看。" },
-    { "id": 14, "tutorId": 5, "author": "小美", "rating": 5, "text": "監控那段超有用，以前模型出問題都是用戶回報才知道，現在儀表板一看就發現。教得很有條理。" },
-    { "id": 15, "tutorId": 5, "author": "阿元", "rating": 4, "text": "工程很扎實，不過她不太碰演算法本身，如果你想連模型一起學可能要另外找人。純上線維運的話很推。" },
+    { "id": 13, "tutorId": 5, "author": "Kevin", "rating": 5, "text": "模型會訓練不會上線是我的痛，找她補了這塊。Docker 到 CI/CD 一路帶，現在部署流程順很多，掛掉也知道去哪看。", "textEn": "Being able to train a model but not ship it was my pain point, and she filled that gap. She took me from Docker through CI/CD, my deploys are much smoother now, and I know where to look when things break." },
+    { "id": 14, "tutorId": 5, "author": "小美", "rating": 5, "text": "監控那段超有用，以前模型出問題都是用戶回報才知道，現在儀表板一看就發現。教得很有條理。", "textEn": "The monitoring part was super useful. I used to learn about model problems only when users reported them; now the dashboard shows it at a glance. She teaches in a very organized way." },
+    { "id": 15, "tutorId": 5, "author": "阿元", "rating": 4, "text": "工程很扎實，不過她不太碰演算法本身，如果你想連模型一起學可能要另外找人。純上線維運的話很推。", "textEn": "The engineering is solid, but she doesn't really touch the algorithms, so if you want to learn the modeling too you may need someone else. For pure deployment and operations, highly recommended." },
 
-    { "id": 16, "tutorId": 6, "author": "怕程式的小林", "rating": 5, "text": "我真的是零基礎，看到程式碼就緊張。老師用生活化的比喻慢慢帶，第一次覺得自己也學得會，太感動了。" },
-    { "id": 17, "tutorId": 6, "author": "Anna", "rating": 5, "text": "她自己也是轉職過來的，超懂新手會卡在哪。錯誤訊息怎麼看這種小事她都會教，這對新手真的很重要。" },
-    { "id": 18, "tutorId": 6, "author": "阿德", "rating": 4, "text": "入門帶得很好，很適合完全沒基礎的人。學到後面想進階她就會建議去找別的老師，很誠實。" },
+    { "id": 16, "tutorId": 6, "author": "怕程式的小林", "rating": 5, "text": "我真的是零基礎，看到程式碼就緊張。老師用生活化的比喻慢慢帶，第一次覺得自己也學得會，太感動了。", "textEn": "I truly started from zero and got nervous just seeing code. She took it slow with everyday analogies, and for the first time I felt I could learn this. So moving." },
+    { "id": 17, "tutorId": 6, "author": "Anna", "rating": 5, "text": "她自己也是轉職過來的，超懂新手會卡在哪。錯誤訊息怎麼看這種小事她都會教，這對新手真的很重要。", "textEn": "She switched careers herself, so she really knows where beginners get stuck. She teaches little things like how to read an error message, which matters a lot for beginners." },
+    { "id": 18, "tutorId": 6, "author": "阿德", "rating": 4, "text": "入門帶得很好，很適合完全沒基礎的人。學到後面想進階她就會建議去找別的老師，很誠實。", "textEn": "She's great at getting you started and ideal for people with no background at all. When you want to go more advanced later, she'll honestly suggest another tutor." },
 
-    { "id": 19, "tutorId": 7, "author": "產品經理 Joe", "rating": 5, "text": "上完格局完全不一樣。以前只會寫功能，現在會從整個系統跟成本去想。評估那套方法直接搬進我們團隊了。" },
-    { "id": 20, "tutorId": 7, "author": "阿翔", "rating": 5, "text": "價位偏高但很值。他真的在第一線做產品，成本優化那堂幫我們公司省下的錢遠超學費。" },
-    { "id": 21, "tutorId": 7, "author": "Lisa", "rating": 4, "text": "很有深度，但真的不適合新手，我第一堂有點聽不懂。建議至少做過一個 LLM 專案再來，收穫會很大。" },
+    { "id": 19, "tutorId": 7, "author": "產品經理 Joe", "rating": 5, "text": "上完格局完全不一樣。以前只會寫功能，現在會從整個系統跟成本去想。評估那套方法直接搬進我們團隊了。", "textEn": "After his classes my perspective was on a whole different level. I used to just write features; now I think about the whole system and its cost. We brought his evaluation method straight into our team." },
+    { "id": 20, "tutorId": 7, "author": "阿翔", "rating": 5, "text": "價位偏高但很值。他真的在第一線做產品，成本優化那堂幫我們公司省下的錢遠超學費。", "textEn": "Pricey but worth it. He's genuinely on the front line building products, and the cost-optimization session saved our company far more than the fee." },
+    { "id": 21, "tutorId": 7, "author": "Lisa", "rating": 4, "text": "很有深度，但真的不適合新手，我第一堂有點聽不懂。建議至少做過一個 LLM 專案再來，收穫會很大。", "textEn": "Very deep, but truly not for beginners; I struggled to follow the first session. I'd suggest doing at least one LLM project first, then you'll get a lot out of it." },
 
-    { "id": 22, "tutorId": 8, "author": "準研究生小陳", "rating": 5, "text": "推甄前找她帶讀 paper，把我一直看不懂的數學從頭推一遍。復現實驗那段也很扎實，面試被問到都答得出來。" },
-    { "id": 23, "tutorId": 8, "author": "Tim", "rating": 4, "text": "學術底子很強，論文導讀很細。但她偏理論，我想做應用的部分她就比較沒著墨，這點要先想清楚。" },
-    { "id": 24, "tutorId": 8, "author": "小雨", "rating": 5, "text": "很喜歡她講數學的方式，不是丟公式而是講清楚為什麼。多模態那塊她很熟，帶我入門得很順。" },
+    { "id": 22, "tutorId": 8, "author": "準研究生小陳", "rating": 5, "text": "推甄前找她帶讀 paper，把我一直看不懂的數學從頭推一遍。復現實驗那段也很扎實，面試被問到都答得出來。", "textEn": "Before my grad-school application she guided me through papers and derived the math I could never follow from scratch. The experiment-reproduction part was solid too, and I could answer everything the interview asked." },
+    { "id": 23, "tutorId": 8, "author": "Tim", "rating": 4, "text": "學術底子很強，論文導讀很細。但她偏理論，我想做應用的部分她就比較沒著墨，這點要先想清楚。", "textEn": "Strong academic foundation and very detailed paper reading. But she leans theoretical and put less into the application side I wanted, so think that through first." },
+    { "id": 24, "tutorId": 8, "author": "小雨", "rating": 5, "text": "很喜歡她講數學的方式，不是丟公式而是講清楚為什麼。多模態那塊她很熟，帶我入門得很順。", "textEn": "I love how she teaches the math, not tossing out formulas but explaining why. She knows the multimodal area well and eased me into it smoothly." },
 
-    { "id": 25, "tutorId": 9, "author": "阿宇", "rating": 5, "text": "想做一個 side project 卡在不知道怎麼把 AI 接進去，找他一堂就開了個能跑的雛形出來。什麼技術棧他好像都碰過，卡住的地方他都做過。" },
-    { "id": 26, "tutorId": 9, "author": "Grace", "rating": 5, "text": "很務實，直接帶你動手做，不會繞一堆理論。我從完全不會到做出一個 Chrome 擴充功能，過程一路有人接住。" },
-    { "id": 27, "tutorId": 9, "author": "小凱", "rating": 4, "text": "全端都能帶這點很讚，前端後端手機都問得到。就是他手上專案有點多，約時間偶爾要等一下，但上課品質沒話說。" }
+    { "id": 25, "tutorId": 9, "author": "阿宇", "rating": 5, "text": "想做一個 side project 卡在不知道怎麼把 AI 接進去，找他一堂就開了個能跑的雛形出來。什麼技術棧他好像都碰過，卡住的地方他都做過。", "textEn": "I was stuck on how to wire AI into a side project, and in one session with him we had a working prototype. He seems to have touched every stack, and he's already dealt with whatever you get stuck on." },
+    { "id": 26, "tutorId": 9, "author": "Grace", "rating": 5, "text": "很務實，直接帶你動手做，不會繞一堆理論。我從完全不會到做出一個 Chrome 擴充功能，過程一路有人接住。", "textEn": "Very practical, hands-on from the start, no long detours through theory. I went from knowing nothing to building a Chrome extension, with someone catching me the whole way." },
+    { "id": 27, "tutorId": 9, "author": "小凱", "rating": 4, "text": "全端都能帶這點很讚，前端後端手機都問得到。就是他手上專案有點多，約時間偶爾要等一下，但上課品質沒話說。", "textEn": "It's great that he covers the full stack; I could ask about front end, back end, and mobile. He just has a lot of projects on, so scheduling sometimes takes a wait, but the class quality is beyond question." }
   ],
   "endorsements": [
     { "id": 1, "tutorId": 3, "endorserName": "陳志明", "endorserTitle": "AI 補教名師", "quote": "建霖對 agent 系統的理解在業界算前段，他教的東西是真的能拿去用的，不是紙上談兵。想學自動化的我第一個推他。" },

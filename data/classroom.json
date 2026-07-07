@@ -1,32 +1,37 @@
 {
   "course": {
     "title": "LoRA 微調實戰（第 3 堂）",
+    "titleEn": "LoRA Fine-Tuning in Practice (Session 3)",
     "subtitle": "用小成本把大模型調成你要的樣子",
+    "subtitleEn": "Shape a large model to your needs on a small budget",
     "tutorSlug": "stan-shih",
     "tutorName": "Stan Shih",
     "sessionLabel": "第 3 堂 · 共 6 堂",
+    "sessionLabelEn": "Session 3 of 6",
     "durationMin": 90
   },
   "meeting": {
     "meetUrl": "https://meet.google.com/xqz-lora-3rd",
     "recordingNote": "本課將全程錄影，課後由 AvoMole AI 引擎自動產生摘要、重點與練習題。",
+    "recordingNoteEn": "This session is recorded in full, and afterward the AvoMole AI engine generates the summary, key points, and practice questions automatically.",
     "joinSteps": [
-      { "step": 1, "title": "確認裝置", "desc": "上課前十分鐘打開 Google Meet 連結，測試一下麥克風跟喇叭。" },
-      { "step": 2, "title": "準備環境", "desc": "打開你的 Google Colab，把上一堂發的 notebook 開好，GPU 執行階段先接上。" },
-      { "step": 3, "title": "進入教室", "desc": "點下方按鈕進入 Meet。若滿員或連不上，重新整理一次通常就好。" }
+      { "step": 1, "title": "確認裝置", "titleEn": "Check your device", "desc": "上課前十分鐘打開 Google Meet 連結，測試一下麥克風跟喇叭。", "descEn": "Open the Google Meet link ten minutes before class and test your microphone and speakers." },
+      { "step": 2, "title": "準備環境", "titleEn": "Set up your environment", "desc": "打開你的 Google Colab，把上一堂發的 notebook 開好，GPU 執行階段先接上。", "descEn": "Open Google Colab, load the notebook from the previous session, and connect a GPU runtime ahead of time." },
+      { "step": 3, "title": "進入教室", "titleEn": "Enter the classroom", "desc": "點下方按鈕進入 Meet。若滿員或連不上，重新整理一次通常就好。", "descEn": "Click the button below to join Meet. If it's full or won't connect, a single refresh usually fixes it." }
     ]
   },
   "aiSummary": {
     "generatedNote": "以下摘要由 AvoMole AI 引擎根據錄影自動生成（Demo 示意）。",
+    "generatedNoteEn": "The summary below is generated automatically by the AvoMole AI engine from the recording (demo illustration).",
     "timeline": [
-      { "time": "00:00", "title": "複習上一堂：什麼是微調、跟提示工程差在哪" },
-      { "time": "06:45", "title": "為什麼不全參數微調：顯存與成本的現實考量" },
-      { "time": "12:30", "title": "LoRA 的核心想法：只訓練低秩的增量矩陣" },
-      { "time": "23:40", "title": "實作開場：載入基礎模型與資料集" },
-      { "time": "38:10", "title": "設定 LoRA rank 與 alpha，跑第一輪訓練" },
-      { "time": "54:20", "title": "看訓練曲線：怎麼判斷過擬合" },
-      { "time": "68:05", "title": "合併權重、存檔與推論測試" },
-      { "time": "81:30", "title": "問答與下一堂預告：把微調好的模型接進服務" }
+      { "time": "00:00", "title": "複習上一堂：什麼是微調、跟提示工程差在哪", "titleEn": "Recap: what fine-tuning is, and how it differs from prompt engineering" },
+      { "time": "06:45", "title": "為什麼不全參數微調：顯存與成本的現實考量", "titleEn": "Why not full fine-tuning: the real cost and memory trade-offs" },
+      { "time": "12:30", "title": "LoRA 的核心想法：只訓練低秩的增量矩陣", "titleEn": "The core idea of LoRA: train only the low-rank update matrices" },
+      { "time": "23:40", "title": "實作開場：載入基礎模型與資料集", "titleEn": "Hands-on start: loading the base model and dataset" },
+      { "time": "38:10", "title": "設定 LoRA rank 與 alpha，跑第一輪訓練", "titleEn": "Setting LoRA rank and alpha, and running the first training round" },
+      { "time": "54:20", "title": "看訓練曲線：怎麼判斷過擬合", "titleEn": "Reading the training curves: how to spot overfitting" },
+      { "time": "68:05", "title": "合併權重、存檔與推論測試", "titleEn": "Merging weights, saving, and testing inference" },
+      { "time": "81:30", "title": "問答與下一堂預告：把微調好的模型接進服務", "titleEn": "Q&A and next-session preview: serving the fine-tuned model" }
     ],
     "keyPoints": [
       "微調適合讓模型學會固定的風格或格式，臨時的知識補充用檢索（RAG）通常更划算。",
@@ -37,18 +42,33 @@
       "資料品質決定上限，兩三百筆乾淨、格式一致的資料，往往勝過幾千筆雜亂的。",
       "訓練完記得把 LoRA 權重跟基礎模型合併再存，推論時才不用每次都掛一次。"
     ],
+    "keyPointsEn": [
+      "Fine-tuning is best for teaching a model a fixed style or format; for adding transient knowledge, retrieval (RAG) is usually more cost-effective.",
+      "Full fine-tuning touches the entire model and eats memory; LoRA trains only a small set of extra parameters, so a consumer-grade GPU can handle it.",
+      "LoRA rank sets the size of those extra parameters. Start with 8 or 16; going too large invites overfitting and wastes resources.",
+      "The learning rate matters more than you'd think. Too high and the model forgets what it knew, so fine-tuning usually uses a value far smaller than pretraining.",
+      "When validation loss starts rising while training loss keeps falling, that's the overfitting signal, and it's time to stop.",
+      "Data quality sets the ceiling. Two or three hundred clean, consistently formatted examples often beat thousands of messy ones.",
+      "After training, remember to merge the LoRA weights into the base model before saving, so you don't have to attach them at every inference."
+    ],
     "termCards": [
       {
         "term": "LoRA rank",
-        "explain": "控制你「額外加上去訓練的那組參數」有多大。數字越大能學的越多，但也越吃資源、越容易記太死。實務上先從小數字（像 8、16）開始試。"
+        "termEn": "LoRA rank",
+        "explain": "控制你「額外加上去訓練的那組參數」有多大。數字越大能學的越多，但也越吃資源、越容易記太死。實務上先從小數字（像 8、16）開始試。",
+        "explainEn": "Controls how large the extra set of parameters you train on top is. A bigger number can learn more, but it also uses more resources and memorizes too rigidly. In practice, start small, like 8 or 16."
       },
       {
         "term": "學習率",
-        "explain": "模型每次修正自己的步伐大小。步伐太大容易一腳踏空、把原本會的忘掉；太小又學得很慢。微調時通常刻意調得比從頭訓練小很多。"
+        "termEn": "Learning rate",
+        "explain": "模型每次修正自己的步伐大小。步伐太大容易一腳踏空、把原本會的忘掉；太小又學得很慢。微調時通常刻意調得比從頭訓練小很多。",
+        "explainEn": "The size of the step the model takes each time it corrects itself. Too big and it stumbles and forgets what it knew; too small and it learns slowly. For fine-tuning you deliberately set it far smaller than for training from scratch."
       },
       {
         "term": "過擬合",
-        "explain": "模型把訓練資料背得滾瓜爛熟，卻對沒看過的新資料表現變差。就像只會考古題的學生，換個題目就不會了。看到驗證分數變差就要警覺。"
+        "termEn": "Overfitting",
+        "explain": "模型把訓練資料背得滾瓜爛熟，卻對沒看過的新資料表現變差。就像只會考古題的學生，換個題目就不會了。看到驗證分數變差就要警覺。",
+        "explainEn": "The model memorizes the training data cold but does worse on new data it hasn't seen, like a student who only knows past exam questions and freezes on a new one. Watch out when the validation score gets worse."
       }
     ]
   },
@@ -57,56 +77,87 @@
       "id": "q1",
       "type": "choice",
       "prompt": "關於 LoRA 微調，下列哪一項描述最正確？",
+      "promptEn": "Which of the following best describes LoRA fine-tuning?",
       "options": [
         "LoRA 會重新訓練模型的全部參數，所以效果最好",
         "LoRA 只訓練一小組低秩的增量參數，用較少資源達到接近的效果",
         "LoRA 不需要任何訓練資料，靠提示就能改變模型行為",
         "LoRA 只能用在影像模型，不能用在語言模型"
       ],
+      "optionsEn": [
+        "LoRA retrains all of the model's parameters, so it gives the best results",
+        "LoRA trains only a small set of low-rank update parameters, reaching near-equal results with fewer resources",
+        "LoRA needs no training data and changes the model's behavior through prompts alone",
+        "LoRA only works on image models, not language models"
+      ],
       "answerIndex": 1,
       "explanation": "LoRA 的重點就是凍住原本的權重、只訓練額外的低秩矩陣，所以省資源。全參數微調才會動到全部參數。",
+      "explanationEn": "The whole point of LoRA is to freeze the original weights and train only the extra low-rank matrices, which is why it saves resources. Only full fine-tuning touches every parameter.",
       "mockStudentAnswer": "我選第一個，感覺重新訓練全部參數效果應該最好。",
-      "aiFeedback": "這題選錯了，但你的直覺可以理解——「動得越多效果越好」聽起來很合理。不過 LoRA 的價值剛好相反：它凍住原本的權重，只訓練一小組新增的參數，用很少的資源就逼近全參數微調的效果。全參數微調確實可能更好一點點，但顯存與成本高很多，多數情境不划算。建議回去看 12:30 那段的比喻。"
+      "mockStudentAnswerEn": "I picked the first one; retraining all the parameters feels like it should give the best results.",
+      "aiFeedback": "這題選錯了，但你的直覺可以理解——「動得越多效果越好」聽起來很合理。不過 LoRA 的價值剛好相反：它凍住原本的權重，只訓練一小組新增的參數，用很少的資源就逼近全參數微調的效果。全參數微調確實可能更好一點點，但顯存與成本高很多，多數情境不划算。建議回去看 12:30 那段的比喻。",
+      "aiFeedbackEn": "This one's wrong, but your instinct makes sense: \"more moving parts, better results\" sounds reasonable. LoRA's value is the opposite, though. It freezes the original weights and trains only a small set of new parameters, getting close to full fine-tuning with very few resources. Full fine-tuning may be slightly better, but the memory and cost are much higher and rarely worth it. Take another look at the analogy around 12:30."
     },
     {
       "id": "q2",
       "type": "choice",
       "prompt": "訓練過程中，你發現訓練損失持續下降，但驗證損失開始往上升，這代表什麼？",
+      "promptEn": "During training you notice the training loss keeps falling while the validation loss starts to rise. What does this mean?",
       "options": [
         "模型還沒學夠，應該再多訓練幾輪",
         "學習率設得太低了，要調高",
         "出現過擬合的訊號，該考慮提早停止",
         "資料集太小，跟訓練狀況無關"
       ],
+      "optionsEn": [
+        "The model hasn't learned enough yet; train for more epochs",
+        "The learning rate is set too low and should be raised",
+        "It's a sign of overfitting, and you should consider early stopping",
+        "The dataset is too small and it has nothing to do with training"
+      ],
       "answerIndex": 2,
       "explanation": "訓練損失降、驗證損失升，是典型的過擬合訊號，代表模型開始死背訓練資料。這時候該提早停止或加正則化。",
+      "explanationEn": "Training loss down, validation loss up is the classic overfitting signal: the model is starting to memorize the training data. This is when you stop early or add regularization.",
       "mockStudentAnswer": "訓練損失還在降，應該是還沒學夠，我會再多跑幾輪。",
-      "aiFeedback": "答對了一半的觀察，但結論剛好反了。訓練損失還在降沒錯，可是關鍵在「驗證損失開始升」——這代表模型已經在死背訓練資料，對新資料反而變差，這就是過擬合。再多跑幾輪只會更嚴重。正確做法是提早停止，或降低 rank、加一點正則化。這正是 54:20 那段在示範的判讀方式。"
+      "mockStudentAnswerEn": "The training loss is still falling, so it probably hasn't learned enough. I'd run a few more epochs.",
+      "aiFeedback": "答對了一半的觀察，但結論剛好反了。訓練損失還在降沒錯，可是關鍵在「驗證損失開始升」——這代表模型已經在死背訓練資料，對新資料反而變差，這就是過擬合。再多跑幾輪只會更嚴重。正確做法是提早停止，或降低 rank、加一點正則化。這正是 54:20 那段在示範的判讀方式。",
+      "aiFeedbackEn": "Half your observation is right, but the conclusion is backwards. Yes, the training loss is still falling, but the key is that the validation loss has started rising. That means the model is already memorizing the training data and doing worse on new data, which is overfitting. More epochs only make it worse. The right move is to stop early, or lower the rank and add a little regularization. That's exactly the read-out demonstrated around 54:20."
     },
     {
       "id": "q3",
       "type": "short",
       "prompt": "假設你要微調一個模型，讓它固定用「條列式、每點加上表情符號」的風格回答。請說明你會怎麼準備訓練資料，以及為什麼這個任務適合用微調而不是只靠提示。",
+      "promptEn": "Suppose you want to fine-tune a model so it always answers in a fixed style: bulleted, with an emoji on each point. Explain how you'd prepare the training data, and why this task suits fine-tuning rather than prompting alone.",
       "answerIndex": null,
       "explanation": "重點在於：準備一批「問題→符合目標風格的回答」的成對資料，格式要一致；適合微調是因為這是穩定的風格需求，靠提示每次都要重講、還可能被使用者輸入蓋掉。",
+      "explanationEn": "The key: prepare a batch of question-to-answer pairs where the answers match the target style, with consistent formatting. Fine-tuning fits because this is a stable style requirement; with prompting you'd have to restate it every time, and user input could override it.",
       "mockStudentAnswer": "我會收集大概兩三百筆問答，答案都寫成條列加表情符號的格式，讓模型看多了自然學會這種風格。這比每次都在提示裡叫它條列好，因為提示會佔 token，而且有時候它會忘記照做。",
-      "aiFeedback": "答得很好，抓到重點了。你提到兩三百筆、格式一致，這個量級跟品質的判斷是對的，資料一致性正是微調風格類任務的關鍵。你也點出提示的兩個弱點：佔 token、容易被忽略或被使用者輸入蓋掉，這正是為什麼穩定的風格需求適合固化進模型。可以再補一點的是：訓練資料的「問題」部分最好也涵蓋多種主題，避免模型只在某類問題上表現好。整體是一份很完整的回答。"
+      "mockStudentAnswerEn": "I'd collect around two or three hundred Q&A pairs, writing every answer in the bulleted-plus-emoji format so the model naturally picks up the style from seeing it a lot. That beats telling it to bullet in the prompt every time, because the prompt uses up tokens and it sometimes forgets to follow it.",
+      "aiFeedback": "答得很好，抓到重點了。你提到兩三百筆、格式一致，這個量級跟品質的判斷是對的，資料一致性正是微調風格類任務的關鍵。你也點出提示的兩個弱點：佔 token、容易被忽略或被使用者輸入蓋掉，這正是為什麼穩定的風格需求適合固化進模型。可以再補一點的是：訓練資料的「問題」部分最好也涵蓋多種主題，避免模型只在某類問題上表現好。整體是一份很完整的回答。",
+      "aiFeedbackEn": "Well answered, you got the main points. You mentioned two or three hundred examples with consistent formatting, and that read on scale and quality is right: data consistency is exactly what matters for style-type fine-tuning. You also named two weaknesses of prompting, that it uses up tokens and is easily ignored or overridden by user input, which is precisely why a stable style requirement is worth baking into the model. One thing to add: the question side of the training data should ideally span several topics, so the model doesn't only do well on one kind of question. Overall a very complete answer."
     }
   ],
   "knowledgeQA": {
     "note": "課堂知識庫問答（Demo）：以本堂摘要為依據回答。可點下列預設問題。",
+    "noteEn": "Class knowledge Q&A (demo): answers are grounded in this session's summary. Tap one of the preset questions below.",
     "presets": [
       {
         "question": "LoRA rank 到底要設多少？",
-        "answer": "沒有標準答案，但實務上先從 8 或 16 試起最保險。rank 越大能學的細節越多，但也更吃資源、更容易過擬合。先用小的跑，看驗證表現不夠再往上加，比一開始就設很大來得穩。"
+        "questionEn": "What should I actually set the LoRA rank to?",
+        "answer": "沒有標準答案，但實務上先從 8 或 16 試起最保險。rank 越大能學的細節越多，但也更吃資源、更容易過擬合。先用小的跑，看驗證表現不夠再往上加，比一開始就設很大來得穩。",
+        "answerEn": "There's no set answer, but in practice starting at 8 or 16 is the safest. A larger rank can learn more detail, but it also uses more resources and overfits more easily. Run a small one first, then raise it if validation performance falls short. That's steadier than setting it large from the start."
       },
       {
         "question": "微調跟 RAG 我該選哪個？",
-        "answer": "看你要解決什麼。如果是要讓模型學會固定的風格、格式或語氣，微調比較合適。如果是要補充會變動的知識，例如公司最新文件，用 RAG 檢索通常更划算也更好維護。兩個也可以搭配用。"
+        "questionEn": "Should I choose fine-tuning or RAG?",
+        "answer": "看你要解決什麼。如果是要讓模型學會固定的風格、格式或語氣，微調比較合適。如果是要補充會變動的知識，例如公司最新文件，用 RAG 檢索通常更划算也更好維護。兩個也可以搭配用。",
+        "answerEn": "It depends on the problem. If you want the model to learn a fixed style, format, or tone, fine-tuning fits better. If you need to add changing knowledge, like your company's latest documents, retrieval with RAG is usually more cost-effective and easier to maintain. You can also combine the two."
       },
       {
         "question": "訓練資料要準備多少筆才夠？",
-        "answer": "風格類的任務，兩三百筆乾淨、格式一致的資料常常就夠了。重點不是量多，而是品質跟一致性。與其塞幾千筆雜亂的，不如把少量資料整理乾淨，效果反而更好。"
+        "questionEn": "How many training examples are enough?",
+        "answer": "風格類的任務，兩三百筆乾淨、格式一致的資料常常就夠了。重點不是量多，而是品質跟一致性。與其塞幾千筆雜亂的，不如把少量資料整理乾淨，效果反而更好。",
+        "answerEn": "For style-type tasks, two or three hundred clean, consistently formatted examples are often enough. What matters isn't volume but quality and consistency. Rather than stuffing in thousands of messy ones, clean up a small set and the results are usually better."
       }
     ]
   }

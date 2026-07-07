@@ -27,9 +27,10 @@ function Stars({ rating }: { rating: number }) {
 }
 
 export function TutorCard({ tutor, rating, reason, className = '' }: TutorCardProps) {
-  const { t } = useLang();
+  const { lang, t } = useLang();
   const shownSkills = tutor.skills.slice(0, 4);
   const extra = tutor.skills.length - shownSkills.length;
+  const title = lang === 'en' ? tutor.titleEn ?? tutor.title : tutor.title;
 
   return (
     <Link
@@ -55,7 +56,7 @@ export function TutorCard({ tutor, rating, reason, className = '' }: TutorCardPr
             <h3 className="avo-display truncate text-lg text-avo-dark">{tutor.name}</h3>
             {tutor.isReal && <Badge kind="real" />}
           </div>
-          <p className="truncate text-sm text-avo-ink/65">{tutor.title}</p>
+          <p className="truncate text-sm text-avo-ink/65">{title}</p>
         </div>
       </div>
 

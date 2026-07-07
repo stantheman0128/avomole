@@ -9,17 +9,31 @@ export type Exercise = {
   id: string;
   type: 'choice' | 'short';
   prompt: string;
+  promptEn?: string;
   options?: string[];
+  optionsEn?: string[];
   answerIndex: number | null;
   explanation: string;
+  explanationEn?: string;
   mockStudentAnswer: string;
+  mockStudentAnswerEn?: string;
   aiFeedback: string;
+  aiFeedbackEn?: string;
 };
 
 function Item({ ex, index }: { ex: Exercise; index: number }) {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const en = lang === 'en';
   const [open, setOpen] = useState(false);
   const typeLabel = ex.type === 'choice' ? CR.typeChoice : CR.typeShort;
+  const prompt = en ? ex.promptEn ?? ex.prompt : ex.prompt;
+  const options =
+    en && ex.optionsEn && ex.options && ex.optionsEn.length === ex.options.length
+      ? ex.optionsEn
+      : ex.options;
+  const mockStudentAnswer = en ? ex.mockStudentAnswerEn ?? ex.mockStudentAnswer : ex.mockStudentAnswer;
+  const aiFeedback = en ? ex.aiFeedbackEn ?? ex.aiFeedback : ex.aiFeedback;
+  const explanation = en ? ex.explanationEn ?? ex.explanation : ex.explanation;
 
   return (
     <li className="avo-panel rounded-2xl p-4 sm:p-5">
@@ -31,11 +45,11 @@ function Item({ ex, index }: { ex: Exercise; index: number }) {
           <span className="inline-block rounded-full bg-avo-light px-2 py-0.5 text-xs text-avo-dark">
             {t(typeLabel)}
           </span>
-          <p className="mt-2 font-medium text-avo-ink">{ex.prompt}</p>
+          <p className="mt-2 font-medium text-avo-ink">{prompt}</p>
 
-          {ex.options && (
+          {options && (
             <ol className="mt-3 space-y-1.5">
-              {ex.options.map((opt, i) => {
+              {options.map((opt, i) => {
                 const isAnswer = ex.answerIndex === i;
                 return (
                   <li
@@ -78,18 +92,18 @@ function Item({ ex, index }: { ex: Exercise; index: number }) {
               <div>
                 <p className="font-mono text-xs text-avo-ink/50">{t(CR.studentAnswerLabel)}</p>
                 <p className="mt-1 rounded-lg bg-avo-light/30 px-3 py-2 text-sm text-avo-ink/90">
-                  {ex.mockStudentAnswer}
+                  {mockStudentAnswer}
                 </p>
               </div>
               <div>
                 <p className="font-mono text-xs text-avo-main">{t(CR.aiFeedbackLabel)}</p>
                 <p className="mt-1 rounded-lg bg-avo-light/40 px-3 py-2 text-sm leading-relaxed text-avo-ink">
-                  {ex.aiFeedback}
+                  {aiFeedback}
                 </p>
               </div>
               <div>
                 <p className="font-mono text-xs text-avo-ink/50">{t(CR.explanationLabel)}</p>
-                <p className="mt-1 text-sm leading-relaxed text-avo-ink/80">{ex.explanation}</p>
+                <p className="mt-1 text-sm leading-relaxed text-avo-ink/80">{explanation}</p>
               </div>
             </div>
           )}

@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useLang } from '@/lib/i18n';
 import { BRAND } from '@/lib/brand';
 import { HOME } from '../../home-strings';
+import { ROADMAP } from '../../roadmap/strings';
 import { HeroSearch } from './HeroSearch';
 
 export function HomeContent() {
@@ -103,6 +104,20 @@ export function HomeContent() {
             </div>
           ))}
         </div>
+
+        {/* 這裡只列了幾項；完整藍圖（含每個未上線功能的 Demo 示意）在 /roadmap */}
+        <Link
+          href="/roadmap"
+          className="group mt-9 inline-flex items-center gap-1.5 text-sm font-medium text-avo-main underline-offset-4 hover:underline"
+        >
+          {t(ROADMAP.fromDiscover)}
+          <span
+            aria-hidden
+            className="transition-transform duration-[var(--dur-fast)] ease-[var(--ease-out-quart)] group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </Link>
       </section>
     </div>
   );

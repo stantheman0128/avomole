@@ -62,6 +62,5 @@ export const s = {
   reviewDigest: { zh: 'AI 評價摘要', en: 'AI review summary' },
   plansTitle: { zh: '課程方案', en: 'Plans' },
   endorsementsTitle: { zh: '名人推薦', en: 'Endorsements' },
-  demoContentZh: { zh: '', en: 'Demo content in Chinese' },
   backToList: { zh: '← 回講師列表', en: '← Back to tutors' },
 } as const;

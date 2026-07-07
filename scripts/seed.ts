@@ -37,7 +37,9 @@ async function upsertTutor(t: Tutor, passwordHash: string): Promise<void> {
     name: t.name,
     nameEn: t.nameEn,
     title: t.title,
+    titleEn: t.titleEn ?? null,
     bio: t.bio,
+    bioEn: t.bioEn ?? null,
     avatar: t.avatar,
     hourlyRate: t.hourlyRate,
     acceptsProjects: t.acceptsProjects,
@@ -75,7 +77,7 @@ async function reseedReviewsAndEndorsements(data: TutorData): Promise<void> {
     const tutorProfileId = seqToId.get(r.tutorId);
     if (!tutorProfileId) continue;
     await prisma.review.create({
-      data: { tutorProfileId, author: r.author, rating: r.rating, text: r.text },
+      data: { tutorProfileId, author: r.author, rating: r.rating, text: r.text, textEn: r.textEn ?? null },
     });
   }
   for (const e of data.endorsements) {
