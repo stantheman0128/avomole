@@ -42,3 +42,17 @@
 
 ### 整合驗證
 `npm run seed && npm run build` 全綠（8 路由）、`npm test` 6/6 綠。
+
+## Wave 2 — 整合 QA（Task 7）
+
+實機（dev server, port 3100, 無 GEMINI_API_KEY）走完 SPEC §7 六步敘事線，桌面與手機 390px 各驗一次：
+- 首頁 hero 輸入 → `/match?q=` 自動發問 → `POST /api/chat 200`，**無 key 走罐頭退路**：回 2 張內嵌講師卡＋「離線建議」標籤，reply 自然、`offline:true`、回應無 hiddenScore。
+- Stan 個人頁：雷達圖 SVG、GitHub repo、真實資料徽章齊；**DOM 掃描確認無 hiddenScore/hidden_score 外洩**。預約試教 → toast 正常。
+- `/classroom` 四區塊齊（Meet 連結、8 段時間軸、名詞卡翻面、練習題、罐頭問答）。
+- 中/EN 切換：nav、區塊標題、footer 聲明、品牌名全切換，mock 內容顯示「Demo content in Chinese」，不破版。
+- `/login` 提交 → toast「Demo 版請以訪客身份繼續探索 🥑」→ 導回首頁。
+- RWD：home/tutors/個人頁/match/classroom 在 390px 全部零水平溢出。
+- 全程無 console error、無站內 404。
+
+### 修正
+- `components/TutorCard.tsx`：星等 aria-label 用 `toFixed(1)`，避免首頁把原始平均分浮點（如 4.6666…）塞進無障礙標籤。

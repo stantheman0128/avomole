@@ -17,7 +17,7 @@ interface TutorCardProps {
 function Stars({ rating }: { rating: number }) {
   const full = Math.round(rating);
   return (
-    <span className="font-mono text-sm text-avo-seed" aria-label={`${rating} / 5`}>
+    <span className="font-mono text-sm text-avo-seed" aria-label={`${rating.toFixed(1)} / 5`}>
       {'★'.repeat(full)}
       <span className="text-avo-seed/30">{'★'.repeat(5 - full)}</span>
     </span>
