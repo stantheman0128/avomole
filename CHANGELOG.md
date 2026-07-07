@@ -17,3 +17,28 @@
 
 ### 已知待辦（環境限制）
 - `scaffoldtmp/`（中斷 scaffold 殘留）已在 `.gitignore`、tsconfig 已排除、不進 build 與 commit；本機刪除指令被 careful 守衛擋下，留給 Stan 手動 `Remove-Item -Recurse -Force scaffoldtmp`。
+
+## Wave 1 — 頁面群（四個平行任務）
+
+### Task 3：/tutors 列表 ＋ /tutors/[slug] 個人頁
+- 列表頁：Server Component 讀 db、算平均評分後傳 client 篩選器；領域多選、程度、時薪三檔、可接案開關前端過濾；`?domain=` 白名單預選（首頁分類導覽入口）。桌面 3 欄 / 手機 1 欄。
+- 個人頁：§4.3 六區塊全做（頭部徽章、AI 側寫卡含 RadarChart、GitHub repo/語言橫條、作品集、評價＋AI 摘要、方案）；預約鈕出 toast。
+- 兩頁 `force-dynamic`；只有 page.tsx 碰 db，互動下放 `_components/` client 子元件。
+
+### Task 4：/match 聊天 ＋ /api/chat ＋ Gemini ＋ 罐頭退路
+- `lib/canned-match.ts`：純函式關鍵字→領域對照，命中域取 hiddenScore 前 2 名，只回 {slug,reason}。
+- `lib/gemini.ts`：`@google/genai`，JSON mode（responseSchema）、system prompt 照 §6、10s timeout、最近 10 則歷史。
+- `app/api/chat/route.ts`：同 IP 每分鐘 10 次防刷；有 key 試 Gemini、任何錯誤退 canned 且 `offline:true`；無 key 直接 canned；驗證 slug 存在；回應絕無 hiddenScore。
+- `/match`：Server 傳 PublicTutor 給 client 聊天室；`?q=` 自動發問；推薦以內嵌 TutorCard 呈現、offline 標「離線建議」。
+- `tests/canned-match.test.ts`：關鍵字路由、slug 存在、輸出無 hiddenScore。
+
+### Task 5：/classroom 教室體驗
+- Server Component 讀 `data/classroom.json`，四區塊：上課資訊卡（Meet 連結＋三步驟）、AI 課程摘要（時間軸點擊 tooltip、重點、名詞卡 hover 翻面）、練習題（展開 AI 批改示範）、知識庫問答（罐頭三按鈕，依砍單順序不做真 AI）。
+- 翻面/展開純 CSS transform + React state，不引動畫庫。
+
+### Task 6：首頁完整版 ＋ /login
+- 首頁 async Server Component：hero 搜尋框導 /match?q=、三亮點卡、精選 4 卡（含 Stan 真人卡）、六領域導覽、名人推薦牆（去重取 3 位認證帳號）、Roadmap 三卡。
+- `/login`：完整登入 UI，提交/點擊 → toast → 導回首頁。
+
+### 整合驗證
+`npm run seed && npm run build` 全綠（8 路由）、`npm test` 6/6 綠。
