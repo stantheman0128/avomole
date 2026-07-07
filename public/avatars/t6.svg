@@ -1,0 +1,10 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="幾何頭像">
+  <circle cx="60" cy="60" r="60" fill="#F1C15B"/>
+  <circle cx="60" cy="52" r="22" fill="#F8F6EC"/>
+  <path d="M28 106 C28 82 44 72 60 72 C76 72 92 82 92 106 Z" fill="#2E4A1F"/>
+  <circle cx="52" cy="50" r="3.6" fill="#2E4A1F"/>
+  <circle cx="68" cy="50" r="3.6" fill="#2E4A1F"/>
+  <path d="M50 60 q10 9 20 0" stroke="#2E4A1F" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <circle cx="44" cy="58" r="4.5" fill="#E88" opacity="0.5"/>
+  <circle cx="76" cy="58" r="4.5" fill="#E88" opacity="0.5"/>
+</svg>

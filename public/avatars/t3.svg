@@ -1,0 +1,9 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="幾何頭像">
+  <circle cx="60" cy="60" r="60" fill="#2E4A1F"/>
+  <polygon points="60,20 92,60 60,100 28,60" fill="#6B9E3E"/>
+  <circle cx="60" cy="60" r="18" fill="#F8F6EC"/>
+  <circle cx="60" cy="60" r="7" fill="#2E4A1F"/>
+  <circle cx="60" cy="60" r="2.6" fill="#C9DCA6"/>
+  <rect x="86" y="30" width="9" height="9" rx="2" fill="#C9DCA6"/>
+  <rect x="26" y="82" width="9" height="9" rx="2" fill="#C9DCA6"/>
+</svg>

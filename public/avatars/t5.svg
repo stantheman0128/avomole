@@ -1,0 +1,8 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="幾何頭像">
+  <circle cx="60" cy="60" r="60" fill="#9C6B3F"/>
+  <polygon points="60,26 90,44 90,80 60,98 30,80 30,44" fill="#F8F6EC"/>
+  <polygon points="60,40 78,50 78,72 60,82 42,72 42,50" fill="#6B9E3E"/>
+  <circle cx="53" cy="60" r="3.4" fill="#F8F6EC"/>
+  <circle cx="67" cy="60" r="3.4" fill="#F8F6EC"/>
+  <path d="M53 70 q7 5 14 0" stroke="#F8F6EC" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+</svg>

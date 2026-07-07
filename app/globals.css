@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/*
+  酪梨醬 AI 家教網 主題 tokens（SPEC §2 色板 + 字體）。
+  Tailwind v4：@theme 內定義的變數會生成對應 utility（bg-avo-main、text-avo-dark…）。
+*/
+@theme {
+  --color-avo-dark: #2e4a1f;   /* 果皮深綠：標題、nav */
+  --color-avo-main: #6b9e3e;   /* 果肉綠：主色、按鈕 */
+  --color-avo-light: #c9dca6;  /* 淺果肉：卡片底、hover */
+  --color-avo-cream: #f8f6ec;  /* 奶油白：頁面底色 */
+  --color-avo-seed: #9c6b3f;   /* 果核棕：強調、徽章 */
+  --color-avo-ink: #22301a;    /* 內文字色 */
+
+  /* 字體：Noto Sans TC（全站）＋ JetBrains Mono（數字、代碼、GitHub 統計）
+     變數由 next/font 在 layout 注入。 */
+  --font-sans: var(--font-noto-sans-tc), "Noto Sans TC", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-avo-cream);
+  color: var(--color-avo-ink);
+  font-family: var(--font-sans);
+}
