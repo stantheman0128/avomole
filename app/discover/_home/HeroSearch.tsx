@@ -1,9 +1,9 @@
 'use client';
-// app/_home/HeroSearch.tsx —— Hero 的大輸入框。送出導向 /match?q=<文字>；空字串就去 /match。
+// app/discover/_home/HeroSearch.tsx —— Hero 的大輸入框。送出導向 /match?q=<文字>；空字串就去 /match。
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLang } from '@/lib/i18n';
-import { HOME } from '../home-strings';
+import { HOME } from '../../home-strings';
 
 export function HeroSearch() {
   const { t } = useLang();

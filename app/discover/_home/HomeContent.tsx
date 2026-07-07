@@ -1,5 +1,5 @@
 'use client';
-// app/_home/HomeContent.tsx —— 首頁主體（client）。
+// app/discover/_home/HomeContent.tsx —— 探索頁主體（client）。原首頁主體原樣搬來。
 // 吃 server 傳入的純資料 props（featured 已 toPublic、endorsements 已攤平），用 t() 渲染區塊 2–7。
 // 區塊 1（Nav）與 8（Footer）已在 layout 全站掛好，這裡不做。
 import Link from 'next/link';
@@ -8,7 +8,7 @@ import { useLang } from '@/lib/i18n';
 import { BRAND } from '@/lib/brand';
 import type { PublicTutor } from '@/lib/types';
 import { TutorCard } from '@/components/TutorCard';
-import { HOME } from '../home-strings';
+import { HOME } from '../../home-strings';
 import { HeroSearch } from './HeroSearch';
 
 export interface FeaturedTutor {

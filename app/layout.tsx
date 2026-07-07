@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Noto_Sans_TC, JetBrains_Mono } from 'next/font/google';
+import { Noto_Sans_TC, Noto_Serif_TC, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { LangProvider } from '@/lib/i18n';
 import { ToastProvider } from '@/lib/toast';
@@ -7,10 +7,19 @@ import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { BRAND } from '@/lib/brand';
 
+// UI / body workhorse
 const notoSansTC = Noto_Sans_TC({
   variable: '--font-noto-sans-tc',
   subsets: ['latin'],
   weight: ['400', '500', '700'],
+  display: 'swap',
+});
+
+// display / 大標，給編輯感（對比軸配對：serif × sans）
+const notoSerifTC = Noto_Serif_TC({
+  variable: '--font-noto-serif-tc',
+  subsets: ['latin'],
+  weight: ['600', '700', '900'],
   display: 'swap',
 });
 
@@ -29,7 +38,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="zh-Hant">
-      <body className={`${notoSansTC.variable} ${jetbrainsMono.variable} antialiased`}>
+      <body
+        className={`${notoSansTC.variable} ${notoSerifTC.variable} ${jetbrainsMono.variable} antialiased`}
+      >
+        {/* SessionProvider slot (backend line) —— 之後後端線在此掛 next-auth 的 <SessionProvider>，包住下面整棵樹。設計線不動它。 */}
         <LangProvider>
           <ToastProvider>
             <div className="flex min-h-screen flex-col">

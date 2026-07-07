@@ -1,21 +1,51 @@
 @import "tailwindcss";
 
 /*
-  酪梨醬 AI 家教網 主題 tokens（SPEC §2 色板 + 字體）。
-  Tailwind v4：@theme 內定義的變數會生成對應 utility（bg-avo-main、text-avo-dark…）。
+  酪梨醬 AI 家教網 —— 編輯/排版風主題 tokens。
+  設計定案見根目錄 DESIGN.md。
+
+  重點：body 不再用 cream。品牌綠從「灑在米底上的點綴」變成「結構色」。
+  --color-avo-* 這些名字全保留（現有其他頁不會壞），只換數值；語義變了的在下面註明。
+  一律 OKLCH。
 */
 @theme {
-  --color-avo-dark: #2e4a1f;   /* 果皮深綠：標題、nav */
-  --color-avo-main: #6b9e3e;   /* 果肉綠：主色、按鈕 */
-  --color-avo-light: #c9dca6;  /* 淺果肉：卡片底、hover */
-  --color-avo-cream: #f8f6ec;  /* 奶油白：頁面底色 */
-  --color-avo-seed: #9c6b3f;   /* 果核棕：強調、徽章 */
-  --color-avo-ink: #22301a;    /* 內文字色 */
+  /* --- 綠色階（品牌識別，沿用原酪梨綠的色相，往深淺兩端拉開）--- */
+  --color-avo-dark: oklch(0.30 0.055 140);   /* 果皮深綠：深色版塊、nav、footer 底 */
+  --color-avo-main: oklch(0.64 0.13 132);    /* 果肉綠：主色、CTA、連結、強調 */
+  --color-avo-light: oklch(0.88 0.06 128);   /* 淺果肉：淺底色塊、hover、chip */
 
-  /* 字體：Noto Sans TC（全站）＋ JetBrains Mono（數字、代碼、GitHub 統計）
-     變數由 next/font 在 layout 注入。 */
-  --font-sans: var(--font-noto-sans-tc), "Noto Sans TC", system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace;
+  /* --- 底色（drop cream）--- */
+  /* ground：內頁乾淨底色。不是暖米，chroma 極低且往品牌綠偏一點點的中性白。
+     語義變更：cream 這個名字以前＝暖米頁底(#F8F6EC)，現在＝乾淨近白 ground。 */
+  --color-avo-cream: oklch(0.985 0.006 130);
+
+  /* ink：內文字色，比舊值再壓深一點確保 ground 上 ≥4.5:1 */
+  --color-avo-ink: oklch(0.28 0.045 140);
+
+  /* --- 承諾色：drenched 深墨綠，Landing / 深色版塊的底 --- */
+  /* 近黑深綠。Landing 主場、footer、任何要「浸染」的深色區塊都用它。 */
+  --color-avo-drench: oklch(0.22 0.045 145);
+
+  /* --- 強調棕（果核）：徽章、次要強調 --- */
+  --color-avo-seed: oklch(0.56 0.085 62);
+
+  /* --- 深色版塊上的字色 --- */
+  --color-avo-paper: oklch(0.95 0.012 120);  /* 深底上的主字（暖白，不刺眼）*/
+
+  /* --- 字體：三支對比軸配對，變數由 next/font 在 layout 注入 --- */
+  --font-serif: var(--font-noto-serif-tc), "Noto Serif TC", "Songti TC", serif; /* display / 大標，編輯感 */
+  --font-sans: var(--font-noto-sans-tc), "Noto Sans TC", system-ui, sans-serif; /* body / UI workhorse */
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace; /* 數字 / GitHub / 代碼 */
+
+  /* --- 語義 z-index 階梯（取代 999 這種魔術數字）--- */
+  --z-sticky: 30;
+  --z-nav: 50;
+  --z-toast: 60;
+
+  /* --- 動態：克制，ease-out，150–250ms --- */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
 }
 
 html {
@@ -23,7 +53,64 @@ html {
 }
 
 body {
+  /* ground 是內頁預設底；Landing 這種深色頁在頁面層自己鋪 --color-avo-drench。 */
   background: var(--color-avo-cream);
   color: var(--color-avo-ink);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- 版型 primitives ---------------------------------------------------- */
+
+/* .rule：一條細分隔線，取代到處是卡片盒。用在版塊之間或欄之間。 */
+.avo-rule {
+  border: 0;
+  border-top: 1px solid color-mix(in oklch, var(--color-avo-ink) 15%, transparent);
+}
+/* 深底上的分隔線 */
+.avo-rule-on-dark {
+  border: 0;
+  border-top: 1px solid color-mix(in oklch, var(--color-avo-paper) 18%, transparent);
+}
+
+/* 大標排版：serif、緊排但不到字擠、balance 換行 */
+.avo-display {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+/* 長內文：pretty 換行減少孤字 */
+.avo-prose {
+  text-wrap: pretty;
+  max-width: 68ch;
+}
+
+/* 深色浸染區塊：Landing、footer 等直接掛 class 即可 */
+.avo-drenched {
+  background: var(--color-avo-drench);
+  color: var(--color-avo-paper);
+}
+
+/* --- 動態預設 ---------------------------------------------------------- */
+.avo-enter {
+  animation: avo-enter var(--dur-base) var(--ease-out-quart) both;
+}
+@keyframes avo-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* reduced-motion：關掉位移與 smooth scroll，改為即時／淡入 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .avo-enter { animation: avo-fade var(--dur-fast) linear both; }
+  @keyframes avo-fade { from { opacity: 0; } to { opacity: 1; } }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
