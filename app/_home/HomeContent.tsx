@@ -68,7 +68,7 @@ export function HomeContent({ featured, endorsements }: HomeContentProps) {
       {/* 2. Hero */}
       <section className="flex flex-col items-center py-14 text-center sm:py-20">
         <Image
-          src="/mascot.svg"
+          src="/mascot.png"
           alt={lang === 'zh' ? BRAND.zh : BRAND.en}
           width={160}
           height={160}

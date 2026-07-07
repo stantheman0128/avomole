@@ -66,3 +66,7 @@
 - Prod 驗證（真 Chromium）：首頁 console 0 error、`?q=` 自動發問渲染 2 張推薦卡＋「離線建議」、DOM 無 hiddenScore、六頁全 200、`/api/chat` 罐頭路徑正常。
 - 自訂網域 `guacamole.stan-shih.com` 已於 Zeabur 綁定（PROVISIONING），待 Stan 於 Cloudflare 加 CNAME → `guacamole-ai.zeabur.app`（DNS only 灰雲）。
 - 部署識別碼記於 `CLAUDE.md`。
+
+### 收尾（Codex 吉祥物 + 自訂網域上線）
+- 換上 Codex 產的正式吉祥物：`public/mascot.png`（戴眼鏡酪梨騎鼴鼠，1024²、透明底）用於 hero/nav/login；`public/icon.png`（酪梨頭）用於 favicon。hero/nav/login 引用改 `/mascot.png`、favicon 改 `/icon.png`（皆正方形、套原尺寸）。
+- **`https://guacamole.stan-shih.com` 已上線**（Stan 完成 Cloudflare CNAME，DNS 解析 → guacamole-ai.zeabur.app → 43.167.169.222，TLS 憑證受信任、HTTP 200）。

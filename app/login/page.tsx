@@ -29,7 +29,7 @@ export default function LoginPage() {
     <section className="mx-auto flex max-w-md flex-col px-4 py-14 sm:py-20">
       <div className="flex flex-col items-center text-center">
         <Image
-          src="/mascot.svg"
+          src="/mascot.png"
           alt={brandName}
           width={72}
           height={72}

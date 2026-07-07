@@ -14,7 +14,7 @@ export function Nav() {
     <header className="sticky top-0 z-50 border-b border-avo-light bg-avo-cream/90 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
         <Link href="/" className="flex shrink-0 items-center gap-2">
-          <Image src="/mascot.svg" alt="" width={32} height={32} className="h-8 w-8" />
+          <Image src="/mascot.png" alt="" width={32} height={32} className="h-8 w-8" />
           <span className="font-semibold text-avo-dark">{brandName}</span>
         </Link>
 
