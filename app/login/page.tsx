@@ -3,7 +3,7 @@
 // 成功導向 /discover（由 server action 的 redirectTo 處理）。錯誤態、loading 態齊全。
 import Link from 'next/link';
 import Image from 'next/image';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { useLang } from '@/lib/i18n';
 import { BRAND } from '@/lib/brand';
 import { LOGIN } from './strings';
@@ -16,6 +16,11 @@ export default function LoginPage() {
   const { lang, t } = useLang();
   const brandName = lang === 'zh' ? BRAND.zh : BRAND.en;
   const [state, formAction, pending] = useActionState<LoginState, FormData>(authenticate, undefined);
+
+  // 登入成功 → 整頁硬導向 /discover（重掛→Nav 立刻是登入狀態）
+  useEffect(() => {
+    if (state?.ok) window.location.href = '/discover';
+  }, [state]);
 
   return (
     <section className="mx-auto flex max-w-md flex-col px-4 py-14 sm:py-20">

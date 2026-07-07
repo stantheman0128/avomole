@@ -3,18 +3,22 @@
 import { AuthError } from 'next-auth';
 import { signIn } from '@/lib/auth';
 
-export type LoginState = { error?: 'invalid' | 'generic' } | undefined;
+export type LoginState = { error?: 'invalid' | 'generic'; ok?: boolean } | undefined;
 
+// redirect:false —— 不讓 signIn 自己做 RSC 軟導向（那會讓 client session 沒刷新、Nav 卡在「登入」）。
+// 成功回 {ok:true}，由 client 做整頁硬導向，重掛後 SessionProvider 帶到新 session。
 export async function authenticate(_prev: LoginState, formData: FormData): Promise<LoginState> {
   try {
-    await signIn('credentials', {
+    const res = await signIn('credentials', {
       email: formData.get('email'),
       password: formData.get('password'),
-      redirectTo: '/discover',
+      redirect: false,
     });
-    return undefined;
+    if (res && typeof res === 'object' && 'error' in res && (res as { error?: unknown }).error) {
+      return { error: 'invalid' };
+    }
+    return { ok: true };
   } catch (error) {
-    // signIn 成功時會 throw 一個 redirect，要往上拋讓 Next 處理
     if (error instanceof AuthError) {
       return { error: error.type === 'CredentialsSignin' ? 'invalid' : 'generic' };
     }

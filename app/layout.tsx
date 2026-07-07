@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Noto_Sans_TC, Noto_Serif_TC, JetBrains_Mono } from 'next/font/google';
 import { SessionProvider } from 'next-auth/react';
 import './globals.css';
+import { auth } from '@/lib/auth';
 import { LangProvider } from '@/lib/i18n';
 import { ToastProvider } from '@/lib/toast';
 import { Nav } from '@/components/Nav';
@@ -36,14 +37,16 @@ export const metadata: Metadata = {
   icons: { icon: '/icon.png' },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  // 從 server 取當前 session 傳給 SessionProvider：登入後（硬導向）整頁重掛即帶正確狀態，
+  // Nav 不會再卡在「登入」；一般載入也沒有先閃一下未登入的問題。
+  const session = await auth();
   return (
     <html lang="zh-Hant">
       <body
         className={`${notoSansTC.variable} ${notoSerifTC.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        {/* SessionProvider（後端線）：包住整棵樹，讓 client 能讀登入狀態。只加這層，不動版面。 */}
-        <SessionProvider>
+        <SessionProvider session={session}>
           <LangProvider>
             <ToastProvider>
               <div className="flex min-h-screen flex-col">

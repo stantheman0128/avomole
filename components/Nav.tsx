@@ -12,7 +12,6 @@ export function Nav() {
   const { data: session } = useSession();
   const brandName = lang === 'zh' ? BRAND.zh : BRAND.en;
   const user = session?.user;
-  const isTutor = user?.role === 'TUTOR';
 
   return (
     <header className="sticky top-0 z-50 border-b border-avo-light bg-avo-cream/90 backdrop-blur">
@@ -29,14 +28,8 @@ export function Nav() {
         </div>
 
         <div className="ml-auto flex items-center gap-2">
-          {!user && (
-            <span className="hidden rounded-full bg-avo-light px-2.5 py-0.5 text-xs text-avo-dark sm:inline">
-              {t(NAV.guestMode)}
-            </span>
-          )}
-
-          {/* 講師才顯示後臺連結 */}
-          {isTutor && (
+          {/* 登入者都有後臺入口（訪客模式已移除） */}
+          {user && (
             <Link href="/dashboard" className="hidden text-sm text-avo-ink/80 hover:text-avo-main sm:inline">
               {t(NAV.dashboard)}
             </Link>

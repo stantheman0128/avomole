@@ -7,7 +7,7 @@ import { prisma } from '@/lib/prisma';
 import { signIn } from '@/lib/auth';
 
 export type SignupError = 'duplicate' | 'password' | 'email' | 'name' | 'generic';
-export type SignupState = { error?: SignupError } | undefined;
+export type SignupState = { error?: SignupError; ok?: boolean; redirect?: string } | undefined;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -32,14 +32,10 @@ export async function register(_prev: SignupState, formData: FormData): Promise<
     return { error: 'generic' };
   }
 
-  // 註冊成功 → 自動登入 → 依角色導向（signIn 成功會 throw redirect，往上拋讓 Next 處理）
+  // 註冊成功 → 自動登入（redirect:false）→ 回 redirect 目標給 client 做整頁硬導向
   try {
-    await signIn('credentials', {
-      email,
-      password,
-      redirectTo: role === 'TUTOR' ? '/dashboard' : '/discover',
-    });
-    return undefined;
+    await signIn('credentials', { email, password, redirect: false });
+    return { ok: true, redirect: role === 'TUTOR' ? '/dashboard' : '/discover' };
   } catch (error) {
     if (error instanceof AuthError) return { error: 'generic' };
     throw error;

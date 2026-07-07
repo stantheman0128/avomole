@@ -3,7 +3,7 @@
 // ?role=tutor（來自 Landing「我是講師」）→ 預選講師。成功自動登入並依角色導向。
 import Link from 'next/link';
 import Image from 'next/image';
-import { Suspense, useActionState, useState } from 'react';
+import { Suspense, useActionState, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useLang } from '@/lib/i18n';
 import { BRAND } from '@/lib/brand';
@@ -33,6 +33,11 @@ function SignupForm() {
   const initialRole = params.get('role') === 'tutor' ? 'TUTOR' : 'STUDENT';
   const [role, setRole] = useState<'STUDENT' | 'TUTOR'>(initialRole);
   const [state, formAction, pending] = useActionState<SignupState, FormData>(register, undefined);
+
+  // 註冊成功 → 整頁硬導向（重掛→Nav 立刻是登入狀態）
+  useEffect(() => {
+    if (state?.ok && state.redirect) window.location.href = state.redirect;
+  }, [state]);
 
   const roleButton = (value: 'STUDENT' | 'TUTOR', label: string) => (
     <button
