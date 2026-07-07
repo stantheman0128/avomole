@@ -56,3 +56,13 @@
 
 ### 修正
 - `components/TutorCard.tsx`：星等 aria-label 用 `toFixed(1)`，避免首頁把原始平均分浮點（如 4.6666…）塞進無障礙標籤。
+- `app/layout.tsx`：metadata 設 `icons: { icon: '/mascot.svg' }`，消除 `/favicon.ico` 404 console error。
+
+## Wave 3 — 部署（Zeabur）
+
+- 於 Stan 自租的 Tencent Tokyo 2C/2GB dedicated server 建專案 `guacamole-ai` 並 direct deploy。
+- 環境變數：`DATA_BACKEND=json`（部署用安全退路，runtime 不載原生模組）、`GEMINI_MODEL=gemini-2.5-flash`。
+- 預設網址上線：**https://guacamole-ai.zeabur.app**（TLS 憑證真瀏覽器可信；Windows curl schannel 的 UNTRUSTED_ROOT 為本機憑證庫問題、非真問題）。
+- Prod 驗證（真 Chromium）：首頁 console 0 error、`?q=` 自動發問渲染 2 張推薦卡＋「離線建議」、DOM 無 hiddenScore、六頁全 200、`/api/chat` 罐頭路徑正常。
+- 自訂網域 `guacamole.stan-shih.com` 已於 Zeabur 綁定（PROVISIONING），待 Stan 於 Cloudflare 加 CNAME → `guacamole-ai.zeabur.app`（DNS only 灰雲）。
+- 部署識別碼記於 `CLAUDE.md`。
