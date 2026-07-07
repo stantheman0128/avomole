@@ -101,6 +101,11 @@ export async function seed(): Promise<{ tutors: number; reviews: number; endorse
     await upsertTutor(t, passwordHash);
   }
   await reseedReviewsAndEndorsements(data);
+  // 用顯式 seq(1-9) upsert 不會推進 Postgres autoincrement sequence，之後 create 的講師會拿 seq=1 撞 unique。
+  // 把 sequence 推到目前 max，讓新講師從 max+1 開始。
+  await prisma.$executeRawUnsafe(
+    `SELECT setval(pg_get_serial_sequence('"TutorProfile"', 'seq'), (SELECT COALESCE(MAX(seq), 1) FROM "TutorProfile"))`,
+  );
   return {
     tutors: data.tutors.length,
     reviews: data.reviews.length,

@@ -26,15 +26,16 @@ export function defaultAiProfile(): AiProfile {
   return { radar: { ...DEFAULT_RADAR }, summary: '', difficulty: 3, reviewDigest: '' };
 }
 
-// slug：name/email → kebab；保留英數與漢字，其餘轉 -；空退回 'tutor'。
+// slug：ASCII-safe（只留 a-z0-9-）。含中文的名字 strip 後可能變空 → 退回 email 帳號 → 'tutor'。
+// 不保留漢字：CJK slug 在 URL 上會 404/400（Next 路由與 Prisma 比對對編碼敏感）。
 export function baseSlug(name: string | null, email: string | null): string {
-  const source = (name && name.trim()) || (email ? email.split('@')[0] : '') || 'tutor';
-  const slug = source
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9一-鿿]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-  return slug || 'tutor';
+  const toAscii = (s: string) =>
+    s.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  const fromName = name ? toAscii(name) : '';
+  if (fromName.length >= 2) return fromName;
+  const fromEmail = email ? toAscii(email.split('@')[0]) : '';
+  if (fromEmail.length >= 2) return fromEmail;
+  return 'tutor';
 }
 
 // 唯一 slug：撞了加 -2、-3…；exceptId 讓自己已佔的 slug 不算撞。極端情況掛時間戳保底。
