@@ -16,17 +16,22 @@ export interface TutorProfileInput {
   skills: string[];
   domains: string[];
   githubUsername: string;
+  // 抓自真實 GitHub 的文字摘要（語言分佈 + 代表 repo）。有值時併進 prompt 讓側寫反映真作品。
+  githubSummary?: string;
 }
 
 const SYSTEM_PROMPT = `你是「酪梨醬 AI 家教網（Guacamole AI）」的能力評估引擎。
 根據一位 AI 講師的頭銜、自我介紹、技能標籤、教學領域與 GitHub 帳號，
 產出一張客觀、克制、不浮誇的能力側寫卡。
+若輸入含 githubSummary（抓自該講師真實 GitHub 的語言分佈與代表 repo），
+請把它當成最可信的作品證據：讓 radar 的 engineering / llm / cv 反映真實使用的語言與專案，
+summary 也可具體點名他的語言強項或代表作，不要憑空吹捧。
 
 規則：
 1. radar 六軸各給 0–100 的整數，代表：llm（大型語言模型應用）、cv（電腦視覺）、
    mlBasics（機器學習基礎）、engineering（工程實務）、teaching（教學經驗）、
    influence（社群影響力）。依技能與領域合理評分，沒有明顯訊號的軸給中庸偏低分，
-   不要六軸全部拉高。
+   不要六軸全部拉高。有 githubSummary 時，engineering 與相關技術軸應反映真實 repo 訊號。
 2. summary：一段 60–90 字的繁體中文短評，講這位講師的定位與強項，語氣專業、具體、不空泛。
 3. difficulty：1–5 的整數，代表他帶的專案通常有多難（1 很入門、5 很進階）。
 4. reviewDigest：一段 40–60 字、像是彙整多則學生評價的摘要，語氣真實不吹捧。
@@ -90,6 +95,7 @@ function buildUserPrompt(input: TutorProfileInput): string {
     skills: input.skills,
     domains: input.domains,
     githubUsername: input.githubUsername,
+    ...(input.githubSummary ? { githubSummary: input.githubSummary } : {}),
   });
 }
 

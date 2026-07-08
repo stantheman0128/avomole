@@ -3,12 +3,15 @@
 // 全部直接用 prisma 寫入。每個 action 重新驗 auth + 只認 session.user 對應的 TutorProfile（不信任 client 送的 id）。
 // hiddenScore 由 server 從雷達平均推導、寫進 DB，永不回傳給 client。
 import { revalidatePath } from 'next/cache';
+import { Prisma } from '@prisma/client';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { generateTutorAiProfile } from '@/lib/gemini-tutor';
+import { fetchGithubProfile, githubSummaryForPrompt } from '@/lib/github';
 import { DOMAINS, LEVELS } from './strings';
 import { deriveHiddenScore } from './profile';
 import type { AiProfile, PlanItem, PortfolioItem, Radar } from './_components/types';
+import type { GithubData } from '@/lib/types';
 
 export type ActionState = { ok?: boolean; error?: string } | undefined;
 // 生成側寫回傳新 aiProfile 給 client 立即反映（不含 hiddenScore）。
@@ -161,9 +164,21 @@ export async function updatePortfolioPlans(_prev: ActionState, formData: FormDat
 
 // ---- Slice 4：AI 生成側寫卡 -------------------------------------------------
 // 讀 profile 現有技能/自傳/GitHub → Gemini；失敗走罐頭。hiddenScore 由 radar 推導寫入，不回傳。
+// 有填 githubUsername 時先抓真 GitHub：抓到就存進 github 欄（公開頁顯示真資料）+ 摘要進 prompt；
+// 抓不到（帳號不存在／限流／網路錯）就照舊只用自填資料，github 欄維持原樣。
 export async function generateAiProfile(): Promise<AiActionState> {
   const profile = await currentTutorProfile();
   if (!profile) return { error: 'forbidden' };
+
+  const username = (profile.githubUsername ?? '').trim();
+  let githubData: GithubData | null = null;
+  if (username) {
+    try {
+      githubData = await fetchGithubProfile(username);
+    } catch {
+      githubData = null; // 保險：fetchGithubProfile 已自吞錯，這裡再兜一層。
+    }
+  }
 
   let aiProfile: AiProfile;
   let fallback = false;
@@ -173,7 +188,8 @@ export async function generateAiProfile(): Promise<AiActionState> {
       bio: profile.bio,
       skills: profile.skills,
       domains: profile.domains,
-      githubUsername: profile.githubUsername ?? '',
+      githubUsername: username,
+      githubSummary: githubData ? githubSummaryForPrompt(githubData) : undefined,
     });
   } catch {
     aiProfile = cannedAiProfile(profile.skills, profile.bio);
@@ -183,7 +199,13 @@ export async function generateAiProfile(): Promise<AiActionState> {
   try {
     await prisma.tutorProfile.update({
       where: { id: profile.id },
-      data: { aiProfile, hiddenScore: deriveHiddenScore(aiProfile.radar) },
+      data: {
+        aiProfile,
+        hiddenScore: deriveHiddenScore(aiProfile.radar),
+        // 抓到真 GitHub 才覆寫 github 欄；抓不到就不動（不覆蓋既有 seed/手填資料）。
+        // cast：GithubData 是 interface，缺隱式 index signature，不符 Prisma InputJsonValue。
+        ...(githubData ? { github: githubData as unknown as Prisma.InputJsonValue } : {}),
+      },
     });
   } catch {
     return { error: 'generic' };

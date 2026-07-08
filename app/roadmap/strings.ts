@@ -81,7 +81,7 @@ export const ROADMAP = {
             zh: '把公開 repo 的語言分佈、專案規模與活躍度攤在檔案上，程度用資料說話。',
             en: 'Language mix, project scale and activity from public repos, laid out so skill speaks in data.',
           },
-          status: 'liveDemo',
+          status: 'live',
           href: '/tutors',
         },
         {

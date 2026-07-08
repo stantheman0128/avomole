@@ -10,9 +10,18 @@ export interface Tutor {
     radar: { llm: number; cv: number; mlBasics: number; engineering: number; teaching: number; influence: number };
     summary: string; summaryEn?: string; difficulty: number; reviewDigest: string; reviewDigestEn?: string;
   };
-  github: { username: string; repos: Repo[]; langDist: Record<string, number>; activityNote: string; activityNoteEn?: string };
+  github: GithubData;
   portfolio: { title: string; titleEn?: string; desc: string; descEn?: string; link: string }[];
   plans: { name: string; nameEn?: string; price: number; desc: string; descEn?: string }[];
+}
+
+// 講師 GitHub 側寫（Tutor.github 逐字沿用的形狀，抽成具名型別供 lib/github.ts 與生成流程共用）。
+export interface GithubData {
+  username: string;
+  repos: Repo[];
+  langDist: Record<string, number>;
+  activityNote: string;
+  activityNoteEn?: string;
 }
 export interface Review { id: number; tutorId: number; author: string; rating: number; text: string; textEn?: string; }
 export interface Endorsement { id: number; tutorId: number; endorserName: string; endorserTitle: string; quote: string; }
