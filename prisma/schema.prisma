@@ -30,6 +30,8 @@ model User {
   sessions     Session[]
   tutorProfile TutorProfile?
 
+  studentRequests StudentRequest[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -130,4 +132,18 @@ model Endorsement {
   quote          String
 
   tutorProfile TutorProfile @relation(fields: [tutorProfileId], references: [id], onDelete: Cascade)
+}
+
+// 反向媒合：學生發需求貼文（講師來表達意願）。demo 版意願不落表、純前端示意。
+model StudentRequest {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  description String
+  budget      Int? // 每小時預算 NT$
+  level       String? // beginner/intermediate/advanced
+  domain      String? // 六領域之一
+  status      String   @default("open")
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

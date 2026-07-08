@@ -111,7 +111,8 @@ export const ROADMAP = {
             zh: '給一個主題與時數，AI 排出章節、練習與里程碑，講師改一改就能開課。',
             en: 'Give a topic and a time budget; AI drafts chapters, exercises and milestones for the tutor to tweak.',
           },
-          status: 'planned',
+          status: 'live',
+          href: '/syllabus',
         },
         {
           id: 'pricing',
@@ -120,7 +121,8 @@ export const ROADMAP = {
             zh: '參考同領域、同程度講師的行情，給一個合理時薪區間，不用憑感覺喊價。',
             en: 'A sensible hourly range benchmarked against peers in the same domain and level, instead of guessing.',
           },
-          status: 'planned',
+          status: 'live',
+          href: '/pricing',
         },
         {
           id: 'video-intro',
@@ -189,7 +191,8 @@ export const ROADMAP = {
             zh: '把需求貼出來，讓合適的講師主動來找你，不用自己一個個翻。',
             en: 'Post your need and let suitable tutors come to you, instead of paging through the list.',
           },
-          status: 'planned',
+          status: 'live',
+          href: '/requests',
         },
         {
           id: 'compare',
@@ -226,10 +229,10 @@ export const ROADMAP = {
           id: 'knowledge-base',
           title: { zh: '個人學習知識庫', en: 'Personal knowledge base' },
           line: {
-            zh: '把上過的每一堂課變成可問答的知識庫，跨課程隨時查。目前放的是罐頭示範。',
-            en: 'Every class you took becomes a queryable knowledge base across courses. What you see now is a canned demo.',
+            zh: '把上過的每一堂課變成可問答的知識庫。教室頁的問答已接上真 AI，只根據本課內容回答。',
+            en: 'Every class becomes a queryable knowledge base; the classroom Q&A now runs on real AI, answering from the course content.',
           },
-          status: 'cannedDemo',
+          status: 'live',
           href: '/classroom',
         },
         {
@@ -249,7 +252,8 @@ export const ROADMAP = {
             zh: '把各課程的進度、練習表現與待補的地方集中成一張圖，知道下一步該補哪裡。',
             en: 'Progress, exercise results and gaps across courses in one view, pointing at what to shore up next.',
           },
-          status: 'planned',
+          status: 'liveDemo',
+          href: '/progress',
         },
       ],
     },

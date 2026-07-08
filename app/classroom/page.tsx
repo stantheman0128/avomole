@@ -14,8 +14,31 @@ export const metadata: Metadata = {
   title: '教室體驗｜Classroom',
 };
 
+// 把本堂摘要串成一段純文字 context，餵給 /api/classroom-qa 的 Gemini 當回答依據。
+// 中英欄位都帶進去，讓模型能用任一語言作答；只組字串、不動任何資料。
+function buildCourseContext(c: typeof classroom): string {
+  const { course, aiSummary } = c;
+  const lines: string[] = [];
+  lines.push(`課程 / Course: ${course.title}（${course.titleEn}） — ${course.sessionLabel} / ${course.sessionLabelEn}`);
+  lines.push('');
+  lines.push('章節時間軸 / Timeline:');
+  for (const seg of aiSummary.timeline) {
+    lines.push(`- ${seg.time} ${seg.title}（${seg.titleEn}）`);
+  }
+  lines.push('');
+  lines.push('重點 / Key points:');
+  aiSummary.keyPoints.forEach((p, i) => lines.push(`- ${p}（${aiSummary.keyPointsEn[i] ?? ''}）`));
+  lines.push('');
+  lines.push('名詞卡 / Glossary:');
+  for (const term of aiSummary.termCards) {
+    lines.push(`- ${term.term}（${term.termEn}）：${term.explain}`);
+  }
+  return lines.join('\n');
+}
+
 export default function ClassroomPage() {
   const { course, meeting, aiSummary, exercises, knowledgeQA } = classroom;
+  const courseContext = buildCourseContext(classroom);
 
   return (
     <div className="mx-auto max-w-4xl px-5 py-12 sm:py-16">
@@ -39,7 +62,7 @@ export default function ClassroomPage() {
 
         {/* 4. 課堂知識庫問答（罐頭） */}
         <Section step={4} title={CR.qaHeading}>
-          <KnowledgeQA knowledgeQA={knowledgeQA} />
+          <KnowledgeQA knowledgeQA={knowledgeQA} courseContext={courseContext} />
         </Section>
       </div>
     </div>
