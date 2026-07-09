@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { loadOrCreateProfile } from './profile';
 import { TutorEditor } from './_components/TutorEditor';
+import { BecomeTutor } from './_components/BecomeTutor';
 
 export const dynamic = 'force-dynamic';
 
@@ -30,20 +31,24 @@ export default async function DashboardPage() {
       {isTutor && profile ? (
         <TutorEditor profile={profile} />
       ) : (
-        <div className="mt-8 avo-panel rounded-2xl p-5">
-          <h2 className="avo-display text-lg text-avo-dark">開始學 AI</h2>
-          <p className="mt-2 text-sm text-avo-ink/70">
-            用對話媒合找到適合你的講師，收藏與學習紀錄之後會出現在這裡。
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3 text-sm">
-            <Link href="/match" className="font-medium text-avo-main hover:text-avo-dark">
-              AI 對話媒合 →
-            </Link>
-            <Link href="/tutors" className="font-medium text-avo-main hover:text-avo-dark">
-              瀏覽講師 →
-            </Link>
+        <>
+          <div className="mt-8 avo-panel rounded-2xl p-5">
+            <h2 className="avo-display text-lg text-avo-dark">開始學 AI</h2>
+            <p className="mt-2 text-sm text-avo-ink/70">
+              用對話媒合找到適合你的講師，收藏與學習紀錄之後會出現在這裡。
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3 text-sm">
+              <Link href="/match" className="font-medium text-avo-main hover:text-avo-dark">
+                AI 對話媒合 →
+              </Link>
+              <Link href="/tutors" className="font-medium text-avo-main hover:text-avo-dark">
+                瀏覽講師 →
+              </Link>
+            </div>
           </div>
-        </div>
+          {/* 學生（含 Google 註冊者）可在這裡補選角色升級成講師 */}
+          <BecomeTutor />
+        </>
       )}
     </section>
   );

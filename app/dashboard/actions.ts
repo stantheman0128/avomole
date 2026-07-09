@@ -249,6 +249,24 @@ export async function updateAiProfile(_prev: ActionState, formData: FormData): P
   return { ok: true };
 }
 
+// ---- 補選角色：學生（含 Google 註冊者，預設 STUDENT）在後臺升級成講師 -----------
+// 只允許「學生→講師」單向；jwt callback 對非 TUTOR 會重查 DB，升級免重新登入。
+// client 收到 ok 後整頁硬導向 /dashboard，重載時 loadOrCreateProfile 會自動建講師草稿。
+export async function becomeTutor(_prev: ActionState): Promise<ActionState> {
+  const session = await auth();
+  const userId = session?.user?.id;
+  if (!userId) return { error: 'forbidden' };
+  if (session.user.role === 'TUTOR') return { ok: true }; // 已是講師，冪等
+
+  try {
+    await prisma.user.update({ where: { id: userId }, data: { role: 'TUTOR' } });
+  } catch {
+    return { error: 'generic' };
+  }
+  revalidatePath('/dashboard');
+  return { ok: true };
+}
+
 // ---- Slice 5：發佈開關 ------------------------------------------------------
 export async function togglePublish(_prev: ActionState, formData: FormData): Promise<ActionState> {
   const profile = await currentTutorProfile();

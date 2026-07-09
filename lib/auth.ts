@@ -67,8 +67,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.id = user.id;
         token.role = (user as { role?: Role }).role;
       }
-      // OAuth 首次登入可能沒帶 role（adapter 建帳號用預設 STUDENT）：從 DB 補
-      if (token.id && !token.role) {
+      // OAuth 首次登入可能沒帶 role（adapter 建帳號預設 STUDENT）；且學生可在後臺「成為講師」。
+      // 只要 token 還不是 TUTOR 就重查 DB：升級當下免重新登入即生效，講師則維持快取不多查。
+      if (token.id && token.role !== 'TUTOR') {
         const db = await prisma.user.findUnique({ where: { id: String(token.id) }, select: { role: true } });
         if (db) token.role = db.role;
       }
