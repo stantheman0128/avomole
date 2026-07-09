@@ -70,3 +70,9 @@
 ### 收尾（Codex 吉祥物 + 自訂網域上線）
 - 換上 Codex 產的正式吉祥物：`public/mascot.png`（戴眼鏡酪梨騎鼴鼠，1024²、透明底）用於 hero/nav/login；`public/icon.png`（酪梨頭）用於 favicon。hero/nav/login 引用改 `/mascot.png`、favicon 改 `/icon.png`（皆正方形、套原尺寸）。
 - **`https://guacamole.stan-shih.com` 已上線**（Stan 完成 Cloudflare CNAME，DNS 解析 → guacamole-ai.zeabur.app → 43.167.169.222，TLS 憑證受信任、HTTP 200）。
+
+## 收尾批次（2026-07-09/10）
+- Nav 深色版：Landing（/）的 Nav 改 drench 深綠接續（同 Footer 的 pathname 模式），最後一條淺 bar 壓深底消失。
+- 「成為講師」補選角色：學生（含 Google 註冊者，預設學生）可在後臺一鍵升級成講師；jwt 對非 TUTOR 重查 role，升級免重新登入；升級後自動建講師草稿。
+- 測試：baseSlug ASCII 回歸（CJK slug 404）、deriveHiddenScore 值域、罐頭退路不變量（syllabus 週數/pricing low≤high/learning-path 領域對得到講師）。12 測綠。
+- 維運：guacamole-ai 曾因 Tokyo 2GB 節點記憶體壓力被驅逐一次（非程式 crash）；已暫停 banini-tracker、threads-menu 騰 RAM（english-companion 本來就是空專案）。記憶體 request/limit 無 CLI 介面，如需設定走 Zeabur dashboard。
