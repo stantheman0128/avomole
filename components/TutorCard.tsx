@@ -1,18 +1,17 @@
 'use client';
-// components/TutorCard.tsx —— 講師卡，列表／首頁／AI 推薦卡共用。
-// 講師卡是少數「卡片是對的載體」的地方（它就是一個可點的實體）。編輯風處理：
-// 大名字、mono 價格靠右、skills 走文字 chip 不搶戲、hover 用邊框+輕位移不換整塊底。
-// 只吃 PublicTutor（型別上不含 hiddenScore）。頁面 Task 可加變體 props。
+// components/TutorCard.tsx —— 講師卡（可點實體）。結果感：迷你雷達、AI 摘要、領域／真實標示。
+// 只吃 PublicTutor（型別上不含 hiddenScore）。
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLang } from '@/lib/i18n';
 import type { PublicTutor } from '@/lib/types';
 import { Badge } from './Badge';
+import { RadarChart } from './RadarChart';
 
 interface TutorCardProps {
   tutor: PublicTutor;
-  rating?: number;            // 0–5，有評價時由頁面帶入
-  reason?: string;            // AI 推薦理由（/match 推薦卡用）
+  rating?: number;
+  reason?: string;
   className?: string;
 }
 
@@ -28,9 +27,15 @@ function Stars({ rating }: { rating: number }) {
 
 export function TutorCard({ tutor, rating, reason, className = '' }: TutorCardProps) {
   const { lang, t } = useLang();
-  const shownSkills = tutor.skills.slice(0, 4);
-  const extra = tutor.skills.length - shownSkills.length;
+  const shownDomains = tutor.domains.slice(0, 3);
+  const extraDomains = tutor.domains.length - shownDomains.length;
   const title = lang === 'en' ? tutor.titleEn ?? tutor.title : tutor.title;
+  const summaryRaw =
+    lang === 'en'
+      ? tutor.aiProfile.summaryEn ?? tutor.aiProfile.summary
+      : tutor.aiProfile.summary;
+  const summary = summaryRaw?.trim() ? summaryRaw.trim() : '';
+  const hasRadar = Boolean(tutor.aiProfile?.radar);
 
   return (
     <Link
@@ -52,27 +57,43 @@ export function TutorCard({ tutor, rating, reason, className = '' }: TutorCardPr
           className="h-14 w-14 shrink-0 rounded-2xl object-cover"
         />
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <h3 className="avo-display truncate text-lg text-avo-dark">{tutor.name}</h3>
-            {tutor.isReal && <Badge kind="real" />}
+            {tutor.isReal ? (
+              <Badge kind="real" />
+            ) : (
+              <span className="rounded-full bg-avo-ink/8 px-2 py-0.5 text-[11px] font-medium text-avo-ink/55">
+                {t({ zh: '示意', en: 'Sample' })}
+              </span>
+            )}
           </div>
           <p className="truncate text-sm text-avo-ink/65">{title}</p>
+          {shownDomains.length > 0 && (
+            <p className="mt-1.5 flex flex-wrap gap-x-2 gap-y-0.5 text-xs text-avo-ink/70">
+              {shownDomains.map((d) => (
+                <span key={d} className="whitespace-nowrap">
+                  {d}
+                </span>
+              ))}
+              {extraDomains > 0 && <span className="text-avo-ink/40">+{extraDomains}</span>}
+            </p>
+          )}
         </div>
+        {hasRadar && (
+          <div className="shrink-0">
+            <RadarChart radar={tutor.aiProfile.radar} size={56} compact />
+          </div>
+        )}
       </div>
 
-      <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-avo-ink/70">
-        {shownSkills.map((sk) => (
-          <span key={sk} className="whitespace-nowrap">
-            {sk}
-          </span>
-        ))}
-        {extra > 0 && <span className="text-avo-ink/40">+{extra}</span>}
-      </div>
+      {summary && (
+        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-avo-ink/75">{summary}</p>
+      )}
 
       <hr className="avo-rule my-3" />
 
       <div className="flex items-center justify-between">
-        <span className="font-mono text-sm text-avo-dark">
+        <span className="font-mono text-sm text-avo-seed">
           NT${tutor.hourlyRate}
           <span className="text-avo-ink/45">{t({ zh: ' /時', en: ' /hr' })}</span>
         </span>
@@ -83,7 +104,7 @@ export function TutorCard({ tutor, rating, reason, className = '' }: TutorCardPr
       </div>
 
       {reason && (
-        <p className="mt-3 rounded-lg bg-avo-light/40 px-3 py-2 text-sm leading-relaxed text-avo-ink/85">
+        <p className="mt-3 rounded-lg bg-avo-light/50 px-3 py-2 text-sm leading-relaxed text-avo-ink/85">
           {reason}
         </p>
       )}

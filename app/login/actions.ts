@@ -1,5 +1,5 @@
 'use server';
-// app/login/actions.ts —— 登入 server action。用 Credentials provider 驗證，成功導向 /discover。
+// app/login/actions.ts —— 登入 server action。用 Credentials provider 驗證，成功導向 /。
 import { AuthError } from 'next-auth';
 import { signIn } from '@/lib/auth';
 
@@ -28,5 +28,5 @@ export async function authenticate(_prev: LoginState, formData: FormData): Promi
 
 // Google 登入（server action，供表單 formAction 用）
 export async function googleSignIn(): Promise<void> {
-  await signIn('google', { redirectTo: '/discover' });
+  await signIn('google', { redirectTo: '/' });
 }

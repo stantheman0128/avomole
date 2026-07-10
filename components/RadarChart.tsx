@@ -1,6 +1,7 @@
 'use client';
-// components/RadarChart.tsx —— 六軸能力雷達圖，純 SVG 自繪（不引圖表庫，SPEC §4.3）。
+// components/RadarChart.tsx —— 六軸能力雷達圖，純 SVG 自繪（不引圖表庫）。
 // 軸：LLM、電腦視覺、ML 基礎、工程實務、教學經驗、社群影響力（0–100）。
+// compact：講師卡縮圖用，無軸標。
 import { useLang } from '@/lib/i18n';
 import type { Tutor } from '@/lib/types';
 
@@ -16,21 +17,28 @@ const AXES: { key: keyof Radar; label: { zh: string; en: string } }[] = [
 ];
 
 function pointOnAxis(cx: number, cy: number, radius: number, index: number, total: number, value: number) {
-  // 從正上方開始、順時針；value 為 0–100 的比例
   const angle = (Math.PI * 2 * index) / total - Math.PI / 2;
   const r = (radius * Math.max(0, Math.min(100, value))) / 100;
   return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
 }
 
-export function RadarChart({ radar, size = 260 }: { radar: Radar; size?: number }) {
+export function RadarChart({
+  radar,
+  size = 260,
+  compact = false,
+}: {
+  radar: Radar;
+  size?: number;
+  /** 卡片縮圖：無軸標、較滿半徑 */
+  compact?: boolean;
+}) {
   const { t } = useLang();
   const cx = size / 2;
   const cy = size / 2;
-  const radius = size * 0.34; // 留邊給軸標籤
-  const rings = [25, 50, 75, 100];
+  const radius = compact ? size * 0.42 : size * 0.34;
+  const rings = compact ? [50, 100] : [25, 50, 75, 100];
   const n = AXES.length;
 
-  // 色彩走 avo token（OKLCH）而非硬編 hex，隨主題色板走。
   const ink = 'var(--color-avo-ink)';
   const main = 'var(--color-avo-main)';
   const dark = 'var(--color-avo-dark)';
@@ -45,8 +53,8 @@ export function RadarChart({ radar, size = 260 }: { radar: Radar; size?: number 
       height={size}
       role="img"
       aria-label={t({ zh: '講師能力雷達圖', en: 'Tutor skill radar chart' })}
+      className={compact ? 'shrink-0' : undefined}
     >
-      {/* 同心多邊形格線 */}
       {rings.map((ring) => {
         const pts = AXES.map((_, i) => pointOnAxis(cx, cy, radius, i, n, ring))
           .map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`)
@@ -57,13 +65,12 @@ export function RadarChart({ radar, size = 260 }: { radar: Radar; size?: number 
             points={pts}
             fill="none"
             stroke={ink}
-            strokeOpacity={0.14}
+            strokeOpacity={compact ? 0.12 : 0.14}
             strokeWidth={1}
           />
         );
       })}
 
-      {/* 軸線 */}
       {AXES.map((_, i) => {
         const end = pointOnAxis(cx, cy, radius, i, n, 100);
         return (
@@ -74,36 +81,42 @@ export function RadarChart({ radar, size = 260 }: { radar: Radar; size?: number 
             x2={end.x}
             y2={end.y}
             stroke={ink}
-            strokeOpacity={0.14}
+            strokeOpacity={compact ? 0.12 : 0.14}
             strokeWidth={1}
           />
         );
       })}
 
-      {/* 數據多邊形 */}
-      <polygon points={dataPath} fill={main} fillOpacity={0.28} stroke={main} strokeWidth={2} />
-      {dataPoints.map((p, i) => (
-        <circle key={i} cx={p.x} cy={p.y} r={2.5} fill={dark} />
-      ))}
+      <polygon
+        points={dataPath}
+        fill={main}
+        fillOpacity={compact ? 0.35 : 0.28}
+        stroke={main}
+        strokeWidth={compact ? 1.5 : 2}
+      />
+      {!compact &&
+        dataPoints.map((p, i) => (
+          <circle key={i} cx={p.x} cy={p.y} r={2.5} fill={dark} />
+        ))}
 
-      {/* 軸標籤 */}
-      {AXES.map((a, i) => {
-        const lp = pointOnAxis(cx, cy, radius + 16, i, n, 100);
-        const anchor = Math.abs(lp.x - cx) < 4 ? 'middle' : lp.x < cx ? 'end' : 'start';
-        return (
-          <text
-            key={a.key}
-            x={lp.x}
-            y={lp.y}
-            fontSize={10}
-            fill={dark}
-            textAnchor={anchor}
-            dominantBaseline="middle"
-          >
-            {t(a.label)}
-          </text>
-        );
-      })}
+      {!compact &&
+        AXES.map((a, i) => {
+          const lp = pointOnAxis(cx, cy, radius + 16, i, n, 100);
+          const anchor = Math.abs(lp.x - cx) < 4 ? 'middle' : lp.x < cx ? 'end' : 'start';
+          return (
+            <text
+              key={a.key}
+              x={lp.x}
+              y={lp.y}
+              fontSize={10}
+              fill={dark}
+              textAnchor={anchor}
+              dominantBaseline="middle"
+            >
+              {t(a.label)}
+            </text>
+          );
+        })}
     </svg>
   );
 }

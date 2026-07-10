@@ -1,91 +1,41 @@
 'use client';
-// app/_landing/Landing.tsx —— 編輯風 Landing 分流頁（client，要 useLang）。
-// 職責只有一件事：分流。品牌感 hero + 兩道門（找講師 / 我是講師）。
-// 深色浸染(drenched)由本頁自己鋪；Nav/Footer 是 layout 全站掛的，不在這裡。
+// app/_landing/Landing.tsx —— 唯一訪客首頁。
+// 價值主張 + 主 CTA「開始媒合」+ 次 CTA「瀏覽講師」；講師入口收成次要。
+// 深中性底由本頁鋪；Nav/Footer 由 layout 掛。吉祥物只在這裡放大一次。
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLang } from '@/lib/i18n';
 import { BRAND } from '@/lib/brand';
 import { LANDING } from '../landing-strings';
 
-// 一道門：typographic block，不是卡片。primary 走填色大份量，secondary 走描邊輕份量。
-function Door({
-  href,
-  label,
-  line,
-  cta,
-  variant,
-  index,
-}: {
-  href: string;
-  label: string;
-  line: string;
-  cta: string;
-  variant: 'primary' | 'secondary';
-  index: string;
-}) {
-  const primary = variant === 'primary';
-  return (
-    <Link
-      href={href}
-      className={[
-        'group avo-enter relative flex flex-col justify-between gap-8 rounded-3xl p-7 sm:p-9',
-        'transition-[transform,background-color,border-color] duration-[var(--dur-base)] ease-[var(--ease-out-quart)]',
-        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-avo-main',
-        primary
-          ? 'bg-avo-main text-avo-dark hover:-translate-y-1 sm:col-span-3'
-          : 'border border-avo-paper/25 text-avo-paper hover:-translate-y-1 hover:border-avo-paper/50 sm:col-span-2',
-      ].join(' ')}
-    >
-      <div>
-        <span
-          className={[
-            'font-mono text-xs',
-            primary ? 'text-avo-dark/60' : 'text-avo-paper/45',
-          ].join(' ')}
-        >
-          {index}
-        </span>
-        <h2
-          className="avo-display mt-3 text-4xl sm:text-5xl"
-          style={{ letterSpacing: '-0.03em' }}
-        >
-          {label}
-        </h2>
-        <p
-          className={[
-            'mt-4 max-w-sm text-[15px] leading-relaxed',
-            primary ? 'text-avo-dark/85' : 'text-avo-paper/70',
-          ].join(' ')}
-        >
-          {line}
-        </p>
-      </div>
-      <span
-        className={[
-          'inline-flex items-center gap-2 text-sm font-medium',
-          primary ? 'text-avo-dark' : 'text-avo-main',
-        ].join(' ')}
-      >
-        {cta}
-        <span
-          aria-hidden
-          className="transition-transform duration-[var(--dur-fast)] ease-[var(--ease-out-quart)] group-hover:translate-x-1"
-        >
-          →
-        </span>
-      </span>
-    </Link>
-  );
-}
-
 export function Landing() {
   const { lang, t } = useLang();
   const slogan = lang === 'zh' ? BRAND.sloganZh : BRAND.sloganEn;
 
+  const live = [
+    {
+      title: t(LANDING.live1Title),
+      desc: t(LANDING.live1Desc),
+      cta: t(LANDING.live1Cta),
+      href: '/match',
+    },
+    {
+      title: t(LANDING.live2Title),
+      desc: t(LANDING.live2Desc),
+      cta: t(LANDING.live2Cta),
+      href: '/tutors',
+    },
+    {
+      title: t(LANDING.live3Title),
+      desc: t(LANDING.live3Desc),
+      cta: t(LANDING.live3Cta),
+      href: '/learning-path',
+    },
+  ];
+
   return (
     <div className="avo-drenched">
-      {/* Hero：非對稱。左側大字排版，右側吉祥物錨點；不是置中三件式。 */}
+      {/* Hero：非對稱。左價值主張＋CTA，右吉祥物。 */}
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-5 pt-16 pb-14 sm:pt-24 sm:pb-16 lg:grid-cols-[1.35fr_1fr] lg:gap-12">
         <div>
           <p className="avo-enter max-w-lg font-mono text-xs leading-relaxed text-avo-main">
@@ -103,9 +53,27 @@ export function Landing() {
           >
             {t(LANDING.heroLead)}
           </p>
+
+          <div
+            className="avo-enter mt-8 flex flex-wrap items-center gap-3"
+            style={{ animationDelay: '180ms' }}
+          >
+            <Link
+              href="/match"
+              className="inline-flex items-center gap-2 rounded-full bg-avo-main px-6 py-3 text-sm font-semibold text-avo-dark transition-[transform,background-color] duration-[var(--dur-base)] ease-[var(--ease-out-quart)] hover:-translate-y-0.5 hover:bg-avo-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-avo-main"
+            >
+              {t(LANDING.primaryCta)}
+              <span aria-hidden>→</span>
+            </Link>
+            <Link
+              href="/tutors"
+              className="inline-flex items-center gap-2 rounded-full border border-avo-seed/70 px-6 py-3 text-sm font-medium text-avo-paper transition-[transform,border-color,background-color] duration-[var(--dur-base)] ease-[var(--ease-out-quart)] hover:-translate-y-0.5 hover:border-avo-seed hover:bg-avo-seed/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-avo-seed"
+            >
+              {t(LANDING.secondaryCta)}
+            </Link>
+          </div>
         </div>
 
-        {/* 吉祥物：真實圖像當錨點，靠下靠右，不置中 */}
         <div
           className="avo-enter flex justify-center lg:justify-end"
           style={{ animationDelay: '160ms' }}
@@ -125,42 +93,88 @@ export function Landing() {
         <hr className="avo-rule-on-dark" />
       </div>
 
-      {/* 兩道門：不等份量，不是兩張一樣的卡片 */}
+      {/* 已上線能力：清單節奏，不是三張等大卡 */}
       <section className="mx-auto max-w-6xl px-5 py-14 sm:py-16">
-        <h2
-          className="avo-enter font-sans text-sm font-medium tracking-wide text-avo-paper/55"
-        >
-          {t(LANDING.doorPick)}
+        <h2 className="avo-enter font-sans text-sm font-medium tracking-wide text-avo-paper/70">
+          {t(LANDING.liveTitle)}
         </h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-5">
-          <Door
-            href="/discover"
-            label={t(LANDING.learnerLabel)}
-            line={t(LANDING.learnerLine)}
-            cta={t(LANDING.learnerCta)}
-            variant="primary"
-            index={t({ zh: '想學', en: 'learner' })}
-          />
-          <Door
-            href="/login"
-            label={t(LANDING.tutorLabel)}
-            line={t(LANDING.tutorLine)}
-            cta={t(LANDING.tutorCta)}
-            variant="secondary"
-            index={t({ zh: '想教', en: 'tutor' })}
-          />
+        <div className="mt-8 space-y-8">
+          {live.map((item, i) => (
+            <div key={item.href} className="avo-enter" style={{ animationDelay: `${i * 40}ms` }}>
+              {i > 0 && <hr className="avo-rule-on-dark mb-8" />}
+              <Link
+                href={item.href}
+                className="group grid gap-2 sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-6"
+              >
+                <div>
+                  <h3 className="avo-display text-xl text-avo-paper sm:text-2xl">{item.title}</h3>
+                  <p className="avo-prose mt-2 text-avo-paper/70">{item.desc}</p>
+                </div>
+                <span className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-medium text-avo-main">
+                  {item.cta}
+                  <span
+                    aria-hidden
+                    className="transition-transform duration-[var(--dur-fast)] ease-[var(--ease-out-quart)] group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </span>
+              </Link>
+            </div>
+          ))}
         </div>
+      </section>
 
-        {/* 還沒決定的人：安靜的一行，導向 AI 媒合 */}
-        <p className="avo-enter mt-8 text-sm text-avo-paper/55">
-          {t(LANDING.undecided)}{' '}
+      <div className="mx-auto max-w-6xl px-5">
+        <hr className="avo-rule-on-dark" />
+      </div>
+
+      {/* 講師次要入口 + 教室次要入口 */}
+      <section className="mx-auto max-w-6xl px-5 py-12 sm:py-14">
+        <p className="text-sm leading-relaxed text-avo-paper/70">
+          {t(LANDING.tutorAside)}{' '}
           <Link
-            href="/match"
-            className="font-medium text-avo-main underline-offset-4 hover:underline"
+            href="/login"
+            className="font-medium text-avo-seed underline-offset-4 hover:underline"
           >
-            {t(LANDING.undecidedCta)}
+            {t(LANDING.tutorAsideCta)}
           </Link>
         </p>
+        <p className="mt-4 text-sm text-avo-paper/55">
+          {t(LANDING.classroomHint)}{' '}
+          <Link
+            href="/classroom"
+            className="font-medium text-avo-main underline-offset-4 hover:underline"
+          >
+            {t(LANDING.classroomCta)}
+          </Link>
+        </p>
+      </section>
+
+      {/* 誠實未做：只留影片自介 */}
+      <section className="mx-auto max-w-6xl px-5 pb-16">
+        <div className="rounded-3xl border border-avo-paper/15 px-6 py-10 sm:px-10">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h2 className="avo-display text-2xl text-avo-paper sm:text-3xl">{t(LANDING.soonTitle)}</h2>
+            <span className="font-mono text-xs text-avo-seed">{t(LANDING.soonBadge)}</span>
+          </div>
+          <h3 className="mt-6 font-semibold text-avo-paper">{t(LANDING.soon1Title)}</h3>
+          <p className="avo-prose mt-2 text-sm leading-relaxed text-avo-paper/70">
+            {t(LANDING.soon1Desc)}
+          </p>
+          <Link
+            href="/roadmap"
+            className="group mt-8 inline-flex items-center gap-1.5 text-sm font-medium text-avo-main underline-offset-4 hover:underline"
+          >
+            {t(LANDING.soonMore)}
+            <span
+              aria-hidden
+              className="transition-transform duration-[var(--dur-fast)] ease-[var(--ease-out-quart)] group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
+        </div>
       </section>
     </div>
   );

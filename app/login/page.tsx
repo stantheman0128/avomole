@@ -1,6 +1,6 @@
 'use client';
 // app/login/page.tsx —— 真登入頁。Email+密碼（Credentials）＋ Google（未設定時停用）＋ 去註冊連結。
-// 成功導向 /discover（由 server action 的 redirectTo 處理）。錯誤態、loading 態齊全。
+// 成功導向 /（訪客主線已與 /discover 合併）。錯誤態、loading 態齊全。
 import Link from 'next/link';
 import Image from 'next/image';
 import { useActionState, useEffect } from 'react';
@@ -17,9 +17,9 @@ export default function LoginPage() {
   const brandName = lang === 'zh' ? BRAND.zh : BRAND.en;
   const [state, formAction, pending] = useActionState<LoginState, FormData>(authenticate, undefined);
 
-  // 登入成功 → 整頁硬導向 /discover（重掛→Nav 立刻是登入狀態）
+  // 登入成功 → 整頁硬導向 /（重掛→Nav 立刻是登入狀態）
   useEffect(() => {
-    if (state?.ok) window.location.href = '/discover';
+    if (state?.ok) window.location.href = '/';
   }, [state]);
 
   return (

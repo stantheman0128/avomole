@@ -46,7 +46,7 @@ export const ROADMAP = {
     zh: '這個功能上線後，這裡會放一段實際操作的示範影片。',
     en: 'Once this ships, an actual walkthrough video will live here.',
   },
-  // 從 /discover 即將推出區導過來的入口文案
+  // 從首頁「還在路上」區導過來的入口文案
   fromDiscover: { zh: '看完整產品藍圖', en: 'See the full roadmap' },
   // 頁尾一句收束
   footNote: {

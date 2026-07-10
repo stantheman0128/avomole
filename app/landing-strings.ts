@@ -1,36 +1,63 @@
-// app/landing-strings.ts —— Landing 分流頁字串（雙語，走 useLang 的 t()）。
+// app/landing-strings.ts —— Landing（唯一訪客首頁）雙語字串。
 // 站名／slogan 不放這裡，一律取自 lib/brand.ts。
 export const LANDING = {
-  // hero 上方一句定位（slogan 之外的補充，講平臺在做什麼）
   kicker: {
     zh: '學 AI 這件事，講師的底細本來就攤在 GitHub 上。',
     en: 'Learning AI is different: a tutor’s real track record already lives on GitHub.',
   },
   heroLead: {
-    zh: '一個用 AI 評估「教 AI 的人」、也用 AI 幫你媒合的地方。先告訴酪梨，你是哪一邊。',
-    en: 'A place where AI sizes up the people who teach AI, then matches you to them. First, tell the avocado which side you’re on.',
+    zh: '用 AI 評估教 AI 的人，再用對話幫你媒合。講清楚程度、目標與預算，酪梨直接挑人。',
+    en: 'AI sizes up the people who teach AI, then matches you in a chat. Say your level, goals and budget — the avocado picks.',
   },
 
-  // 兩道門
-  doorPick: { zh: '你從哪道門進來？', en: 'Which door are you coming through?' },
+  // 主線 CTA
+  primaryCta: { zh: '開始媒合', en: 'Start matching' },
+  secondaryCta: { zh: '瀏覽講師', en: 'Browse tutors' },
 
-  learnerLabel: { zh: '我要找講師', en: 'I’m here to learn' },
-  learnerLine: {
-    zh: '講清楚程度、目標跟預算，酪梨直接幫你挑人，還能先看每位講師的能力側寫。',
-    en: 'Say where you’re at, what you want, and your budget. The avocado picks people for you, profiles included.',
+  // 已上線能力（不是「即將推出」）
+  liveTitle: { zh: '現在就能用', en: 'Available now' },
+  live1Title: { zh: 'AI 對話媒合', en: 'AI conversational matching' },
+  live1Desc: {
+    zh: '用聊天講清楚需求，直接拿到合適講師與推薦理由。',
+    en: 'Describe what you need in a chat and get fitting tutors with reasons.',
   },
-  learnerCta: { zh: '進去找講師', en: 'Find a tutor' },
-
-  tutorLabel: { zh: '我是講師', en: 'I teach' },
-  tutorLine: {
-    zh: '把你的 GitHub 跟作品接上來，AI 幫你生一張能力側寫卡，讓想學的人一眼看懂你會什麼。',
-    en: 'Connect your GitHub and work; AI drafts a capability profile so learners see what you’ve actually built.',
+  live1Cta: { zh: '去媒合', en: 'Match now' },
+  live2Title: { zh: '講師能力側寫', en: 'Tutor capability profiles' },
+  live2Desc: {
+    zh: '雷達圖與 AI 摘要把 GitHub、作品與教學經驗攤開來看。',
+    en: 'Radar charts and AI summaries lay out GitHub, projects and teaching.',
   },
-  tutorCta: { zh: '成為講師', en: 'Start teaching' },
+  live2Cta: { zh: '看講師', en: 'See tutors' },
+  live3Title: { zh: '學習路徑規劃', en: 'Learning path planner' },
+  live3Desc: {
+    zh: '給一個目標，AI 排出階段，並配上合適的課與講師。',
+    en: 'Give a goal; AI lays out stages with the right courses and tutors.',
+  },
+  live3Cta: { zh: '規劃路徑', en: 'Plan a path' },
 
-  // 底部一行，導向 AI 媒合（給還沒決定的人）
-  undecided: { zh: '還沒想好？', en: 'Not sure yet?' },
-  undecidedCta: { zh: '直接問酪梨', en: 'Just ask the avocado' },
+  // 講師次要入口
+  tutorAside: {
+    zh: '你是講師？把 GitHub 接上來，AI 幫你生能力側寫卡。',
+    en: 'You teach? Connect GitHub and let AI draft your capability profile.',
+  },
+  tutorAsideCta: { zh: '成為講師', en: 'Start teaching' },
+
+  // 誠實的未做區
+  soonTitle: { zh: '還在路上', en: 'Still on the way' },
+  soonBadge: { zh: '規劃中', en: 'Planned' },
+  soon1Title: { zh: '影片自介 + AI 字幕', en: 'Video intro with AI captions' },
+  soon1Desc: {
+    zh: '講師錄一段自我介紹，系統自動上雙語字幕——需要上傳與轉檔基礎建設，尚未上線。',
+    en: 'Tutors record a short intro with bilingual captions — needs upload/transcoding infra; not live yet.',
+  },
+  soonMore: { zh: '看完整產品藍圖', en: 'See the full roadmap' },
+
+  // 教室體驗：從頂欄拿掉後的次要入口
+  classroomHint: {
+    zh: '想先看課後摘要與知識庫問答？',
+    en: 'Want a peek at class recaps and knowledge Q&A?',
+  },
+  classroomCta: { zh: '教室體驗', en: 'Classroom demo' },
 
   mascotAlt: {
     zh: '酪梨醬吉祥物：一顆戴眼鏡的酪梨，騎在一隻鼴鼠背上',

@@ -1,7 +1,6 @@
 'use client';
 // app/match/_components/MatchChat.tsx —— 聊天 UI 主體。
-// 狀態機：訊息列表 + 每則 assistant 回覆掛推薦卡。fetch /api/chat 帶累積 messages。
-// 錯誤／例外一律罐頭回覆，UI 永不白屏、不裸露錯誤。initialQuery 非空時自動送出第一問。
+// 空狀態給 3 個可點範例問題（轉 LLM／預算／程度），點了就送出。
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useLang } from '@/lib/i18n';
 import type { PublicTutor } from '@/lib/types';
@@ -13,7 +12,6 @@ interface Rec {
   reason: string;
 }
 
-// 一則對話：user 只有文字；assistant 可能帶推薦卡與 offline 旗標。
 interface ChatTurn {
   role: 'user' | 'assistant';
   content: string;
@@ -52,7 +50,6 @@ export function MatchChat({
       setInput('');
       setLoading(true);
 
-      // 只把 role/content 送給 API（累積歷史）。
       const payload = nextTurns.map((m) => ({ role: m.role, content: m.content }));
 
       try {
@@ -73,7 +70,6 @@ export function MatchChat({
           },
         ]);
       } catch {
-        // 網路／非 200／解析失敗：友善罐頭，永不白屏。
         setTurns((prev) => [
           ...prev,
           { role: 'assistant', content: t(s.errorReply), recommendations: [], offline: true },
@@ -85,20 +81,19 @@ export function MatchChat({
     [turns, loading, t],
   );
 
-  // initialQuery（?q=）掛載後自動送出一次。
   useEffect(() => {
     if (initialQuery.trim() && !autoSent.current) {
       autoSent.current = true;
       void send(initialQuery);
     }
-    // 僅在掛載時觸發一次
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // 新訊息時捲到底。
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [turns, loading]);
+
+  const showEmptyPrompts = turns.length === 0 && !loading && !initialQuery.trim();
 
   return (
     <div className="flex min-h-[70vh] flex-col">
@@ -108,13 +103,30 @@ export function MatchChat({
         <p className="avo-prose mt-3 text-sm text-avo-ink/70">{t(s.subtitle)}</p>
       </header>
 
-      {/* 訊息列表 */}
       <div
         ref={scrollRef}
         className="avo-panel flex-1 space-y-4 overflow-y-auto rounded-3xl p-4 sm:p-5"
       >
-        {/* 開場白 */}
         <AssistantBubble text={t(s.greeting)} />
+
+        {showEmptyPrompts && (
+          <div className="rounded-2xl border border-dashed border-avo-seed/40 bg-avo-seed/5 px-4 py-4">
+            <p className="text-sm font-medium text-avo-ink/80">{t(s.emptyHint)}</p>
+            <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+              {s.chips.map((chip, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  disabled={loading}
+                  onClick={() => void send(t(chip))}
+                  className="rounded-2xl border border-avo-seed/45 bg-avo-cream px-3.5 py-2.5 text-left text-sm text-avo-dark transition-colors hover:border-avo-seed hover:bg-avo-seed/10 disabled:opacity-50"
+                >
+                  {t(chip)}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {turns.map((turn, i) =>
           turn.role === 'user' ? (
@@ -132,22 +144,23 @@ export function MatchChat({
         {loading && <AssistantBubble text={t(s.sending)} pending />}
       </div>
 
-      {/* 建議 prompt chips */}
-      <div className="mt-4 flex flex-wrap gap-2">
-        {s.chips.map((chip, i) => (
-          <button
-            key={i}
-            type="button"
-            disabled={loading}
-            onClick={() => void send(t(chip))}
-            className="rounded-full border border-avo-main/35 px-3.5 py-1.5 text-sm text-avo-dark transition-colors hover:bg-avo-light/60 disabled:opacity-50"
-          >
-            {t(chip)}
-          </button>
-        ))}
-      </div>
+      {/* 對話開始後仍保留精簡 chips，方便追問 */}
+      {!showEmptyPrompts && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {s.chips.map((chip, i) => (
+            <button
+              key={i}
+              type="button"
+              disabled={loading}
+              onClick={() => void send(t(chip))}
+              className="rounded-full border border-avo-main/35 px-3.5 py-1.5 text-sm text-avo-dark transition-colors hover:bg-avo-light/60 disabled:opacity-50"
+            >
+              {t(chip)}
+            </button>
+          ))}
+        </div>
+      )}
 
-      {/* 輸入列 */}
       <form
         className="mt-3 flex gap-2"
         onSubmit={(e) => {

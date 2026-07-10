@@ -4,40 +4,37 @@
   酪梨醬 AI 家教網 —— 編輯/排版風主題 tokens。
   設計定案見根目錄 DESIGN.md。
 
-  重點：body 不再用 cream。品牌綠從「灑在米底上的點綴」變成「結構色」。
-  --color-avo-* 這些名字全保留（現有其他頁不會壞），只換數值；語義變了的在下面註明。
-  一律 OKLCH。
+  酪梨綠是品牌強調色（CTA／連結／active），不是整頁浸染主色。
+  Landing 深底走深中性／深橄欖灰；內頁 ground 近中性白。
+  --color-avo-* 名字全保留（現有頁不會壞），只換數值。一律 OKLCH。
 */
 @theme {
-  /* --- 綠色階（品牌識別，沿用原酪梨綠的色相，往深淺兩端拉開）--- */
-  --color-avo-dark: oklch(0.30 0.055 140);   /* 果皮深綠：深色版塊、nav、footer 底 */
-  --color-avo-main: oklch(0.64 0.13 132);    /* 果肉綠：主色、CTA、連結、強調 */
-  --color-avo-light: oklch(0.88 0.06 128);   /* 淺果肉：淺底色塊、hover、chip */
+  /* --- 綠色階（品牌強調，色相沿用酪梨綠）--- */
+  --color-avo-dark: oklch(0.32 0.035 140);   /* 深橄欖灰：深色版塊字、次要深底、nav 字 */
+  --color-avo-main: oklch(0.64 0.13 132);    /* 果肉綠：主 CTA、連結、active——唯一大面積綠 */
+  --color-avo-light: oklch(0.90 0.04 128);   /* 極淺果肉：hover、chip 底 */
 
-  /* --- 底色（drop cream）--- */
-  /* ground：內頁乾淨底色。不是暖米，chroma 極低且往品牌綠偏一點點的中性白。
-     語義變更：cream 這個名字以前＝暖米頁底(#F8F6EC)，現在＝乾淨近白 ground。 */
-  --color-avo-cream: oklch(0.985 0.006 130);
+  /* --- 內頁 ground：再壓 chroma，近中性白（不是暖米、也不是綠浸）--- */
+  --color-avo-cream: oklch(0.985 0.003 100);
 
-  /* ink：內文字色，比舊值再壓深一點確保 ground 上 ≥4.5:1 */
-  --color-avo-ink: oklch(0.28 0.045 140);
+  /* ink：內文字色，ground 上 ≥4.5:1 */
+  --color-avo-ink: oklch(0.28 0.025 140);
 
-  /* --- 承諾色：drenched 深墨綠，Landing / 深色版塊的底 --- */
-  /* 近黑深綠。Landing 主場、footer、任何要「浸染」的深色區塊都用它。 */
-  --color-avo-drench: oklch(0.22 0.045 145);
+  /* --- Landing／footer 深底：深中性橄欖灰，不是近黑深綠浸染 --- */
+  --color-avo-drench: oklch(0.23 0.018 130);
 
-  /* --- 強調棕（果核）：徽章、次要強調 --- */
+  /* --- 第二強調：果核棕——價格、徽章、次要 CTA --- */
   --color-avo-seed: oklch(0.56 0.085 62);
 
-  /* --- 深色版塊上的字色 --- */
-  --color-avo-paper: oklch(0.95 0.012 120);  /* 深底上的主字（暖白，不刺眼）*/
+  /* --- 深底上的字色 --- */
+  --color-avo-paper: oklch(0.95 0.008 95);  /* 暖紙白，不刺眼；淡化字最低 paper/70 */
 
   /* --- 字體：三支對比軸配對，變數由 next/font 在 layout 注入 --- */
-  --font-serif: var(--font-noto-serif-tc), "Noto Serif TC", "Songti TC", serif; /* display / 大標，編輯感 */
-  --font-sans: var(--font-noto-sans-tc), "Noto Sans TC", system-ui, sans-serif; /* body / UI workhorse */
-  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace; /* 數字 / GitHub / 代碼 */
+  --font-serif: var(--font-noto-serif-tc), "Noto Serif TC", "Songti TC", serif;
+  --font-sans: var(--font-noto-sans-tc), "Noto Sans TC", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace;
 
-  /* --- 語義 z-index 階梯（取代 999 這種魔術數字）--- */
+  /* --- 語義 z-index --- */
   --z-sticky: 30;
   --z-nav: 50;
   --z-toast: 60;
@@ -53,7 +50,7 @@ html {
 }
 
 body {
-  /* ground 是內頁預設底；Landing 這種深色頁在頁面層自己鋪 --color-avo-drench。 */
+  /* ground 是內頁預設底；Landing 在頁面層鋪 --color-avo-drench。 */
   background: var(--color-avo-cream);
   color: var(--color-avo-ink);
   font-family: var(--font-sans);
@@ -62,18 +59,15 @@ body {
 
 /* --- 版型 primitives ---------------------------------------------------- */
 
-/* .rule：一條細分隔線，取代到處是卡片盒。用在版塊之間或欄之間。 */
 .avo-rule {
   border: 0;
   border-top: 1px solid color-mix(in oklch, var(--color-avo-ink) 15%, transparent);
 }
-/* 深底上的分隔線 */
 .avo-rule-on-dark {
   border: 0;
   border-top: 1px solid color-mix(in oklch, var(--color-avo-paper) 18%, transparent);
 }
 
-/* 大標排版：serif、緊排但不到字擠、balance 換行 */
 .avo-display {
   font-family: var(--font-serif);
   font-weight: 700;
@@ -82,27 +76,40 @@ body {
   text-wrap: balance;
 }
 
-/* 長內文：pretty 換行減少孤字 */
 .avo-prose {
   text-wrap: pretty;
   max-width: 68ch;
 }
 
-/* 深色浸染區塊：Landing、footer 等直接掛 class 即可 */
+/* 深色區塊：中性橄欖灰底 + 極淡紙感噪點（不是玻璃擬態） */
 .avo-drenched {
   background: var(--color-avo-drench);
   color: var(--color-avo-paper);
+  position: relative;
+  isolation: isolate;
+}
+.avo-drenched::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+}
+.avo-drenched > * {
+  position: relative;
+  z-index: 1;
 }
 
-/* 內頁乾淨版塊：白底 + 極淡描邊。取代到處手寫 border+bg-white，收斂視覺語彙。
-   不強制圓角尺寸，讓各頁自己配（避免全站又變成一致卡片格）。 */
+/* 內頁乾淨版塊：白底 + 極淡描邊 */
 .avo-panel {
-  background: color-mix(in oklch, white 92%, var(--color-avo-cream));
+  background: color-mix(in oklch, white 94%, var(--color-avo-cream));
   border: 1px solid color-mix(in oklch, var(--color-avo-ink) 10%, transparent);
 }
 
-/* 內頁上的細分隔線 kicker 小標：mono、放大字距、次要色。用在版塊標題上方當角色字，
-   不是每段都放的裝飾 eyebrow——只在真的要標一個角色時用。 */
 .avo-kicker {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -110,7 +117,7 @@ body {
   color: color-mix(in oklch, var(--color-avo-seed) 90%, var(--color-avo-ink));
 }
 
-/* --- 換頁過場：template.tsx 每次導航重掛時觸發（淡入 + 輕微上移）--- */
+/* --- 換頁過場 --- */
 .avo-page {
   animation: avo-page-in var(--dur-base) var(--ease-out-quart) both;
 }
@@ -119,7 +126,6 @@ body {
   to   { opacity: 1; transform: none; }
 }
 
-/* --- 動態預設 ---------------------------------------------------------- */
 .avo-enter {
   animation: avo-enter var(--dur-base) var(--ease-out-quart) both;
 }
@@ -128,11 +134,9 @@ body {
   to   { opacity: 1; transform: none; }
 }
 
-/* reduced-motion：關掉位移與 smooth scroll，改為即時／淡入 */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .avo-enter { animation: avo-fade var(--dur-fast) linear both; }
-  /* 換頁過場退化成純淡入，不位移 */
   .avo-page { animation: avo-fade var(--dur-fast) linear both; }
   @keyframes avo-fade { from { opacity: 0; } to { opacity: 1; } }
   *, *::before, *::after {

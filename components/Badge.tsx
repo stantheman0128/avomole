@@ -11,9 +11,9 @@ const LABEL: Record<BadgeKind, { zh: string; en: string }> = {
 };
 
 const STYLE: Record<BadgeKind, string> = {
-  endorsed: 'bg-avo-seed text-avo-cream',
-  real: 'bg-avo-dark text-avo-cream',
-  projects: 'bg-avo-light text-avo-dark',
+  endorsed: 'bg-avo-seed text-avo-paper',
+  real: 'bg-avo-dark text-avo-paper',
+  projects: 'bg-avo-seed/15 text-avo-seed',
 };
 
 export function Badge({ kind }: { kind: BadgeKind }) {

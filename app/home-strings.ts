@@ -1,4 +1,5 @@
-// app/home-strings.ts —— 首頁 UI 字串（雙語）。站名／slogan 不放這裡，一律取自 lib/brand.ts。
+// app/home-strings.ts —— 舊 /discover 字串（頁面已 redirect）。
+// 保留給可能的引用；敘事已對齊：已上線功能不再標「即將推出」。
 export const HOME = {
   heroTagline: {
     zh: 'AI 領域人才的專門媒合平臺，用 AI 評估教 AI 的人。',
@@ -7,8 +8,7 @@ export const HOME = {
   heroPlaceholder: { zh: '告訴酪梨你想學什麼…', en: 'Tell the avocado what you want to learn…' },
   heroSubmit: { zh: '問酪梨', en: 'Ask' },
 
-  // 三亮點卡
-  highlightsTitle: { zh: '三個核心能力', en: 'Three core capabilities' },
+  highlightsTitle: { zh: '現在就能用', en: 'Available now' },
   h1Title: { zh: 'AI 對話媒合', en: 'AI conversational matching' },
   h1Desc: {
     zh: '用聊天講清楚你的程度、目標跟預算，AI 直接幫你挑出最合適的講師。',
@@ -21,14 +21,13 @@ export const HOME = {
     en: 'Every tutor has an engine-generated radar chart drawn from GitHub, projects and teaching.',
   },
   h2Cta: { zh: '看講師', en: 'Browse tutors' },
-  h3Title: { zh: 'AI 課後摘要', en: 'AI class recap' },
+  h3Title: { zh: '學習路徑規劃', en: 'Learning path planner' },
   h3Desc: {
-    zh: '課程錄影自動生成章節時間軸、重點條列與名詞卡，下課不用自己整理筆記。',
-    en: 'Recordings turn into a chapter timeline, key points and term cards, so you skip the note-taking.',
+    zh: '給一個目標，AI 幫你排出階段、每階段配上該學的課跟合適的講師。',
+    en: 'Give a goal, and AI lays out stages with the right courses and tutors for each.',
   },
-  h3Cta: { zh: '看教室體驗', en: 'See the classroom' },
+  h3Cta: { zh: '規劃路徑', en: 'Plan a path' },
 
-  // 精選講師
   featuredTitle: { zh: '精選講師', en: 'Featured tutors' },
   featuredDesc: {
     zh: '從九位講師裡先挑幾位給你看看，涵蓋不同領域跟程度。',
@@ -36,14 +35,12 @@ export const HOME = {
   },
   featuredMore: { zh: '看全部講師', en: 'See all tutors' },
 
-  // 領域分類
   domainsTitle: { zh: '依領域找講師', en: 'Find tutors by domain' },
   domainsDesc: {
     zh: '從六大 AI 領域切入，直接看該領域有哪些人在教。',
     en: 'Jump into any of six AI domains to see who teaches there.',
   },
 
-  // 名人推薦牆
   endorsementsTitle: { zh: '業界推薦', en: 'Endorsed by the field' },
   endorsementsDesc: {
     zh: '認證帳號替平臺上的講師背書，點頭的都是實際看過作品的人。',
@@ -51,26 +48,26 @@ export const HOME = {
   },
   verifiedLabel: { zh: '認證帳號', en: 'Verified account' },
 
-  // Roadmap
-  roadmapTitle: { zh: '即將推出', en: 'Coming soon' },
+  // 誠實未做區（學習路徑／作業／知識庫已上線，不再列在這裡）
+  roadmapTitle: { zh: '還在路上', en: 'Still on the way' },
   roadmapDesc: {
-    zh: '這些功能還在路上，先讓你知道酪梨接下來想做什麼。',
-    en: "Still on the way, but here's where the avocado is heading next.",
+    zh: '真正還沒做的功能會誠實標在這裡；已上線的請從首頁或產品藍圖進去用。',
+    en: "Only what's truly unfinished lives here; what's live is on the home page or roadmap.",
   },
-  r1Title: { zh: '學習路徑規劃', en: 'Learning path planner' },
+  r1Title: { zh: '影片自介 + AI 字幕', en: 'Video intro with AI captions' },
   r1Desc: {
-    zh: '給一個目標，AI 幫你排出階段、每階段配上該學的課跟合適的講師。',
-    en: 'Give a goal, and AI lays out stages with the right courses and tutors for each.',
+    zh: '講師錄一段自我介紹，系統自動上雙語字幕——需要上傳與轉檔基礎建設。',
+    en: 'Tutors record a short intro with bilingual captions — needs upload and transcoding infra.',
   },
-  r2Title: { zh: '自動作業生成與批改', en: 'Auto-generated homework and grading' },
+  r2Title: { zh: '進度儀表板接真資料', en: 'Progress dashboard with real data' },
   r2Desc: {
-    zh: '依課程內容出題，交上去由 AI 批改並給修改建議。',
-    en: 'Problems generated from the course, then graded by AI with feedback.',
+    zh: '目前 /progress 是示意資料；接真上課紀錄後才會變成個人儀表板。',
+    en: '/progress is demo data today; real session history turns it into a personal dashboard.',
   },
-  r3Title: { zh: '個人學習知識庫', en: 'Personal learning knowledge base' },
+  r3Title: { zh: '更多工具見藍圖', en: 'More tools on the roadmap' },
   r3Desc: {
-    zh: '把你上過的每一堂課變成可問答的知識庫，跨課程隨時查。',
-    en: 'Turn every class you took into a searchable knowledge base you can query anytime.',
+    zh: '課綱、定價、反向媒合等已上線；完整清單在產品藍圖。',
+    en: 'Syllabus, pricing, reverse match and more are live — full list on the roadmap.',
   },
   roadmapBadge: { zh: '規劃中', en: 'Planned' },
 } as const;

@@ -1,6 +1,6 @@
 'use server';
 // app/signup/actions.ts —— 註冊 server action。建 User（含 role）→ 自動登入 → 依角色導向。
-// 講師 → /dashboard；學生 → /discover。email 重複、密碼太短等錯誤回可讀狀態。
+// 講師 → /dashboard；學生 → /。email 重複、密碼太短等錯誤回可讀狀態。
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcryptjs';
 import { prisma } from '@/lib/prisma';
@@ -35,7 +35,7 @@ export async function register(_prev: SignupState, formData: FormData): Promise<
   // 註冊成功 → 自動登入（redirect:false）→ 回 redirect 目標給 client 做整頁硬導向
   try {
     await signIn('credentials', { email, password, redirect: false });
-    return { ok: true, redirect: role === 'TUTOR' ? '/dashboard' : '/discover' };
+    return { ok: true, redirect: role === 'TUTOR' ? '/dashboard' : '/' };
   } catch (error) {
     if (error instanceof AuthError) return { error: 'generic' };
     throw error;
