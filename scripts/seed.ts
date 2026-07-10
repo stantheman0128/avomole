@@ -5,7 +5,6 @@
 import { PrismaClient, Prisma } from '@prisma/client';
 import fs from 'node:fs';
 import path from 'node:path';
-import bcrypt from 'bcryptjs';
 import type { TutorData, Tutor } from '../lib/types';
 
 const prisma = new PrismaClient();
@@ -14,22 +13,21 @@ const DATA_DIR = path.join(process.cwd(), 'data');
 const JSON_PATH = path.join(DATA_DIR, 'tutors.json');
 const SAMPLE_PATH = path.join(DATA_DIR, 'tutors.sample.json');
 
-// demo 帳號共用密碼（僅供展示；非真使用者）。真註冊走 /signup 自己設密碼。
-const DEMO_PASSWORD = 'guacamole-demo';
-
+// seed 講師是「顯示用」假帳號，不需要也不該能登入：passwordHash 一律 null
+//（repo 公開後，寫死的共用密碼會讓任何人登入九位假講師改頁面）。真講師走 /signup。
 export function loadData(): TutorData {
   const file = fs.existsSync(JSON_PATH) ? JSON_PATH : SAMPLE_PATH;
   return JSON.parse(fs.readFileSync(file, 'utf-8')) as TutorData;
 }
 
 // nameEn 塞進 github JSON 沒必要——name/nameEn 現在是 TutorProfile 的真欄位。
-async function upsertTutor(t: Tutor, passwordHash: string): Promise<void> {
+async function upsertTutor(t: Tutor): Promise<void> {
   const email = `${t.slug}@demo.guacamole.ai`;
 
   const user = await prisma.user.upsert({
     where: { email },
-    update: { name: t.name, role: 'TUTOR', passwordHash },
-    create: { email, name: t.name, role: 'TUTOR', passwordHash },
+    update: { name: t.name, role: 'TUTOR', passwordHash: null },
+    create: { email, name: t.name, role: 'TUTOR', passwordHash: null },
   });
 
   const profileData = {
@@ -96,9 +94,8 @@ async function reseedReviewsAndEndorsements(data: TutorData): Promise<void> {
 
 export async function seed(): Promise<{ tutors: number; reviews: number; endorsements: number }> {
   const data = loadData();
-  const passwordHash = await bcrypt.hash(DEMO_PASSWORD, 10);
   for (const t of data.tutors) {
-    await upsertTutor(t, passwordHash);
+    await upsertTutor(t);
   }
   await reseedReviewsAndEndorsements(data);
   // 用顯式 seq(1-9) upsert 不會推進 Postgres autoincrement sequence，之後 create 的講師會拿 seq=1 撞 unique。
